@@ -1,12 +1,13 @@
 # SnailQuickMaskPopups
-For the view quickly add the mask, and it pops up.
+为任意视图快速添加一个蒙版，并可根据需求定制样式，简单快捷！
+通过SnailQuickMaskPopups内部创建一个蒙版视图，并添加自定义视图，通过一些点的计算实现弹出方向，手势拖动等
 
 ## Installation
 Available in [CocoaPods](https://cocoapods.org "CocoaPods" )
     
         pod 'SnailQuickMaskPopups', '~> 0.0.2'
     
-## Usage scenario
+## Usage scenario 
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/city_.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/wechat_.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/slogan_.gif)
