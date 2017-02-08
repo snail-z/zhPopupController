@@ -1,9 +1,11 @@
 # SnailQuickMaskPopups
 For the view quickly add the mask, and it pops up.
 
-# Installation
-Available in CocoaPods 
+## Installation
+Available in CocoaPods
+    
         pod 'SnailQuickMaskPopups', '~> 0.0.2'
+    
        
        
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/city_.gif)
