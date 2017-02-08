@@ -8,17 +8,11 @@ Available in [CocoaPods](https://cocoapods.org "CocoaPods" )
     
 ## Usage scenario
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/city_.gif)
-
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/wechat_.gif)
-
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/slogan_.gif)
-
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/qzone_.gif)
-
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/shared_.gif)
-
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/sidebar_.gif)
-
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/full_.gif)
 
 
@@ -34,7 +28,7 @@ Available in [CocoaPods](https://cocoapods.org "CocoaPods" )
     _popups.transitionStyle = SnailPopupsTransitionStyleSlideInFromTop;
     [_popups presentPopupsAnimated:YES completion:NULL];
  ```
-  *  一些属性设置
+ *  一些属性设置
 ``` objc
     @property (nonatomic, assign) SnailPopupsPresentationStyle presentationStyle;   // 显现样式
     @property (nonatomic, assign) SnailPopupsTransitionStyle transitionStyle;       // 过渡效果
@@ -42,7 +36,7 @@ Available in [CocoaPods](https://cocoapods.org "CocoaPods" )
     @property (nonatomic, assign) BOOL shouldDismissOnPopupsDrag;                   // 弹出框是否可以被拖动
     @property (nonatomic, assign) BOOL dismissesOppositeDirection;                  // 是否反方向消失
  ```
-  *  Protocol
+ *  Protocol
 ``` objc
     @optional
     - (void)snailQuickMaskPopupsWillPresent:(SnailQuickMaskPopups *)popups;
