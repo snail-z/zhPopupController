@@ -22,7 +22,7 @@
 
 @implementation SnailQuickMaskPopups
 
-- (void)defaultSettings { // some default values
+- (void)defaultSettings {
     _maskAlpha                  = 0.5;
     _isAnimated                 = YES;
     _shouldDismissOnMaskTouch   = YES;

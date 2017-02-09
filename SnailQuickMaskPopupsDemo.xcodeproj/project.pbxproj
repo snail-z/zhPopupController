@@ -20,6 +20,8 @@
 		6156A7DE1E45880600E8374B /* CALayer+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = 6156A7DD1E45880600E8374B /* CALayer+Layout.m */; };
 		61AFD3351E481DE900486841 /* UIScreen+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = 61AFD3341E481DE900486841 /* UIScreen+Extend.m */; };
 		61AFD3381E49B6C200486841 /* SnailSidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 61AFD3371E49B6C200486841 /* SnailSidebarView.m */; };
+		61AFD34D1E4B7C1D00486841 /* UIView+SnailUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 61AFD34C1E4B7C1D00486841 /* UIView+SnailUse.m */; };
+		61AFD3501E4B7C3F00486841 /* UIAlertController+SnailUse.m in Sources */ = {isa = PBXBuildFile; fileRef = 61AFD34F1E4B7C3F00486841 /* UIAlertController+SnailUse.m */; };
 		61CB5EAE1E0D0CB100CD89E5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CB5EAD1E0D0CB100CD89E5 /* main.m */; };
 		61CB5EB11E0D0CB100CD89E5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 61CB5EB01E0D0CB100CD89E5 /* AppDelegate.m */; };
 		61CB5EB71E0D0CB100CD89E5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 61CB5EB51E0D0CB100CD89E5 /* Main.storyboard */; };
@@ -75,6 +77,10 @@
 		61AFD3341E481DE900486841 /* UIScreen+Extend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScreen+Extend.m"; sourceTree = "<group>"; };
 		61AFD3361E49B6C200486841 /* SnailSidebarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnailSidebarView.h; sourceTree = "<group>"; };
 		61AFD3371E49B6C200486841 /* SnailSidebarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnailSidebarView.m; sourceTree = "<group>"; };
+		61AFD34B1E4B7C1D00486841 /* UIView+SnailUse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SnailUse.h"; sourceTree = "<group>"; };
+		61AFD34C1E4B7C1D00486841 /* UIView+SnailUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SnailUse.m"; sourceTree = "<group>"; };
+		61AFD34E1E4B7C3F00486841 /* UIAlertController+SnailUse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIAlertController+SnailUse.h"; sourceTree = "<group>"; };
+		61AFD34F1E4B7C3F00486841 /* UIAlertController+SnailUse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIAlertController+SnailUse.m"; sourceTree = "<group>"; };
 		61CB5EA91E0D0CB100CD89E5 /* SnailQuickMaskPopupsDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnailQuickMaskPopupsDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		61CB5EAD1E0D0CB100CD89E5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		61CB5EAF1E0D0CB100CD89E5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -121,6 +127,10 @@
 		61333B4B1E0E087D00E80FE2 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				61AFD34B1E4B7C1D00486841 /* UIView+SnailUse.h */,
+				61AFD34C1E4B7C1D00486841 /* UIView+SnailUse.m */,
+				61AFD34E1E4B7C3F00486841 /* UIAlertController+SnailUse.h */,
+				61AFD34F1E4B7C3F00486841 /* UIAlertController+SnailUse.m */,
 				61AFD3331E481DE900486841 /* UIScreen+Extend.h */,
 				61AFD3341E481DE900486841 /* UIScreen+Extend.m */,
 				61333B501E0E08AE00E80FE2 /* NSDate+Extend.h */,
@@ -369,10 +379,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				6139329A1E477A2B00E04E02 /* SnailImageLabel.m in Sources */,
+				61AFD34D1E4B7C1D00486841 /* UIView+SnailUse.m in Sources */,
 				61333B561E0E08AE00E80FE2 /* NSDate+Extend.m in Sources */,
 				61CB5EE21E0D0CE700CD89E5 /* SnailQuickMaskPopups.m in Sources */,
 				61333B581E0E08AE00E80FE2 /* UINavigationBar+BackgroundColor.m in Sources */,
 				61333B651E0E096000E80FE2 /* ExampleTableViewController.m in Sources */,
+				61AFD3501E4B7C3F00486841 /* UIAlertController+SnailUse.m in Sources */,
 				61CB5EB11E0D0CB100CD89E5 /* AppDelegate.m in Sources */,
 				61333B681E0E09CA00E80FE2 /* ExampleTableViewCell.m in Sources */,
 				613932921E47540200E04E02 /* SnailCurtainView.m in Sources */,

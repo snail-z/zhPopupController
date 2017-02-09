@@ -146,13 +146,15 @@
 
 - (void)setItems:(NSArray<SnailImageLabelItem *> *)items {
     _itemViews = @[].mutableCopy;
-    for (NSInteger i = 0; i < _rows * _rowCount; i++) {
-        [_pageViews enumerateObjectsUsingBlock:^(UIImageView * imageView, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_pageViews enumerateObjectsUsingBlock:^(UIImageView * _Nonnull imageView, NSUInteger idx, BOOL * _Nonnull stop) {
+        for (NSInteger i = 0; i < _rows * _rowCount; i++) {
             NSInteger l = i % _rowCount;
             NSInteger v = i / _rowCount;
             
             SnailImageLabel *item = [SnailImageLabel new];
             item.tag = i + idx * (_rows *_rowCount);
+            NSLog(@"item.tag_%lu", item.tag);
+            NSLog(@"idx_%lu", idx);
             item.size = _itemSize;
             item.x = _space + (_itemSize.width  + _space) * l;
             item.y = (_itemSize.height + _gap) * v + _gap;
@@ -165,15 +167,15 @@
                 item.titleLabel.font = [UIFont systemFontOfSize:14];
                 item.titleLabel.textColor = [UIColor r:82 g:82 b:82];
             }
-
+            
             item.alpha = 0;
             item.transform = CGAffineTransformMakeTranslation(0, _rows * _itemSize.height);
             [UIView animateWithDuration:0.55 delay:i * 0.025 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{
                 item.transform = CGAffineTransformIdentity;
                 item.alpha = 1;
             } completion:NULL];
-        }];
-    }
+        }
+    }];
 }
 
 - (void)itemClicked:(UITapGestureRecognizer *)recognizer  {
