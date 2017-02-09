@@ -9,8 +9,7 @@ Available in [CocoaPods](https://cocoapods.org "CocoaPods" )
         pod 'SnailQuickMaskPopups', '~> 0.0.3'
     
 ## Usage scenario 
-58同城弹框样式 
-    ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/city_.gif)
+![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/city_.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/wechat_.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/slogan_.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/qzone_.gif)
