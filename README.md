@@ -11,10 +11,12 @@
 =======  
 
 ## Installation
-Available in [CocoaPods](https://cocoapods.org "CocoaPods" )
-    
-        `pod 'SnailQuickMaskPopups', '~> 1.0.0'`
-    
+
+SnailQuickMaskPopups is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:  
+  
+          pod 'SnailQuickMaskPopups', '~> 1.0.0'
+      
+      
 ## Usage scenario 
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/alert%20style.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/WeChat%20style.gif)
