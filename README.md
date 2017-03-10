@@ -7,7 +7,7 @@
  通过SnailQuickMaskPopups内部创建一个蒙版视图，然后根据点的计算，实现弹出方向，手势拖动等_  
   
 =======
-#### _如果需要swift版本，可以[点击这里](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_
+#### _Swift版本[点击这里](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_
 =======  
 
 ## Installation
