@@ -184,4 +184,4 @@ typedef NS_ENUM(NSInteger, TransitionStyle) {
 
 ## License
 
-OverlayController is distributed under the MIT license.
+SnailQuickMaskPopups is distributed under the MIT license.
