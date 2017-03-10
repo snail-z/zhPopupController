@@ -178,7 +178,9 @@ typedef NS_ENUM(NSInteger, TransitionStyle) {
 }
 ```  
 
- <u>如果需要swift版本，可以[点击这里]()</u>
+#### _如果需要swift版本，可以[点击这里](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_
+=======  
+
 ## License
 
 OverlayController is distributed under the MIT license.
