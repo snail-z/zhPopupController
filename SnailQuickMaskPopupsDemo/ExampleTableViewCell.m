@@ -16,7 +16,7 @@
         _titleLabel = [UILabel new];
         _titleLabel.textColor = [UIColor whiteColor];
         _titleLabel.textAlignment = NSTextAlignmentCenter;
-        _titleLabel.font = [UIFont systemFontOfSize:17];
+        _titleLabel.font = [UIFont fontWithName:@"Apple SD Gothic Neo" size:20];
         _titleLabel.clipsToBounds = YES;
         _titleLabel.layer.cornerRadius = 4;
         [self.contentView addSubview:_titleLabel];
@@ -26,7 +26,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _titleLabel.size = CGSizeMake(222, 37);
+    _titleLabel.size = CGSizeMake(222, 40);
     _titleLabel.centerX = self.centerX;
     _titleLabel.bottom = self.contentView.bottom;
 }

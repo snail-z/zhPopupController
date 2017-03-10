@@ -195,8 +195,8 @@
 				61333B671E0E09CA00E80FE2 /* ExampleTableViewCell.m */,
 				61333B631E0E096000E80FE2 /* ExampleTableViewController.h */,
 				61333B641E0E096000E80FE2 /* ExampleTableViewController.m */,
-				61CB5EAF1E0D0CB100CD89E5 /* AppDelegate.h */,
 				61CB5EB01E0D0CB100CD89E5 /* AppDelegate.m */,
+				61CB5EAF1E0D0CB100CD89E5 /* AppDelegate.h */,
 				61CB5EB51E0D0CB100CD89E5 /* Main.storyboard */,
 				61CB5EB81E0D0CB100CD89E5 /* Assets.xcassets */,
 				61CB5EBA1E0D0CB100CD89E5 /* LaunchScreen.storyboard */,
@@ -309,7 +309,7 @@
 				TargetAttributes = {
 					61CB5EA81E0D0CB100CD89E5 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = XPMXP6URKM;
+						DevelopmentTeam = 536C654M9L;
 						ProvisioningStyle = Automatic;
 					};
 					61CB5EC11E0D0CB100CD89E5 = {
@@ -544,9 +544,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XPMXP6URKM;
+				DEVELOPMENT_TEAM = 536C654M9L;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SnailQuickMaskPopupsDemo/SnailPopups-PrefixHeader.pch";
 				INFOPLIST_FILE = SnailQuickMaskPopupsDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zhanghao.SnailQuickMaskPopupsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -557,9 +558,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = XPMXP6URKM;
+				DEVELOPMENT_TEAM = 536C654M9L;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/SnailQuickMaskPopupsDemo/SnailPopups-PrefixHeader.pch";
 				INFOPLIST_FILE = SnailQuickMaskPopupsDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Zhanghao.SnailQuickMaskPopupsDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

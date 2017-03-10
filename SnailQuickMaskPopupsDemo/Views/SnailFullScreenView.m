@@ -164,13 +164,13 @@
             if (item.tag < items.count) {
                 [item setItem:items[item.tag]];
                 item.imgView.userInteractionEnabled = NO;
-                item.titleLabel.font = [UIFont systemFontOfSize:14];
-                item.titleLabel.textColor = [UIColor r:82 g:82 b:82];
+                item.textLabel.font = [UIFont systemFontOfSize:14];
+                item.textLabel.textColor = [UIColor r:82 g:82 b:82];
             }
             
             item.alpha = 0;
             item.transform = CGAffineTransformMakeTranslation(0, _rows * _itemSize.height);
-            [UIView animateWithDuration:0.55 delay:i * 0.025 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{
+            [UIView animateWithDuration:0.75 delay:i * 0.03 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:UIViewAnimationOptionCurveLinear animations:^{
                 item.transform = CGAffineTransformIdentity;
                 item.alpha = 1;
             } completion:NULL];
@@ -211,7 +211,7 @@
         } completion:NULL];
     }
     [_itemViews enumerateObjectsUsingBlock:^(SnailImageLabel *item, NSUInteger idx, BOOL * _Nonnull stop) {
-        [UIView animateWithDuration:0.25 delay:0.025 * (_itemViews.count - idx) options:UIViewAnimationOptionCurveEaseOut animations:^{
+        [UIView animateWithDuration:0.25 delay:0.03 * (_itemViews.count - idx) options:UIViewAnimationOptionCurveEaseOut animations:^{
             item.transform = CGAffineTransformMakeTranslation(0, _rows * _itemSize.height);
             item.alpha = 0;
         } completion:^(BOOL finished) {

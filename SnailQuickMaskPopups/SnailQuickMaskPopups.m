@@ -1,6 +1,6 @@
 //
 //  SnailQuickMaskPopups.m
-//  <https://github.com/snail-z/zhPopups.git>
+//  <https://github.com/snail-z/SnailQuickMaskPopups.git>
 //
 //  Created by zhanghao on 2016/11/15.
 //  Copyright © 2016年 zhanghao. All rights reserved.
@@ -10,90 +10,179 @@
 
 @interface SnailQuickMaskPopups () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong) UIWindow *windowView;
+@property (nonatomic, weak)   UIView *superview;
 @property (nonatomic, strong) UIView *maskView;
-@property (nonatomic, strong) UIView *popupsView;
-@property (nonatomic, assign) CGFloat maskAlpha;
-@property (nonatomic, assign) CGPoint panPoint;
+@property (nonatomic, strong) UIView *popupView;
 @property (nonatomic, assign) BOOL isAnimated;
-@property (nonatomic, assign) BOOL isPresented;                                 
+@property (nonatomic, assign) BOOL isPresented;
 
 @end
 
 @implementation SnailQuickMaskPopups
 
-- (void)defaultSettings {
-    _maskAlpha                  = 0.5;
-    _isAnimated                 = YES;
-    _shouldDismissOnMaskTouch   = YES;
-    _shouldDismissOnPopupsDrag  = NO;
-    _dismissesOppositeDirection = NO;
-    _isPresented                = NO;
+#pragma mark - default values
+
+- (void)defaultInitialization {
+    _presentationStyle = PresentationStyleCentered;
+    _transitionStyle = TransitionStyleCrossDissolve;
+    _maskAlpha = 0.5;
+    _animateDuration = 0.25;
+    _isAllowMaskTouch = YES;
+    _isAllowPopupsDrag = NO;
+    _isDismissedOppositeDirection = NO;
+    _springDampingRatio = 1.0;
 }
 
 #pragma mark - initialization
 
-+ (instancetype)popupsWithView:(UIView *)popupView maskStyle:(SnailPopupsMaskStyle)maskStyle {
-    return [[self alloc] initWithPopups:popupView maskStyle:maskStyle];
-}
-
-- (instancetype)initWithPopups:(UIView *)popupView
-                     maskStyle:(SnailPopupsMaskStyle)maskStyle {
+- (instancetype)initWithMaskStyle:(MaskStyle)maskStyle aView:(UIView *)aView {
+    if (!aView) return nil;
     if (self = [super init]) {
-        [self defaultSettings];
-    
-        _windowView = [UIApplication sharedApplication].keyWindow;
-        _maskView = [self maskStyleSettings:maskStyle];
+        [self defaultInitialization];
         
-        popupView.frame = (CGRect){.origin = CGPointZero, .size = popupView.frame.size};
-        _popupsView = [UIView new];
-        _popupsView.frame = popupView.frame;
-        _popupsView.clipsToBounds = YES;
-        _popupsView.backgroundColor = popupView.backgroundColor;
-        _popupsView.layer.cornerRadius = popupView.layer.cornerRadius;
-        [_popupsView addSubview:popupView];
+        UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
+        _superview = keyWindow;
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(maskWhenTapped:)];
+        _maskView = [self maskViewStyle:maskStyle];
+        
+        aView.frame = (CGRect){.origin = CGPointZero, .size = aView.frame.size};
+        _popupView = [UIView new];
+        _popupView.frame = aView.frame;
+        _popupView.backgroundColor = aView.backgroundColor;
+        if (aView.layer.cornerRadius > 0) {
+            CAShapeLayer *roundRectLayer = [[CAShapeLayer alloc] init];
+            roundRectLayer.bounds = _popupView.layer.bounds;
+            roundRectLayer.frame = _popupView.layer.bounds;
+            UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_popupView.layer.bounds
+                                                            cornerRadius:aView.layer.cornerRadius];
+            roundRectLayer.path = path.CGPath;
+            _popupView.layer.mask = roundRectLayer;
+            _popupView.clipsToBounds = NO;
+        }
+        [_popupView addSubview:aView];
+        [_maskView addSubview:_popupView];
+        
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(maskTapped:)];
         tap.delegate = self;
         [_maskView addGestureRecognizer:tap];
-        [_maskView addSubview:_popupsView];
         
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-        [_popupsView addGestureRecognizer:pan];
+        [_popupView addGestureRecognizer:[[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)]];
     }
     return self;
 }
 
-#pragma mark - UIGestureRecognizerDelegate
-
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
-    if ([touch.view isDescendantOfView:_popupsView]) return NO;
-    return YES;
++ (instancetype)popupsWithMaskStyle:(MaskStyle)maskStyle aView:(UIView *)aView {
+    return [[self alloc] initWithMaskStyle:maskStyle aView:aView];
 }
 
-- (void)maskWhenTapped:(UITapGestureRecognizer *)tap {
-    if (_shouldDismissOnMaskTouch) {
-        [self dismissPopupsAnimated:_isAnimated completion:NULL];
+#pragma mark - present
+
+- (void)presentInView:(UIView *)superview
+         withAnimated:(BOOL)animated
+           completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
+    _superview = superview;
+    _maskView.frame = _superview.frame;
+    [self presentWithAnimated:animated completion:completion];
+}
+
+- (void)presentWithAnimated:(BOOL)animated
+                 completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(snailQuickMaskPopupsWillPresent:)]) {
+        [_delegate snailQuickMaskPopupsWillPresent:self];
+    }
+    
+    [_superview addSubview:_maskView];
+    
+    _isAnimated = animated;
+    
+    _maskView.alpha = 0;
+    _popupView.center = [self startingPoint];
+    
+    if (_springDampingRatio < 1) {
+        [UIView animateWithDuration:animated ? _animateDuration*=3 : 0
+                              delay:0.1
+             usingSpringWithDamping:_springDampingRatio
+              initialSpringVelocity:0.2
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             _maskView.alpha = 1;
+                             _popupView.center = [self finishingPoint];
+        } completion:^(BOOL finished) {
+            [self animation:finished completion:completion];
+        }];
+    } else {
+        [UIView animateWithDuration:animated ? _animateDuration : 0
+                              delay:0.1
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             _maskView.alpha = 1;
+                             _popupView.center = [self finishingPoint];
+        } completion:^(BOOL finished) {
+            [self animation:finished completion:completion];
+        }];
     }
 }
 
-#pragma mark - maskView Settings
+- (void)animation:(BOOL)finished
+       completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
+    _isPresented = YES;
+    if (completion) {
+        completion(finished, self);
+    } else {
+        if (_delegate && [_delegate respondsToSelector:@selector(snailQuickMaskPopupsDidPresent:)]) {
+            [_delegate snailQuickMaskPopupsDidPresent:self];
+        }
+    }
+}
 
-- (UIView *)maskStyleSettings:(SnailPopupsMaskStyle)maskStyle {
+#pragma mark - dismiss
+
+- (void)dismissWithAnimated:(BOOL)animated
+                 completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(snailQuickMaskPopupsWillDismiss:)]) {
+        [_delegate snailQuickMaskPopupsWillDismiss:self];
+    }
+    
+    _springDampingRatio < 1 ? _animateDuration /= 3 : _animateDuration;
+    
+    [UIView animateWithDuration:animated ? _animateDuration : 0
+                          delay:0.1
+                        options:UIViewAnimationOptionCurveLinear
+                     animations:^{
+                         _maskView.alpha = 0;
+                         _popupView.center = [self dismissedPoint];
+    } completion:^(BOOL finished) {
+        _isPresented = NO;
+        [_maskView removeFromSuperview];
+        if (completion) {
+            completion(finished, self);
+        } else {
+            if (_delegate && [_delegate respondsToSelector:@selector(snailQuickMaskPopupsDidDismiss:)]) {
+                [_delegate snailQuickMaskPopupsDidDismiss:self];
+            }
+        }
+    }];
+}
+
+#pragma mark - maskView style
+
+- (UIView *)maskViewStyle:(MaskStyle)maskStyle {
     switch (maskStyle) {
-        case SnailPopupsMaskStyleBlackTranslucent:
+        case MaskStyleBlackTranslucent:
             return [self backgroundWithColor:[UIColor colorWithWhite:0.0 alpha:_maskAlpha]];
             break;
-        case SnailPopupsMaskStyleClear:
+        case MaskStyleClear:
             return [self backgroundWithColor:[UIColor clearColor]];
             break;
-        case SnailPopupsMaskStyleWhite:
+        case MaskStyleWhite:
             return [self backgroundWithColor:[UIColor whiteColor]];
             break;
-        case SnailPopupsMaskStyleBlurTranslucentBlack:
+        case MaskStyleBlackBlur:
             return [self blurTranslucentView:UIBarStyleBlackTranslucent];
             break;
-        case SnailPopupsMaskStyleBlurTranslucentWhite:
+        case MaskStyleWhiteBlur:
             return [self blurTranslucentView:UIBarStyleDefault];
             break;
         default: break;
@@ -101,15 +190,15 @@
 }
 
 - (UIView *)blurTranslucentView:(UIBarStyle)barStyle {
-    UIToolbar *blurTranslucentView = [[UIToolbar alloc] initWithFrame:_windowView.bounds];
-    [blurTranslucentView setBarStyle:barStyle];
-    return blurTranslucentView;
+    UIToolbar *mask = [[UIToolbar alloc] initWithFrame:_superview.bounds];
+    [mask setBarStyle:barStyle];
+    return mask;
 }
 
 - (UIView *)backgroundWithColor:(UIColor *)backgroundColor {
-    UIView *backgroundView = [[UIView alloc] initWithFrame:_windowView.bounds];
-    backgroundView.backgroundColor = backgroundColor;
-    return backgroundView;
+    UIView *mask = [[UIView alloc] initWithFrame:_superview.bounds];
+    mask.backgroundColor = backgroundColor;
+    return mask;
 }
 
 #pragma mark - calculation point
@@ -117,20 +206,20 @@
 - (CGPoint)startingPoint {
     CGPoint point = _maskView.center;
     switch (_presentationStyle) {
-        case SnailPopupsPresentationStyleCentered:
+        case PresentationStyleCentered:
             point = [self presentPointForPresentationStyleCentered];
             break;
-        case SnailPopupsPresentationStyleActionSheet:
-            point = CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupsView.bounds.size.height);
+        case PresentationStyleBottom:
+            point = CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupView.bounds.size.height);
             break;
-        case SnailPopupsPresentationStyleCurtain:
-            point = CGPointMake(_maskView.center.x, -_popupsView.bounds.size.height);
+        case PresentationStyleTop:
+            point = CGPointMake(_maskView.center.x, -_popupView.bounds.size.height);
             break;
-        case SnailPopupsPresentationStyleSlideLeft:
-            point = CGPointMake(-_popupsView.bounds.size.width, _maskView.center.y);
+        case PresentationStyleLeft:
+            point = CGPointMake(-_popupView.bounds.size.width, _maskView.center.y);
             break;
-        case SnailPopupsPresentationStyleSlideRight:
-            point = CGPointMake(_maskView.bounds.size.width + _popupsView.bounds.size.width, _maskView.center.y);
+        case PresentationStyleRight:
+            point = CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width, _maskView.center.y);
             break;
         default: break;
     }
@@ -140,25 +229,25 @@
 - (CGPoint)finishingPoint {
     CGPoint point = _maskView.center;
     switch (_presentationStyle) {
-        case SnailPopupsPresentationStyleCentered: {
+        case PresentationStyleCentered: {
             switch (_transitionStyle) {
-                    case SnailPopupsTransitionStyleTransformScale:
+                case TransitionStyleZoom:
                     _maskView.transform = CGAffineTransformIdentity;
                     break;
                 default: break;
             }
         } break;
-        case SnailPopupsPresentationStyleActionSheet:
-            point = CGPointMake(_maskView.center.x, _maskView.bounds.size.height - _popupsView.bounds.size.height * 0.5);
+        case PresentationStyleBottom:
+            point = CGPointMake(_maskView.center.x, _maskView.bounds.size.height - _popupView.bounds.size.height * 0.5);
             break;
-        case SnailPopupsPresentationStyleCurtain:
-            point = CGPointMake(_maskView.center.x, _popupsView.bounds.size.height * 0.5);
+        case PresentationStyleTop:
+            point = CGPointMake(_maskView.center.x, _popupView.bounds.size.height * 0.5);
             break;
-        case SnailPopupsPresentationStyleSlideLeft:
-            point = CGPointMake(_popupsView.bounds.size.width * 0.5, _maskView.center.y);
+        case PresentationStyleLeft:
+            point = CGPointMake(_popupView.bounds.size.width * 0.5, _maskView.center.y);
             break;
-        case SnailPopupsPresentationStyleSlideRight:
-            point = CGPointMake(_maskView.bounds.size.width - _popupsView.bounds.size.width * 0.5, _maskView.center.y);
+        case PresentationStyleRight:
+            point = CGPointMake(_maskView.bounds.size.width - _popupView.bounds.size.width * 0.5, _maskView.center.y);
             break;
         default: break;
     }
@@ -168,20 +257,20 @@
 - (CGPoint)dismissedPoint {
     CGPoint point = _maskView.center;
     switch (_presentationStyle) {
-        case SnailPopupsPresentationStyleCentered:
+        case PresentationStyleCentered:
             point = [self dismissedPointForPresentationStyleCentered];
             break;
-        case SnailPopupsPresentationStyleActionSheet:
-            point = CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupsView.bounds.size.height);
+        case PresentationStyleBottom:
+            point = CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupView.bounds.size.height);
             break;
-        case SnailPopupsPresentationStyleCurtain:
-            point = CGPointMake(_maskView.center.x, -_popupsView.bounds.size.height);
+        case PresentationStyleTop:
+            point = CGPointMake(_maskView.center.x, -_popupView.bounds.size.height);
             break;
-        case SnailPopupsPresentationStyleSlideLeft:
-            point = CGPointMake(-_popupsView.bounds.size.width, _maskView.center.y);
+        case PresentationStyleLeft:
+            point = CGPointMake(-_popupView.bounds.size.width, _maskView.center.y);
             break;
-        case SnailPopupsPresentationStyleSlideRight:
-            point = CGPointMake(_maskView.bounds.size.width + _popupsView.bounds.size.width, _maskView.center.y);
+        case PresentationStyleRight:
+            point = CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width, _maskView.center.y);
             break;
         default: break;
     }
@@ -191,22 +280,22 @@
 - (CGPoint)presentPointForPresentationStyleCentered {
     CGPoint point = _maskView.center;
     switch (_transitionStyle) {
-        case SnailPopupsTransitionStyleCrossDissolve:
+        case TransitionStyleCrossDissolve:
             break;
-        case SnailPopupsTransitionStyleTransformScale:
-            _maskView.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        case TransitionStyleZoom:
+            _maskView.transform = CGAffineTransformMakeScale(1.15, 1.15);
             break;
-        case SnailPopupsTransitionStyleSlideInFromTop:
-            point = CGPointMake(_maskView.center.x, -_popupsView.bounds.size.height);
+        case TransitionStyleFromTop:
+            point = CGPointMake(_maskView.center.x, -_popupView.bounds.size.height);
             break;
-        case SnailPopupsTransitionStyleSlideInFromBottom:
-            point = CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupsView.bounds.size.height);
+        case TransitionStyleFromBottom:
+            point = CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupView.bounds.size.height);
             break;
-        case SnailPopupsTransitionStyleSlideInFromLeft:
-            point = CGPointMake(-_popupsView.bounds.size.width, _maskView.center.y);
+        case TransitionStyleFromLeft:
+            point = CGPointMake(-_popupView.bounds.size.width, _maskView.center.y);
             break;
-        case SnailPopupsTransitionStyleSlideInFromRight:
-            point = CGPointMake(_maskView.bounds.size.width + _popupsView.bounds.size.width, _maskView.center.y);
+        case TransitionStyleFromRight:
+            point = CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width, _maskView.center.y);
             break;
         default: break;
     }
@@ -216,85 +305,42 @@
 - (CGPoint)dismissedPointForPresentationStyleCentered {
     CGPoint point = _maskView.center;
     switch (_transitionStyle) {
-        case SnailPopupsTransitionStyleCrossDissolve:
-        case SnailPopupsTransitionStyleTransformScale:
+        case TransitionStyleCrossDissolve:
+        case TransitionStyleZoom:
             break;
-        case SnailPopupsTransitionStyleSlideInFromTop:
-            point = _dismissesOppositeDirection ? CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupsView.bounds.size.height) : CGPointMake(_maskView.center.x, -_popupsView.bounds.size.height);
+        case TransitionStyleFromTop:
+            point = _isDismissedOppositeDirection ? CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupView.bounds.size.height) : CGPointMake(_maskView.center.x, -_popupView.bounds.size.height);
             break;
-        case SnailPopupsTransitionStyleSlideInFromBottom:
-            point = _dismissesOppositeDirection ? CGPointMake(_maskView.center.x, -_popupsView.bounds.size.height) : CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupsView.bounds.size.height);
+        case TransitionStyleFromBottom:
+            point = _isDismissedOppositeDirection ? CGPointMake(_maskView.center.x, -_popupView.bounds.size.height) : CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupView.bounds.size.height);
             break;
-        case SnailPopupsTransitionStyleSlideInFromLeft:
-            point = _dismissesOppositeDirection ? CGPointMake(_maskView.bounds.size.width + _popupsView.bounds.size.width, _maskView.center.y) : CGPointMake(-_popupsView.bounds.size.width, _maskView.center.y);
+        case TransitionStyleFromLeft:
+            point = _isDismissedOppositeDirection ? CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width, _maskView.center.y) : CGPointMake(-_popupView.bounds.size.width, _maskView.center.y);
             break;
-        case SnailPopupsTransitionStyleSlideInFromRight:
-            point = _dismissesOppositeDirection ? CGPointMake(-_popupsView.bounds.size.width, _maskView.center.y) : CGPointMake(_maskView.bounds.size.width + _popupsView.bounds.size.width, _maskView.center.y);
+        case TransitionStyleFromRight:
+            point = _isDismissedOppositeDirection ? CGPointMake(-_popupView.bounds.size.width, _maskView.center.y) : CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width, _maskView.center.y);
             break;
         default: break;
     }
     return point;
 }
 
-#pragma mark - present
+#pragma mark - UIGestureRecognizerDelegate
 
-- (void)presentPopupsAnimated:(BOOL)flag
-                   completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
-    if ([_delegate respondsToSelector:@selector(snailQuickMaskPopupsWillPresent:)]) {
-        [_delegate snailQuickMaskPopupsWillPresent:self];
-    }
-    
-    _isAnimated = flag;
-    [_windowView addSubview:_maskView];
-    _maskView.alpha = 0;
-    
-    _popupsView.center = [self startingPoint];
-    
-    NSTimeInterval interval = _isAnimated ? 0.25 : 0;
-    [UIView animateWithDuration:interval animations:^{
-        _maskView.alpha = 1;
-        _popupsView.center = [self finishingPoint];
-    } completion:^(BOOL finished) {
-        _isPresented = YES;
-        if (completion) {
-            completion(finished, self);
-        } else {
-            if ([_delegate respondsToSelector:@selector(snailQuickMaskPopupsDidPresent:)]) {
-                [_delegate snailQuickMaskPopupsDidPresent:self];
-            }
-        }
-    }];
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    return ![touch.view isDescendantOfView:_popupView];
 }
 
-#pragma mark - dismiss
+#pragma mark - gesture action
 
-- (void)dismissPopupsAnimated:(BOOL)flag
-                   completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
-    if ([_delegate respondsToSelector:@selector(snailQuickMaskPopupsWillDismiss:)]) {
-        [_delegate snailQuickMaskPopupsWillDismiss:self];
+- (void)maskTapped:(UITapGestureRecognizer *)tap {
+    if (_isAllowMaskTouch) {
+        [self dismissWithAnimated:_isAnimated completion:NULL];
     }
-    
-    NSTimeInterval interval = flag ? 0.25 : 0;
-    [UIView animateWithDuration:interval animations:^{
-        _maskView.alpha = 0;
-        _popupsView.center = [self dismissedPoint];
-    } completion:^(BOOL finished) {
-        _isPresented = NO;
-        [_maskView removeFromSuperview];
-        if (completion) {
-            completion(finished, self);
-        } else {
-            if ([_delegate respondsToSelector:@selector(snailQuickMaskPopupsDidDismiss:)]) {
-                [_delegate snailQuickMaskPopupsDidDismiss:self];
-            }
-        }
-    }];
 }
-
-#pragma mark - handle Pan
 
 - (void)handlePan:(UIPanGestureRecognizer *)g {
-    if (!_shouldDismissOnPopupsDrag || !_isPresented) return;
+    if (!_isAllowPopupsDrag || !_isPresented) return;
     
     CGPoint translation = [g translationInView:_maskView];
     switch (g.state) {
@@ -302,19 +348,20 @@
             break;
         case UIGestureRecognizerStateChanged: {
             switch (_presentationStyle) {
-                case SnailPopupsPresentationStyleCentered: {
+                case PresentationStyleCentered: {
                     BOOL verticalTransformation = NO;
                     switch (_transitionStyle) {
-                        case SnailPopupsTransitionStyleCrossDissolve:
-                        case SnailPopupsTransitionStyleTransformScale:
-                        case SnailPopupsTransitionStyleSlideInFromTop:
-                        case SnailPopupsTransitionStyleSlideInFromBottom: // vertical sliding
+                        case TransitionStyleCrossDissolve:
+                        case TransitionStyleZoom:
+                        case TransitionStyleFromTop:
+                        case TransitionStyleFromBottom:
                             verticalTransformation = YES;
                             break;
                         default: break;
                     }
                     
-                    NSInteger coefficient = 4; // set screen ratio `_maskView.bounds.size.height / coefficient`
+                    // set screen ratio `_maskView.bounds.size.height / coefficient`
+                    NSInteger coefficient = 4;
                     CGFloat changeValue;
                     if (verticalTransformation) {
                         g.view.center = CGPointMake(g.view.center.x, g.view.center.y + translation.y);
@@ -328,22 +375,22 @@
                         _maskView.alpha = alpha;
                     } completion:NULL];
                 } break;
-                case SnailPopupsPresentationStyleActionSheet: {
+                case PresentationStyleBottom: {
                     if (g.view.frame.origin.y + translation.y > _maskView.bounds.size.height - g.view.bounds.size.height) {
                         g.view.center = CGPointMake(g.view.center.x, g.view.center.y + translation.y);
                     }
                 } break;
-                case SnailPopupsPresentationStyleCurtain: {
+                case PresentationStyleTop: {
                     if (g.view.frame.origin.y + g.view.frame.size.height + translation.y  < g.view.bounds.size.height) {
                         g.view.center = CGPointMake(g.view.center.x, g.view.center.y + translation.y);
                     }
                 } break;
-                case SnailPopupsPresentationStyleSlideLeft: {
+                case PresentationStyleLeft: {
                     if (g.view.frame.origin.x + g.view.frame.size.width + translation.x < g.view.bounds.size.width) {
                         g.view.center = CGPointMake(g.view.center.x + translation.x, g.view.center.y);
                     }
                 } break;
-                case SnailPopupsPresentationStyleSlideRight: {
+                case PresentationStyleRight: {
                     if (g.view.frame.origin.x + translation.x > _maskView.bounds.size.width - g.view.bounds.size.width) {
                         g.view.center = CGPointMake(g.view.center.x + translation.x, g.view.center.y);
                     }
@@ -355,7 +402,7 @@
         case UIGestureRecognizerStateEnded: {
             BOOL willDismiss = YES, styleCentered = NO;
             switch (_presentationStyle) {
-                case SnailPopupsPresentationStyleCentered: {
+                case PresentationStyleCentered: {
                     styleCentered = YES;
                     if (g.view.center.y != _maskView.center.y) {
                         if (g.view.center.y > _maskView.bounds.size.height * 0.25 && g.view.center.y < _maskView.bounds.size.height * 0.75) {
@@ -367,16 +414,16 @@
                         }
                     }
                 } break;
-                case SnailPopupsPresentationStyleActionSheet:
+                case PresentationStyleBottom:
                     willDismiss = g.view.frame.origin.y > _maskView.bounds.size.height - g.view.frame.size.height * 0.75;
                     break;
-                case SnailPopupsPresentationStyleCurtain:
+                case PresentationStyleTop:
                     willDismiss = g.view.frame.origin.y + g.view.frame.size.height < g.view.frame.size.height * 0.75;
                     break;
-                case SnailPopupsPresentationStyleSlideLeft:
+                case PresentationStyleLeft:
                     willDismiss = g.view.frame.origin.x + g.view.frame.size.width < g.view.frame.size.width * 0.75;
                     break;
-                case SnailPopupsPresentationStyleSlideRight:
+                case PresentationStyleRight:
                     willDismiss = g.view.frame.origin.x > _maskView.bounds.size.width - g.view.frame.size.width * 0.75;
                     break;
                 default: break;
@@ -384,37 +431,42 @@
             if (willDismiss) {
                 if (styleCentered) {
                     switch (_transitionStyle) {
-                        case SnailPopupsTransitionStyleCrossDissolve:
-                        case SnailPopupsTransitionStyleTransformScale: {
+                        case TransitionStyleCrossDissolve:
+                        case TransitionStyleZoom: {
                             if (g.view.center.y < _maskView.bounds.size.height * 0.25) {
-                                _transitionStyle = SnailPopupsTransitionStyleSlideInFromTop;
+                                _transitionStyle = TransitionStyleFromTop;
                             } else {
                                 if (g.view.center.y > _maskView.bounds.size.height * 0.75) {
-                                    _transitionStyle = SnailPopupsTransitionStyleSlideInFromBottom;
+                                    _transitionStyle = TransitionStyleFromBottom;
                                 }
                             }
-                            _dismissesOppositeDirection = NO;
+                            _isDismissedOppositeDirection = NO;
                         } break;
-                        case SnailPopupsTransitionStyleSlideInFromTop:
-                            _dismissesOppositeDirection = g.view.center.y < _maskView.bounds.size.height * 0.25 ? NO : YES;
+                        case TransitionStyleFromTop:
+                            _isDismissedOppositeDirection = !(g.view.center.y < _maskView.bounds.size.height * 0.25);
                             break;
-                        case SnailPopupsTransitionStyleSlideInFromBottom:
-                            _dismissesOppositeDirection = g.view.center.y < _maskView.bounds.size.height * 0.25 ? YES : NO;
+                        case TransitionStyleFromBottom:
+                            _isDismissedOppositeDirection = g.view.center.y < _maskView.bounds.size.height * 0.25;
                             break;
-                        case SnailPopupsTransitionStyleSlideInFromLeft:
-                            _dismissesOppositeDirection = g.view.center.x < _maskView.bounds.size.width * 0.25 ? NO : YES;
+                        case TransitionStyleFromLeft:
+                            _isDismissedOppositeDirection = !(g.view.center.x < _maskView.bounds.size.width * 0.25);
                             break;
-                        case SnailPopupsTransitionStyleSlideInFromRight:
-                            _dismissesOppositeDirection = g.view.center.x < _maskView.bounds.size.width * 0.25 ? YES : NO;
+                        case TransitionStyleFromRight:
+                            _isDismissedOppositeDirection = g.view.center.x < _maskView.bounds.size.width * 0.25;
                             break;
                         default: break;
                     }
                 }
-                [self dismissPopupsAnimated:YES completion:NULL];
+                [self dismissWithAnimated:YES completion:NULL];
             } else { // restore view location
-                [UIView animateWithDuration:0.15 animations:^{
-                    g.view.center = [self finishingPoint];
-                } completion:NULL];
+                [UIView animateWithDuration:_animateDuration
+                                      delay:0.0
+                     usingSpringWithDamping:_springDampingRatio
+                      initialSpringVelocity:0.2
+                                    options:UIViewAnimationOptionCurveLinear
+                                 animations:^{
+                                     g.view.center = [self finishingPoint];
+                                 } completion:NULL];
             }
         } break;
         case UIGestureRecognizerStateCancelled:

@@ -35,7 +35,7 @@
         _itemSize.height = 90;
     }
     CGFloat _gap = 15;
-    CGFloat _space = ([UIScreen width] - _rowCount * _itemSize.width) / (_rowCount + 1);
+    CGFloat _space = (self.width - _rowCount * _itemSize.width) / (_rowCount + 1);
     
     NSMutableArray *itemViews = [NSMutableArray new];
     [items enumerateObjectsUsingBlock:^(SnailImageLabelItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {

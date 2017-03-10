@@ -12,7 +12,7 @@
 #import "UIView+SnailUse.h"
 #import "UIAlertController+SnailUse.h"
 
-@interface ExampleTableViewController () <SnailCurtainViewDelegate, SnailFullScreenViewDelegate>
+@interface ExampleTableViewController () <SnailQuickMaskPopupsDelegate, SnailCurtainViewDelegate, SnailFullScreenViewDelegate>
 
 @property (nonatomic, strong) NSArray *colors;
 @property (nonatomic, strong) NSArray *styles;
@@ -25,24 +25,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController.navigationBar sl_setBackgroundColor:[UIColor r:122 g:190 b:95]];
-    [self.tableView setRowHeight:75];
-    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
+    [self.navigationController.navigationBar sl_setBackgroundColor:[UIColor r:102 g:150 b:95]];
+    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
+    textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"Gurmukhi MN" size:20];
+    self.navigationController.navigationBar.titleTextAttributes = textAttrs;
+    self.navigationItem.title = @"SnailQuickMaskPopups";
+    self.tableView.rowHeight = 90;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [self contentsInitialization];
+}
+
+- (void)contentsInitialization {
     _colors = @[@"#FC7541",
                 @"#0AB002",
-                @"#EF6656",
                 @"#707070",
                 @"#7ABE64",
                 @"#5BA9F8",
                 @"#E2547D"];
-    _styles = @[@"58City style",
+    _styles = @[@"Alert style",
                 @"WeChat style",
-                @"Slogan style",
                 @"Qzone style",
                 @"Shared style",
                 @"Sidebar style",
-                @"Full screen style"];
+                @"Full style"];
     _selNames = @[].mutableCopy;
     [_styles enumerateObjectsUsingBlock:^(NSString *styles, NSUInteger idx, BOOL * _Nonnull stop) {
         [_selNames addObject:[NSString stringWithFormat:@"example%lu", idx + 1]];
@@ -80,64 +86,70 @@
 - (void)example1 {
     SnailTooltipView *v = [UIView cityTooltip];
     [v.components.mainButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-    _popups = [SnailQuickMaskPopups popupsWithView:v maskStyle:SnailPopupsMaskStyleBlackTranslucent];
-    _popups.transitionStyle = SnailPopupsTransitionStyleSlideInFromTop;
-    _popups.dismissesOppositeDirection = YES;
-    _popups.shouldDismissOnMaskTouch = NO;
-    [_popups presentPopupsAnimated:YES completion:NULL];
+    _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackBlur aView:v];
+    _popups.presentationStyle = PresentationStyleCentered;
+    _popups.transitionStyle = TransitionStyleFromTop;
+    _popups.isDismissedOppositeDirection = YES;
+    _popups.isAllowMaskTouch = NO;
+    _popups.springDampingRatio = 0.5;
+    [_popups presentWithAnimated:YES completion:NULL];
 }
 
 - (void)example2 {
     SnailTooltipView *v = [UIView wechatTooltip];
     [v.components.mainButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
-    _popups = [SnailQuickMaskPopups popupsWithView:v maskStyle:SnailPopupsMaskStyleBlurTranslucentBlack];
-    _popups.presentationStyle = SnailPopupsPresentationStyleCentered;
-    _popups.shouldDismissOnMaskTouch = NO;
-    [_popups presentPopupsAnimated:YES completion:NULL];
+    _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:v];
+    _popups.presentationStyle = PresentationStyleCentered;
+    _popups.transitionStyle = TransitionStyleZoom;
+    _popups.isAllowMaskTouch = NO;
+    [_popups presentWithAnimated:YES completion:NULL];
 }
 
 - (void)example3 {
-    _popups = [SnailQuickMaskPopups popupsWithView:[UIImageView slogan] maskStyle:SnailPopupsMaskStyleBlackTranslucent];
-    _popups.presentationStyle = SnailPopupsPresentationStyleCentered;
-    _popups.transitionStyle = SnailPopupsTransitionStyleSlideInFromTop;
-    [_popups presentPopupsAnimated:YES completion:NULL];
+    SnailCurtainView *v= [UIView qzoneCurtain];
+    v.delegate = self;
+    _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:v];
+    _popups.presentationStyle = PresentationStyleTop;
+    _popups.delegate = self;
+    [_popups presentInView:self.view withAnimated:YES completion:NULL];
+}
+
+- (void)snailQuickMaskPopupsWillPresent:(SnailQuickMaskPopups *)popups {
+    self.tableView.scrollEnabled = NO;
+}
+
+- (void)snailQuickMaskPopupsWillDismiss:(SnailQuickMaskPopups *)popups {
+    self.tableView.scrollEnabled = YES;
 }
 
 - (void)example4 {
-    SnailCurtainView *v= [UIView qzoneCurtain];
-    v.delegate = self;
-    _popups = [SnailQuickMaskPopups popupsWithView:v maskStyle:SnailPopupsMaskStyleBlackTranslucent];
-    _popups.presentationStyle = SnailPopupsPresentationStyleCurtain;
-    [_popups presentPopupsAnimated:YES completion:NULL];
+    _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:[UIView sharedCurtain]];
+    _popups.presentationStyle = PresentationStyleBottom;
+    _popups.isAllowPopupsDrag = YES;
+    _popups.springDampingRatio = 0.5;
+    [_popups presentWithAnimated:YES completion:NULL];
 }
 
 - (void)example5 {
-    _popups = [SnailQuickMaskPopups popupsWithView:[UIView sharedCurtain] maskStyle:SnailPopupsMaskStyleBlackTranslucent];
-    _popups.presentationStyle = SnailPopupsPresentationStyleActionSheet;
-    _popups.shouldDismissOnPopupsDrag = YES;
-    [_popups presentPopupsAnimated:YES completion:NULL];
+    _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:[UIView sidebar]];
+    _popups.presentationStyle = PresentationStyleLeft;
+    _popups.isAllowPopupsDrag = YES;
+    [_popups presentWithAnimated:YES completion:NULL];
 }
 
 - (void)example6 {
-    _popups = [SnailQuickMaskPopups popupsWithView:[UIView sidebar] maskStyle:SnailPopupsMaskStyleBlackTranslucent];
-    _popups.presentationStyle = SnailPopupsPresentationStyleSlideLeft;
-    _popups.shouldDismissOnPopupsDrag = YES;
-    [_popups presentPopupsAnimated:YES completion:NULL];
-}
-
-- (void)example7 {
     SnailFullScreenView *v = [UIView fullScreen];
     v.delegate = self;
-    _popups = [SnailQuickMaskPopups popupsWithView:v maskStyle:SnailPopupsMaskStyleBlurTranslucentWhite];
-    _popups.transitionStyle = SnailPopupsTransitionStyleTransformScale;
-    _popups.shouldDismissOnPopupsDrag = YES;
-    [_popups presentPopupsAnimated:YES completion:NULL];
+    _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleWhiteBlur aView:v];
+    _popups.isDismissedOppositeDirection = YES;
+    _popups.isAllowPopupsDrag = YES;
+    [_popups presentWithAnimated:YES completion:NULL];
 }
 
 #pragma mark - dismiss
 
 - (void)dismiss {
-    [_popups dismissPopupsAnimated:YES completion:NULL];
+    [_popups dismissWithAnimated:YES completion:NULL];
 }
 
 #pragma mark - SnailCurtainViewDelegate
