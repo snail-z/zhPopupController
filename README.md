@@ -14,7 +14,7 @@ Available in [CocoaPods](https://cocoapods.org "CocoaPods" )
 ## Usage scenario 
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/alert%20style.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/WeChat%20style.gif)
-![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Qzone%20style.gif)
+![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Qzone%20style.gif)  
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Shared%20style.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Sidebar%20style.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Full%20style.gif)
