@@ -4,7 +4,11 @@
 <a href="https://github.com/snail-z/OverlayController-Swift/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat"></a>
   
  为任意视图快速添加一个蒙版，并可根据需求定制样式并可设置一些显示动画等，简单快捷，方便使用!  
- 通过SnailQuickMaskPopups内部创建一个蒙版视图，并添加自定义视图，包含一些点的计算实现弹出方向，手势拖动等
+ 通过SnailQuickMaskPopups内部创建一个蒙版视图，然后根据点的计算，实现弹出方向，手势拖动等  
+  
+=======
+#### _如果需要swift版本，可以[点击这里](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_
+=======  
 
 ## Installation
 Available in [CocoaPods](https://cocoapods.org "CocoaPods" )
@@ -177,10 +181,6 @@ typedef NS_ENUM(NSInteger, TransitionStyle) {
     // do something
 }
 ```  
-
-=======
-#### _如果需要swift版本，可以[点击这里](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_
-=======  
 
 ## License
 
