@@ -6,9 +6,7 @@
  _为任意视图快速添加一个蒙版，并可根据需求定制样式并可设置一些显示动画等，简单快捷，方便使用!  
  通过SnailQuickMaskPopups内部创建一个蒙版视图，然后根据点的计算，实现弹出方向，手势拖动等_  
   
-***** 
 #### _[Swift version is here.](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_
-*****
 
 ## Installation
 
