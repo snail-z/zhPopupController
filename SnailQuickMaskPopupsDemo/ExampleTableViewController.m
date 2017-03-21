@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.navigationController.navigationBar sl_setBackgroundColor:[UIColor r:102 g:150 b:95]];
+    [self.navigationController.navigationBar sl_setBackgroundColor:[UIColor r:47 g:79 b:79]];
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
     textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"Gurmukhi MN" size:20];
@@ -33,12 +33,13 @@
     self.navigationItem.title = @"SnailQuickMaskPopups";
     self.tableView.rowHeight = 90;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     [self contentsInitialization];
 }
 
 - (void)contentsInitialization {
     _colors = @[@"#FC7541",
-                @"#0AB002",
+                @"#42A455",
                 @"#707070",
                 @"#7ABE64",
                 @"#5BA9F8",
@@ -91,8 +92,8 @@
     _popups.transitionStyle = TransitionStyleFromTop;
     _popups.isDismissedOppositeDirection = YES;
     _popups.isAllowMaskTouch = NO;
-    _popups.springDampingRatio = 0.5;
-    [_popups presentWithAnimated:YES completion:NULL];
+    _popups.dampingRatio = 0.5;
+    [_popups presentAnimated:YES completion:NULL];
 }
 
 - (void)example2 {
@@ -100,9 +101,10 @@
     [v.components.mainButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:v];
     _popups.presentationStyle = PresentationStyleCentered;
-    _popups.transitionStyle = TransitionStyleZoom;
+    _popups.transitionStyle = TransitionStyleFromCenter;
     _popups.isAllowMaskTouch = NO;
-    [_popups presentWithAnimated:YES completion:NULL];
+    _popups.dampingRatio = 0.5;
+    [_popups presentAnimated:YES completion:NULL];
 }
 
 - (void)example3 {
@@ -111,7 +113,7 @@
     _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:v];
     _popups.presentationStyle = PresentationStyleTop;
     _popups.delegate = self;
-    [_popups presentInView:self.view withAnimated:YES completion:NULL];
+    [_popups presentInView:self.view animated:YES completion:NULL];
 }
 
 - (void)snailQuickMaskPopupsWillPresent:(SnailQuickMaskPopups *)popups {
@@ -126,15 +128,15 @@
     _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:[UIView sharedCurtain]];
     _popups.presentationStyle = PresentationStyleBottom;
     _popups.isAllowPopupsDrag = YES;
-    _popups.springDampingRatio = 0.5;
-    [_popups presentWithAnimated:YES completion:NULL];
+    _popups.dampingRatio = 0.5;
+    [_popups presentAnimated:YES completion:NULL];
 }
 
 - (void)example5 {
     _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackTranslucent aView:[UIView sidebar]];
     _popups.presentationStyle = PresentationStyleLeft;
     _popups.isAllowPopupsDrag = YES;
-    [_popups presentWithAnimated:YES completion:NULL];
+    [_popups presentAnimated:YES completion:NULL];
 }
 
 - (void)example6 {
@@ -143,13 +145,13 @@
     _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleWhiteBlur aView:v];
     _popups.isDismissedOppositeDirection = YES;
     _popups.isAllowPopupsDrag = YES;
-    [_popups presentWithAnimated:YES completion:NULL];
+    [_popups presentAnimated:YES completion:NULL];
 }
 
 #pragma mark - dismiss
 
 - (void)dismiss {
-    [_popups dismissWithAnimated:YES completion:NULL];
+    [_popups dismissAnimated:YES completion:NULL];
 }
 
 #pragma mark - SnailCurtainViewDelegate

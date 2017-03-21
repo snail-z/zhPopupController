@@ -30,7 +30,7 @@
     _isAllowMaskTouch = YES;
     _isAllowPopupsDrag = NO;
     _isDismissedOppositeDirection = NO;
-    _springDampingRatio = 1.0;
+    _dampingRatio = 1.0;
 }
 
 #pragma mark - initialization
@@ -77,21 +77,25 @@
 
 #pragma mark - present
 
-- (void)presentInView:(UIView *)superview
-         withAnimated:(BOOL)animated
-           completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
-    _superview = superview;
-    _maskView.frame = _superview.frame;
-    [self presentWithAnimated:animated completion:completion];
+- (void)presentInView:(nullable UIView *)superview
+             animated:(BOOL)animated
+           completion:(void (^)(SnailQuickMaskPopups * _Nonnull))completion {
+    
+    if (nil != superview) {
+        _superview = superview;
+        _maskView.frame = _superview.frame;
+    }
+    [self presentAnimated:animated completion:completion];
 }
 
-- (void)presentWithAnimated:(BOOL)animated
-                 completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
+- (void)presentAnimated:(BOOL)animated
+             completion:(void (^)(SnailQuickMaskPopups * _Nonnull))completion {
     
     if (_delegate && [_delegate respondsToSelector:@selector(snailQuickMaskPopupsWillPresent:)]) {
         [_delegate snailQuickMaskPopupsWillPresent:self];
     }
     
+    _popupView.userInteractionEnabled = NO;
     [_superview addSubview:_maskView];
     
     _isAnimated = animated;
@@ -99,10 +103,10 @@
     _maskView.alpha = 0;
     _popupView.center = [self startingPoint];
     
-    if (_springDampingRatio < 1) {
+    if (_dampingRatio < 1) {
         [UIView animateWithDuration:animated ? _animateDuration*=3 : 0
                               delay:0.1
-             usingSpringWithDamping:_springDampingRatio
+             usingSpringWithDamping:_dampingRatio
               initialSpringVelocity:0.2
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
@@ -124,11 +128,12 @@
     }
 }
 
-- (void)animation:(BOOL)finished
-       completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
+- (void)animation:(BOOL)finished completion:(void (^)(SnailQuickMaskPopups * _Nonnull))completion {
+    if (!finished) return;
+    _popupView.userInteractionEnabled = YES;
     _isPresented = YES;
     if (completion) {
-        completion(finished, self);
+        completion(self);
     } else {
         if (_delegate && [_delegate respondsToSelector:@selector(snailQuickMaskPopupsDidPresent:)]) {
             [_delegate snailQuickMaskPopupsDidPresent:self];
@@ -138,14 +143,16 @@
 
 #pragma mark - dismiss
 
-- (void)dismissWithAnimated:(BOOL)animated
-                 completion:(void (^)(BOOL, SnailQuickMaskPopups * _Nonnull))completion {
-    
+- (void)dismissAnimated:(BOOL)animated
+             completion:(void (^)(SnailQuickMaskPopups * _Nonnull))completion {
+
     if (_delegate && [_delegate respondsToSelector:@selector(snailQuickMaskPopupsWillDismiss:)]) {
         [_delegate snailQuickMaskPopupsWillDismiss:self];
     }
     
-    _springDampingRatio < 1 ? _animateDuration /= 3 : _animateDuration;
+    if (_dampingRatio < 1) {
+        _animateDuration *= 0.3;
+    }
     
     [UIView animateWithDuration:animated ? _animateDuration : 0
                           delay:0.1
@@ -154,10 +161,11 @@
                          _maskView.alpha = 0;
                          _popupView.center = [self dismissedPoint];
     } completion:^(BOOL finished) {
+        if (!finished) return;
         _isPresented = NO;
         [_maskView removeFromSuperview];
         if (completion) {
-            completion(finished, self);
+            completion(self);
         } else {
             if (_delegate && [_delegate respondsToSelector:@selector(snailQuickMaskPopupsDidDismiss:)]) {
                 [_delegate snailQuickMaskPopupsDidDismiss:self];
@@ -233,6 +241,8 @@
             switch (_transitionStyle) {
                 case TransitionStyleZoom:
                     _maskView.transform = CGAffineTransformIdentity;
+                case TransitionStyleFromCenter:
+                    _popupView.transform = CGAffineTransformIdentity;
                     break;
                 default: break;
             }
@@ -297,6 +307,8 @@
         case TransitionStyleFromRight:
             point = CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width, _maskView.center.y);
             break;
+        case TransitionStyleFromCenter:
+            _popupView.transform = CGAffineTransformMakeScale(0.05, 0.05);
         default: break;
     }
     return point;
@@ -320,6 +332,8 @@
         case TransitionStyleFromRight:
             point = _isDismissedOppositeDirection ? CGPointMake(-_popupView.bounds.size.width, _maskView.center.y) : CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width, _maskView.center.y);
             break;
+        case TransitionStyleFromCenter:
+            _popupView.transform = CGAffineTransformMakeScale(0.05, 0.05);
         default: break;
     }
     return point;
@@ -335,7 +349,7 @@
 
 - (void)maskTapped:(UITapGestureRecognizer *)tap {
     if (_isAllowMaskTouch) {
-        [self dismissWithAnimated:_isAnimated completion:NULL];
+        [self dismissAnimated:_isAnimated completion:NULL];
     }
 }
 
@@ -351,13 +365,11 @@
                 case PresentationStyleCentered: {
                     BOOL verticalTransformation = NO;
                     switch (_transitionStyle) {
-                        case TransitionStyleCrossDissolve:
-                        case TransitionStyleZoom:
-                        case TransitionStyleFromTop:
-                        case TransitionStyleFromBottom:
+                        case TransitionStyleFromLeft:
+                        case TransitionStyleFromRight: break;
+                        default:
                             verticalTransformation = YES;
                             break;
-                        default: break;
                     }
                     
                     // set screen ratio `_maskView.bounds.size.height / coefficient`
@@ -432,7 +444,8 @@
                 if (styleCentered) {
                     switch (_transitionStyle) {
                         case TransitionStyleCrossDissolve:
-                        case TransitionStyleZoom: {
+                        case TransitionStyleZoom:
+                        case TransitionStyleFromCenter: {
                             if (g.view.center.y < _maskView.bounds.size.height * 0.25) {
                                 _transitionStyle = TransitionStyleFromTop;
                             } else {
@@ -457,16 +470,17 @@
                         default: break;
                     }
                 }
-                [self dismissWithAnimated:YES completion:NULL];
+                [self dismissAnimated:YES completion:NULL];
             } else { // restore view location
-                [UIView animateWithDuration:_animateDuration
-                                      delay:0.0
-                     usingSpringWithDamping:_springDampingRatio
-                      initialSpringVelocity:0.2
-                                    options:UIViewAnimationOptionCurveLinear
-                                 animations:^{
-                                     g.view.center = [self finishingPoint];
-                                 } completion:NULL];
+                if (_dampingRatio < 1) {
+                    [UIView animateWithDuration:_animateDuration delay:0.1 usingSpringWithDamping:_dampingRatio initialSpringVelocity:0.2 options:UIViewAnimationOptionCurveLinear animations:^{
+                        g.view.center = [self finishingPoint];
+                    } completion:NULL];
+                } else {
+                    [UIView animateWithDuration:_animateDuration animations:^{
+                        g.view.center = [self finishingPoint];
+                    }];
+                }
             }
         } break;
         case UIGestureRecognizerStateCancelled:
