@@ -15,7 +15,7 @@ SnailQuickMaskPopups is available through [CocoaPods](http://cocoapods.org). To 
           pod 'SnailQuickMaskPopups', '~> 1.0.0'
       
       
-## Usage scenario 
+## Example 
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/alert%20style.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/WeChat%20style.gif)
 ![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Qzone%20style.gif)  
@@ -29,7 +29,14 @@ SnailQuickMaskPopups is available through [CocoaPods](http://cocoapods.org). To 
     #import "SnailQuickMaskPopups.h"
  ```  
 
-## Update  
+## Update 
+* 更新过渡动画，通过属性
+```objc
+typedef NS_ENUM(NSInteger, TransitionStyle) {
+    // 从中心点变大
+    TransitionStyleFromCenter
+};
+``` 
 * 最新更新，为视图弹出时添加回弹动画，通过修改属性springDampingRatio回弹阻尼比的值来设置，使用了系统方法usingSpringWithDamping动画
 ```objc
 // - usingSpringWithDamping的范围为0.0f到1.0f，数值越小「弹簧」的振动效果越明显
@@ -160,7 +167,7 @@ typedef NS_ENUM(NSInteger, TransitionStyle) {
 
 ```
   
-## Example
+## Usage
  *  实例化SnailQuickMaskPopups传入自定义的view并设置遮罩样式，然后将视图弹出
 ``` objc
     _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackBlur aView:v];
@@ -169,15 +176,24 @@ typedef NS_ENUM(NSInteger, TransitionStyle) {
     _popups.isDismissedOppositeDirection = YES;
     _popups.isAllowMaskTouch = NO;
     _popups.springDampingRatio = 0.5;
+    _popups.delegate = self;
     [_popups presentWithAnimated:YES completion:NULL];
  ```
-* 实现代理方法，部分如下 
+* 实现代理方法
 ```objc
 - (void)snailQuickMaskPopupsWillPresent:(SnailQuickMaskPopups *)popups {
     // do something
 }
 
 - (void)snailQuickMaskPopupsWillDismiss:(SnailQuickMaskPopups *)popups {
+    // do something
+}
+
+- (void)snailQuickMaskPopupsDidPresent:(SnailQuickMaskPopups *)popups {
+    // do something
+}
+
+- (void)snailQuickMaskPopupsDidDismiss:(SnailQuickMaskPopups *)popups {
     // do something
 }
 ```  
