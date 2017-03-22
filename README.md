@@ -3,7 +3,8 @@
 ![enter image description here](https://img.shields.io/badge/platform-iOS%207.0%2B-ff69b5152950834.svg) 
 <a href="https://github.com/snail-z/OverlayController-Swift/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat"></a>
   
- 快速创建蒙版并支持弹出自定义的view，可以设置蒙版样式、过渡效果、还支持手势拖动、弹性动画等等。简单快捷，方便使用!  
+ 快速创建蒙版并支持弹出自定义的view，可以设置蒙版样式、过渡效果、还支持手势拖动、弹性动画等等。简单快捷，方便使用!
+ 参考下面的example ☟
   
 #### _[Swift version is here.](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_
 
