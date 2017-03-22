@@ -12,7 +12,7 @@
 
 SnailQuickMaskPopups is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:  
   
-          pod 'SnailQuickMaskPopups', '~> 1.0.0'
+          pod 'SnailQuickMaskPopups', '~> 1.0.1'
       
       
 ## Example 
@@ -30,14 +30,14 @@ SnailQuickMaskPopups is available through [CocoaPods](http://cocoapods.org). To 
  ```  
 
 ## Update 
-* 更新过渡动画，通过属性
+* 更新过渡动画
 ```objc
 typedef NS_ENUM(NSInteger, TransitionStyle) {
     // 从中心点变大
     TransitionStyleFromCenter
 };
 ``` 
-* 最新更新，为视图弹出时添加回弹动画，通过修改属性springDampingRatio回弹阻尼比的值来设置，使用了系统方法usingSpringWithDamping动画
+* 为视图弹出时添加弹性动画，通过修改属性dampingRatio回弹阻尼比的值来设置，使用了系统方法usingSpringWithDamping动画
 ```objc
 // - usingSpringWithDamping的范围为0.0f到1.0f，数值越小「弹簧」的振动效果越明显
 // - initialSpringVelocity表示初始的速度，数值越大一开始移动越快
@@ -102,7 +102,7 @@ typedef NS_ENUM(NSInteger, TransitionStyle) {
 @property (nonatomic, assign) PresentationStyle presentationStyle;  // 呈现样式，默认值是PresentationStyleCentered
 @property (nonatomic, assign) TransitionStyle transitionStyle;      // 过渡样式，默认值是TransitionStyleCrossDissolve
 @property (nonatomic, assign) CGFloat maskAlpha;                    // 蒙版透明度，默认值0.5
-@property (nonatomic, assign) CGFloat springDampingRatio;           // 视图呈现时是否设置回弹动画效果，默认值1.0 (当'springDampingRatio'值为1.0时没有动画回弹效果；当该值小于1.0时，则开启回弹动画效果)
+@property (nonatomic, assign) CGFloat dampingRatio;                 // 视图呈现时是否设置回弹动画效果，默认值1.0 (当'springDampingRatio'值为1.0时没有动画回弹效果；当该值小于1.0时，则开启回弹动画效果)
 @property (nonatomic, assign) NSTimeInterval animateDuration;       // 动画持续时间，默认值0.25
 @property (nonatomic, assign) BOOL isAllowMaskTouch;                // 蒙版是否可以响应事件，默认值YES
 @property (nonatomic, assign) BOOL isAllowPopupsDrag;               // 是否允许弹出视图响应拖动事件，默认值NO
@@ -119,32 +119,34 @@ typedef NS_ENUM(NSInteger, TransitionStyle) {
                               aView:(UIView *)aView;
 
 /**
- presentInView: withAnimated: completion
+ presentInView: animated: completion
  
- - parameter superview: 在superview上显示
- - parameter animated: 显示时是否需要动画
+ - parameter superview:  将蒙版添加在superview上，若superview为nil，则显示在window上
+ - parameter animated:   显示时是否需要动画，默认YES
+ - parameter completion: 视图显示完成的回调
  */
-- (void)presentInView:(UIView *)superview
-         withAnimated:(BOOL)animated
-           completion:(void (^ __nullable)(BOOL finished, SnailQuickMaskPopups *popups))completion;
+- (void)presentInView:(nullable UIView *)superview
+             animated:(BOOL)animated
+           completion:(void (^ __nullable)(SnailQuickMaskPopups *popups))completion;
 
 /**
- presentWithAnimated: completion
- ! 默认显示在window上
+ presentAnimated: completion
+ ! 视图显示在window上
  
- - parameter animated: 显示时是否需要动画
+ - parameter animated:   显示时是否需要动画
+ - parameter completion: 视图显示完成的回调
  */
-- (void)presentWithAnimated:(BOOL)animated
-                 completion:(void (^ __nullable)(BOOL finished, SnailQuickMaskPopups *popups))completion;
+- (void)presentAnimated:(BOOL)animated
+             completion:(void (^ __nullable)(SnailQuickMaskPopups *popups))completion;
 
 /**
- dismissWithAnimated: completion
+ dismissAnimated: completion
  
- - parameter animated: 隐藏时是否需要动画
+ - parameter animated:   隐藏时是否需要动画
+ - parameter completion: 视图已经消失的回调
  */
-- (void)dismissWithAnimated:(BOOL)animated
-                 completion:(void (^ __nullable)(BOOL finished, SnailQuickMaskPopups *popups))completion;
-
+- (void)dismissAnimated:(BOOL)animated
+             completion:(void (^ __nullable)(SnailQuickMaskPopups *popups))completion;
 ```
 ```objc
 @protocol SnailQuickMaskPopupsDelegate
@@ -153,10 +155,9 @@ typedef NS_ENUM(NSInteger, TransitionStyle) {
 /**
  SnailQuickMaskPopupsDelegate
  
- 如果想在视图将要呈现之前或将要消失前或者完成后doSomething，可以实现以下代理方法:
  - snailQuickMaskPopupsWillPresent: 视图将要呈现
  - snailQuickMaskPopupsWillDismiss: 视图将要消失
- ! 若在'present'或'dismiss'方法中实现completion回调方法，以下两个方法则不起作用
+ ! 这两个是'present'和'dismiss'方法中completion对应的代理方法，completion优先处理
  - snailQuickMaskPopupsDidPresent: 视图已经呈现
  - snailQuickMaskPopupsDidDismiss: 视图已经消失
  */
@@ -175,7 +176,7 @@ typedef NS_ENUM(NSInteger, TransitionStyle) {
     _popups.transitionStyle = TransitionStyleFromTop;
     _popups.isDismissedOppositeDirection = YES;
     _popups.isAllowMaskTouch = NO;
-    _popups.springDampingRatio = 0.5;
+    _popups.dampingRatio = 0.5;
     _popups.delegate = self;
     [_popups presentWithAnimated:YES completion:NULL];
  ```
