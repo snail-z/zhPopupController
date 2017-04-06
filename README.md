@@ -1,204 +1,213 @@
-# SnailQuickMaskPopups 
+# SnailPopupController 
 ![enter image description here](https://img.shields.io/badge/pod-v1.0.0-brightgreen.svg)
 ![enter image description here](https://img.shields.io/badge/platform-iOS%207.0%2B-ff69b5152950834.svg) 
 <a href="https://github.com/snail-z/OverlayController-Swift/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat"></a>
   
- 快速创建蒙版并支持弹出自定义的view，可以设置蒙版样式、过渡效果、还支持手势拖动、弹性动画等等。简单快捷，方便使用!
- 参考下面的example ☟
+ 快速弹出自定义视图，支持自定义蒙版样式、过渡效果、手势拖动、弹性动画等等。简单快捷，方便使用!  
   
 #### _[Swift version is here.](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_
 
 ## Installation
 
-SnailQuickMaskPopups is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:  
+SnailPopupController is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:  
   
-          pod 'SnailQuickMaskPopups', '~> 1.0.1'
+        pod 'SnailPopupController', '~> 2.0.1'
       
       
 ## Example 
-![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/alert%20style.gif)
-![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/WeChat%20style.gif)
-![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Qzone%20style.gif)  
-![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Shared%20style.gif)
-![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Sidebar%20style.gif)
-![image](https://github.com/snail-z/SnailQuickMaskPopups/blob/master/sample/Full%20style.gif)
+![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/alert_style1.gif?raw=true)
+![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/alert_style2.gif?raw=true)
+![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/qzone_style.gif?raw=true)  
+![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/sidebar_style.gif?raw=true)
+![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/full_style.gif?raw=true)
+![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/shared_style.gif?raw=true)
 
 
 ## Import
  ``` objc
-    #import "SnailQuickMaskPopups.h"
+    #import "SnailPopupController.h"
  ```  
 
-## Update 
-* 更新过渡动画
+## Update 2.0版本更新
+* 增加视图弹出样式
 ```objc
-typedef NS_ENUM(NSInteger, TransitionStyle) {
-    // 从中心点变大
-    TransitionStyleFromCenter
+// Controls how the popup will be presented.
+typedef NS_ENUM(NSInteger, PopupTransitStyle) {
+    PopupTransitStyleSlightScale, // 轻微缩放效果
+    PopupTransitStyleShrinkInOut, // 从中心点扩大或收缩
+    PopupTransitStyleDefault // 默认淡入淡出效果
 };
 ``` 
-* 为视图弹出时添加弹性动画，通过修改属性dampingRatio回弹阻尼比的值来设置，使用了系统方法usingSpringWithDamping动画
+* 修改present接口，增加回弹动画等
 ```objc
-// - usingSpringWithDamping的范围为0.0f到1.0f，数值越小「弹簧」的振动效果越明显
-// - initialSpringVelocity表示初始的速度，数值越大一开始移动越快
-[UIView animateWithDuration:duration
-                          delay:0.0
-         usingSpringWithDamping:0.6
-          initialSpringVelocity:0.0
-                        options:UIViewAnimationOptionCurveLinear
-                     animations:^{
-                     } completion:^(BOOL finished) {
-                     }];  
+/*
+ - parameter contentView: 需要弹出的视图 // This is the view that you want to appear in popup.
+ - parameter duration: 动画时间
+ - parameter isElasticAnimated: 是否使用弹性动画
+ - parameter sView: 在sView上显示
+ */
+- (void)presentContentView:(nullable UIView *)contentView
+                  duration:(NSTimeInterval)duration
+           elasticAnimated:(BOOL)isElasticAnimated
+                    inView:(nullable UIView *)sView; 
 ```  
-* 修改接口api，简化方法和枚举值并增加详细注释，具体如下   
+  
+### 以下是修改后接口api，具体如下：
 ```objc
-// 蒙版样式
-typedef NS_ENUM(NSUInteger, MaskStyle) {
-    // 黑色半透明效果
-    MaskStyleBlackTranslucent = 0,
-    // 黑色半透明模糊效果
-    MaskStyleBlackBlur,
-    // 白色半透明模糊效果
-    MaskStyleWhiteBlur,
-    // 白色不透明的效果
-    MaskStyleWhite,
-    // 全透明的效果
-    MaskStyleClear
+// Control mask view of style.
+// 控制蒙版视图的样式
+typedef NS_ENUM(NSUInteger, PopupMaskType) {
+    PopupMaskTypeBlackBlur = 0, // 黑色半透明模糊效果
+    PopupMaskTypeWhiteBlur, // 白色半透明模糊效果
+    PopupMaskTypeWhite, // 纯白色
+    PopupMaskTypeClear, // 全透明
+    PopupMaskTypeDefault, // 默认黑色半透明效果
 };
 
-// 呈现样式
-typedef NS_ENUM(NSUInteger, PresentationStyle) {
-    // 居中显示，类似UIAlertView
-    PresentationStyleCentered = 0,
-    // 显示在底部，类似UIActionSheet
-    PresentationStyleBottom,
-    // 显示在顶部
-    PresentationStyleTop,
-    // 显示在左边，类似侧滑栏
-    PresentationStyleLeft,
-    // 显示在右面
-    PresentationStyleRight
+// Control popup view display position.
+// 控制弹出视图的显示位置
+typedef NS_ENUM(NSUInteger, PopupLayoutType) {
+    PopupLayoutTypeTop = 0, // 在顶部显示
+    PopupLayoutTypeBottom,
+    PopupLayoutTypeLeft,
+    PopupLayoutTypeRight,
+    PopupLayoutTypeCenter // 默认居中显示
 };
 
-// 过渡样式
-/// ! 若PresentationStyle不是'居中样式(Centered)' 该设置是无效的
-typedef NS_ENUM(NSInteger, TransitionStyle) {
-    // 淡入淡出
-    TransitionStyleCrossDissolve = 0,
-    // 轻微缩放效果
-    TransitionStyleZoom,
-    // 从顶部滑出
-    TransitionStyleFromTop,
-    // 从底部滑出
-    TransitionStyleFromBottom,
-    // 从左部滑出
-    TransitionStyleFromLeft,
-    // 从右部滑出
-    TransitionStyleFromRight
+// Controls how the popup will be presented.
+// 控制弹出视图将以哪种样式呈现
+typedef NS_ENUM(NSInteger, PopupTransitStyle) {
+    PopupTransitStyleFromTop = 0, // 从上部滑出
+    PopupTransitStyleFromBottom, // 从底部滑出
+    PopupTransitStyleFromLeft,  // 从左部滑出
+    PopupTransitStyleFromRight, // 从右部滑出
+    PopupTransitStyleSlightScale, // 轻微缩放效果
+    PopupTransitStyleShrinkInOut, // 从中心点扩大或收缩
+    PopupTransitStyleDefault // 默认淡入淡出效果
 };
-
 ```
+* 属性设置
 ```objc
-@property (nonatomic, assign) PresentationStyle presentationStyle;  // 呈现样式，默认值是PresentationStyleCentered
-@property (nonatomic, assign) TransitionStyle transitionStyle;      // 过渡样式，默认值是TransitionStyleCrossDissolve
-@property (nonatomic, assign) CGFloat maskAlpha;                    // 蒙版透明度，默认值0.5
-@property (nonatomic, assign) CGFloat dampingRatio;                 // 视图呈现时是否设置回弹动画效果，默认值1.0 (当'springDampingRatio'值为1.0时没有动画回弹效果；当该值小于1.0时，则开启回弹动画效果)
-@property (nonatomic, assign) NSTimeInterval animateDuration;       // 动画持续时间，默认值0.25
-@property (nonatomic, assign) BOOL isAllowMaskTouch;                // 蒙版是否可以响应事件，默认值YES
-@property (nonatomic, assign) BOOL isAllowPopupsDrag;               // 是否允许弹出视图响应拖动事件，默认值NO
-@property (nonatomic, assign) BOOL isDismissedOppositeDirection;    // 是否反方向消失，默认值NO
+@property (nonatomic, assign) PopupMaskType maskType; // 设置蒙版样式，default = PopupMaskTypeDefault
+
+@property (nonatomic, assign) PopupLayoutType layoutType; // 视图显示位置，default = PopupLayoutTypeCenter
+
+// Must set layoutType = PopupLayoutTypeCenter
+@property (nonatomic, assign) PopupTransitStyle transitStyle; // 视图呈现方式，default = PopupTransitStyleDefault
+
+// Must set maskType = PopupMaskTypeTranslucent
+@property (nonatomic, assign) CGFloat maskAlpha; // 设置蒙版视图的透明度，default = 0.5
+
+// Must set layoutType = PopupLayoutTypeCenter
+@property (nonatomic, assign) BOOL isDismissOppositeDirection; // 是否反方向消失，default = NO
+
+@property (nonatomic, assign) BOOL isDismissOnMaskTouched; // 点击蒙版视图是否响应dismiss事件，default = YES
+
+@property (nonatomic, assign) BOOL isAllowPan; // 是否允许视图拖动，default = NO
+
+@property (nonatomic, assign) BOOL isDropTransitionAnimated; // 视图倾斜掉落动画，当transitStyle为PopupTransitStyleFromTop样式时可以设置为YES使用掉落动画，default = NO
+
+@property (nonatomic, assign, readonly) BOOL isPresenting; // 视图是否正在显示中
 ```
+* 相关事件block
 ```objc
-/**
- popupsWithMaskStyle: aView:
- 
- - parameter maskStyle: 设置蒙版样式
- - parameter aView:     设置要弹出的视图
- */
-+ (instancetype)popupsWithMaskStyle:(MaskStyle)maskStyle
-                              aView:(UIView *)aView;
+// Block gets called when mask touched. 蒙版触摸事件block，主要用来自定义dismiss动画时间及弹性效果
+@property (nonatomic, copy) void (^maskClicked)(SnailPopupController *popupController);
 
-/**
- presentInView: animated: completion
- 
- - parameter superview:  将蒙版添加在superview上，若superview为nil，则显示在window上
- - parameter animated:   显示时是否需要动画，默认YES
- - parameter completion: 视图显示完成的回调
- */
-- (void)presentInView:(nullable UIView *)superview
-             animated:(BOOL)animated
-           completion:(void (^ __nullable)(SnailQuickMaskPopups *popups))completion;
+// Should implement this block before the presenting. 应该在present前实现的block
+@property (nonatomic, copy) void (^willPresent)(SnailPopupController *popupController); // ContentView will present. 视图将要呈现
 
-/**
- presentAnimated: completion
- ! 视图显示在window上
- 
- - parameter animated:   显示时是否需要动画
- - parameter completion: 视图显示完成的回调
- */
-- (void)presentAnimated:(BOOL)animated
-             completion:(void (^ __nullable)(SnailQuickMaskPopups *popups))completion;
+@property (nonatomic, copy) void (^didPresent)(SnailPopupController *popupController); // ContentView Did present. 视图已经呈现
 
-/**
- dismissAnimated: completion
- 
- - parameter animated:   隐藏时是否需要动画
- - parameter completion: 视图已经消失的回调
- */
-- (void)dismissAnimated:(BOOL)animated
-             completion:(void (^ __nullable)(SnailQuickMaskPopups *popups))completion;
+@property (nonatomic, copy) void (^willDismiss)(SnailPopupController *popupController); // ContentView Will dismiss. 视图将要消失
+
+@property (nonatomic, copy) void (^didDismiss)(SnailPopupController *popupController); // ContentView Did dismiss. 视图已经消失
 ```
+* 弹出自定义视图方法等 
 ```objc
-@protocol SnailQuickMaskPopupsDelegate
+/*
+ - parameter contentView: 需要弹出的视图 // This is the view that you want to appear in popup.
+ - parameter duration: 动画时间
+ - parameter isElasticAnimated: 是否使用弹性动画
+ - parameter sView: 在sView上显示
+ */
+- (void)presentContentView:(nullable UIView *)contentView
+                  duration:(NSTimeInterval)duration
+           elasticAnimated:(BOOL)isElasticAnimated
+                    inView:(nullable UIView *)sView;
+
+// inView = nil, 在Window显示
+- (void)presentContentView:(nullable UIView *)contentView duration:(NSTimeInterval)duration elasticAnimated:(BOOL)isElasticAnimated;
+
+/*
+ - duration = 0.25
+ - isElasticAnimated = NO
+ - inView = nil, 在Window显示
+ */
+- (void)presentContentView:(nullable UIView *)contentView;
+
+/*
+ - parameter duration: 动画时间
+ - parameter isElasticAnimated: 是否使用弹性动画
+ */
+- (void)dismissWithDuration:(NSTimeInterval)duration elasticAnimated:(BOOL)isElasticAnimated;
+
+// - parameters等于present时对应设置的values
+- (void)dismiss;
+```  
+* 便利构造器
+``` objc
+// Convenience method for creating popupController with custom values. 便利构造popupController并设置相应属性值
++ (instancetype)popupControllerWithLayoutType:(PopupLayoutType)layoutType
+                                     maskType:(PopupMaskType)maskType
+                         dismissOnMaskTouched:(BOOL)isDismissOnMaskTouched
+                                     allowPan:(BOOL)isAllowPan;
+
+// When layoutType = PopupLayoutTypeCenter // 若弹出视图想居中显示时，可以使用这个方法快速设置
++ (instancetype)popupControllerLayoutInCenterWithTransitStyle:(PopupTransitStyle)transitStyle
+                                                     maskType:(PopupMaskType)maskType
+                                         dismissOnMaskTouched:(BOOL)isDismissOnMaskTouched
+                                     dismissOppositeDirection:(BOOL)isDismissOppositeDirection
+                                                     allowPan:(BOOL)isAllowPan;
+``` 
+* block 对应的代理方法
+``` objc
+@protocol SnailPopupControllerDelegate <NSObject>
 
 @optional
-/**
- SnailQuickMaskPopupsDelegate
- 
- - snailQuickMaskPopupsWillPresent: 视图将要呈现
- - snailQuickMaskPopupsWillDismiss: 视图将要消失
- ! 这两个是'present'和'dismiss'方法中completion对应的代理方法，completion优先处理
- - snailQuickMaskPopupsDidPresent: 视图已经呈现
- - snailQuickMaskPopupsDidDismiss: 视图已经消失
- */
-- (void)snailQuickMaskPopupsWillPresent:(SnailQuickMaskPopups *)popups;
-- (void)snailQuickMaskPopupsWillDismiss:(SnailQuickMaskPopups *)popups;
-- (void)snailQuickMaskPopupsDidPresent:(SnailQuickMaskPopups *)popups;
-- (void)snailQuickMaskPopupsDidDismiss:(SnailQuickMaskPopups *)popups;
+// - Block对应的Delegate方法，block优先
+- (void)popupControllerWillPresent:(nonnull SnailPopupController *)popupController;
+- (void)popupControllerDidPresent:(nonnull SnailPopupController *)popupController;
+- (void)popupControllerWillDismiss:(nonnull SnailPopupController *)popupController;
+- (void)popupControllerDidDismiss:(nonnull SnailPopupController *)popupController;
 
-```
-  
-## Usage
- *  实例化SnailQuickMaskPopups传入自定义的view并设置遮罩样式，然后将视图弹出
+@end
+``` 
+* 为需要使用SnailPopupController的类增加属性sl_popupController
 ``` objc
-    _popups = [SnailQuickMaskPopups popupsWithMaskStyle:MaskStyleBlackBlur aView:v];
-    _popups.presentationStyle = PresentationStyleCentered;
-    _popups.transitionStyle = TransitionStyleFromTop;
-    _popups.isDismissedOppositeDirection = YES;
-    _popups.isAllowMaskTouch = NO;
-    _popups.dampingRatio = 0.5;
-    _popups.delegate = self;
-    [_popups presentWithAnimated:YES completion:NULL];
+@interface NSObject (SnailPopupController)
+
+// 因为SnailPopupController内部子视图是默认添加在keyWindow上的，所以如果popupController是局部变量的话不会被任何引用，生命周期也只在这个方法内。为了使内部视图正常响应，所以应将popupController声明为全局属性，保证其生命周期，也可以直接使用sl_popupController
+@property (nonatomic, strong) SnailPopupController *sl_popupController;
+
+@end
+``` 
+## Usage
+ * 可以直接使用sl_popupController弹出视图
+``` objc
+    [self.sl_popupController presentContentView:customView];
  ```
-* 实现代理方法
+* 自定义sl_popupController
 ```objc
-- (void)snailQuickMaskPopupsWillPresent:(SnailQuickMaskPopups *)popups {
-    // do something
-}
-
-- (void)snailQuickMaskPopupsWillDismiss:(SnailQuickMaskPopups *)popups {
-    // do something
-}
-
-- (void)snailQuickMaskPopupsDidPresent:(SnailQuickMaskPopups *)popups {
-    // do something
-}
-
-- (void)snailQuickMaskPopupsDidDismiss:(SnailQuickMaskPopups *)popups {
-    // do something
-}
+    self.sl_popupController = [[SnailPopupController alloc] init];
+    self.sl_popupController.layoutType = PopupLayoutTypeLeft;
+    self.sl_popupController.isAllowPan = YES;
+    // ...
+    [self.sl_popupController presentContentView:customView];
 ```  
+
+#### 更多使用方法请参考Demo  
 
 ## License
 
-SnailQuickMaskPopups is distributed under the MIT license.
+SnailPopupController is distributed under the MIT license.
