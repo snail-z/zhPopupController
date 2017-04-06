@@ -1,6 +1,6 @@
 //
 //  SnailPopupController.m
-//  <https://github.com/snail-z/SnailQuickMaskPopups.git>
+//  <https://github.com/snail-z/SnailPopupController.git>
 //
 //  Created by zhanghao on 2016/11/15.
 //  Copyright © 2017年 zhanghao. All rights reserved.

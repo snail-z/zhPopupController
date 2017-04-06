@@ -15,7 +15,6 @@
 		6150580E1E8DFEE10053F1F6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6150580C1E8DFEE10053F1F6 /* LaunchScreen.storyboard */; };
 		615058191E8DFEE10053F1F6 /* SnailPopupControllerDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 615058181E8DFEE10053F1F6 /* SnailPopupControllerDemoTests.m */; };
 		615058241E8DFEE10053F1F6 /* SnailPopupControllerDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 615058231E8DFEE10053F1F6 /* SnailPopupControllerDemoUITests.m */; };
-		615058341E8DFF410053F1F6 /* SnailPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 615058331E8DFF410053F1F6 /* SnailPopupController.m */; };
 		615058381E8DFFF70053F1F6 /* SnailIconLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 615058371E8DFFF70053F1F6 /* SnailIconLabel.m */; };
 		615058521E8E01E60053F1F6 /* SnailSidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615058511E8E01E60053F1F6 /* SnailSidebarView.m */; };
 		615058551E8E0C3C0053F1F6 /* SnailCurtainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 615058541E8E0C3C0053F1F6 /* SnailCurtainView.m */; };
@@ -74,8 +73,6 @@
 		6150581F1E8DFEE10053F1F6 /* SnailPopupControllerDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SnailPopupControllerDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		615058231E8DFEE10053F1F6 /* SnailPopupControllerDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SnailPopupControllerDemoUITests.m; sourceTree = "<group>"; };
 		615058251E8DFEE10053F1F6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		615058321E8DFF410053F1F6 /* SnailPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnailPopupController.h; sourceTree = "<group>"; };
-		615058331E8DFF410053F1F6 /* SnailPopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnailPopupController.m; sourceTree = "<group>"; };
 		615058361E8DFFF70053F1F6 /* SnailIconLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnailIconLabel.h; sourceTree = "<group>"; };
 		615058371E8DFFF70053F1F6 /* SnailIconLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnailIconLabel.m; sourceTree = "<group>"; };
 		615058501E8E01E60053F1F6 /* SnailSidebarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnailSidebarView.h; sourceTree = "<group>"; };
@@ -159,7 +156,6 @@
 		615057F21E8DFEE10053F1F6 = {
 			isa = PBXGroup;
 			children = (
-				615058311E8DFF410053F1F6 /* SnailPopupController */,
 				615058351E8DFFBA0053F1F6 /* Classes */,
 				615057FD1E8DFEE10053F1F6 /* SnailPopupControllerDemo */,
 				615058591E8E0EB10053F1F6 /* Utilities */,
@@ -224,15 +220,6 @@
 				615058251E8DFEE10053F1F6 /* Info.plist */,
 			);
 			path = SnailPopupControllerDemoUITests;
-			sourceTree = "<group>";
-		};
-		615058311E8DFF410053F1F6 /* SnailPopupController */ = {
-			isa = PBXGroup;
-			children = (
-				615058321E8DFF410053F1F6 /* SnailPopupController.h */,
-				615058331E8DFF410053F1F6 /* SnailPopupController.m */,
-			);
-			path = SnailPopupController;
 			sourceTree = "<group>";
 		};
 		615058351E8DFFBA0053F1F6 /* Classes */ = {
@@ -482,7 +469,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				615058341E8DFF410053F1F6 /* SnailPopupController.m in Sources */,
 				615058521E8E01E60053F1F6 /* SnailSidebarView.m in Sources */,
 				61F999B21E94C38E002C531B /* ViewController+Extension.m in Sources */,
 				615058381E8DFFF70053F1F6 /* SnailIconLabel.m in Sources */,

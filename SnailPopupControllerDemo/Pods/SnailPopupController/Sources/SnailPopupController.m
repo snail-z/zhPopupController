@@ -1,6 +1,6 @@
 //
 //  SnailPopupController.m
-//  <https://github.com/snail-z/SnailQuickMaskPopups.git>
+//  <https://github.com/snail-z/SnailPopupController.git>
 //
 //  Created by zhanghao on 2016/11/15.
 //  Copyright © 2017年 zhanghao. All rights reserved.
@@ -857,8 +857,6 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
     [[NSNotificationCenter defaultCenter]removeObserver:self
                                                    name:UIApplicationDidChangeStatusBarOrientationNotification
                                                  object:nil];
-    
-    NSLog(@"%@ - dealloc", NSStringFromClass(self.class));
 }
 
 @end

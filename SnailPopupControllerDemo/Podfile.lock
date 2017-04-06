@@ -1,3 +1,12 @@
-PODFILE CHECKSUM: 2a83e991204ae1c9ed603fe3370aa5b723d25c44
+PODS:
+  - SnailPopupController (1.0.2)
+
+DEPENDENCIES:
+  - SnailPopupController
+
+SPEC CHECKSUMS:
+  SnailPopupController: 51628aeeccee0f6eb7dd57462ca7c4ba5dac8af2
+
+PODFILE CHECKSUM: 1cc64610250dcdba0b30e9f0a4b624d9f8040000
 
 COCOAPODS: 1.2.1.beta.1
