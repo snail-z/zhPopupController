@@ -4,16 +4,22 @@
 <a href="https://github.com/snail-z/OverlayController-Swift/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat"></a>
   
  快速弹出自定义视图，支持自定义蒙版样式、过渡效果、手势拖动、弹性动画等等。简单快捷，方便使用!  
-  
-#### _[Swift version is here.](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_
+#### _[Swift version is here.](https://github.com/snail-z/OverlayController-Swift) - [OverlayController-Swift](https://github.com/snail-z/OverlayController-Swift)_    
+
 
 ## Installation
+To install OverlayController using [CocoaPods](https://cocoapods.org "CocoaPods" ), please integrate it in your existing Podfile, or create a new Podfile:
 
-SnailPopupController is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:  
-  
-        pod 'SnailPopupController', '~> 2.0.1'
-      
-      
+```ruby
+    platform :ios, '7.0'
+    use_frameworks!
+
+    target 'You Project' do
+      pod 'SnailPopupController', '~> 2.0.1'
+    end
+```
+Then run pod install.  
+
 ## Example 
 ![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/alert_style1.gif?raw=true)
 ![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/alert_style2.gif?raw=true)
@@ -52,7 +58,7 @@ typedef NS_ENUM(NSInteger, PopupTransitStyle) {
                     inView:(nullable UIView *)sView; 
 ```  
   
-### 以下是修改后接口api，具体如下：
+#### 以下是修改后接口api，具体如下：
 ```objc
 // Control mask view of style.
 // 控制蒙版视图的样式
