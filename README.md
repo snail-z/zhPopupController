@@ -128,7 +128,7 @@ typedef NS_ENUM(NSInteger, PopupTransitStyle) {
 @property (nonatomic, copy) void (^didDismiss)(SnailPopupController *popupController); // ContentView Did dismiss. 视图已经消失
 ```
 * 弹出自定义视图方法等 
-```objc
+```objc 
 /*
  - parameter contentView: 需要弹出的视图 // This is the view that you want to appear in popup.
  - parameter duration: 动画时间
@@ -158,9 +158,10 @@ typedef NS_ENUM(NSInteger, PopupTransitStyle) {
 
 // - parameters等于present时对应设置的values
 - (void)dismiss;
-```  
+```    
+  
 * 便利构造器
-``` objc
+```objc
 // Convenience method for creating popupController with custom values. 便利构造popupController并设置相应属性值
 + (instancetype)popupControllerWithLayoutType:(PopupLayoutType)layoutType
                                      maskType:(PopupMaskType)maskType
@@ -174,6 +175,7 @@ typedef NS_ENUM(NSInteger, PopupTransitStyle) {
                                      dismissOppositeDirection:(BOOL)isDismissOppositeDirection
                                                      allowPan:(BOOL)isAllowPan;
 ``` 
+  
 * block 对应的代理方法
 ``` objc
 @protocol SnailPopupControllerDelegate <NSObject>
