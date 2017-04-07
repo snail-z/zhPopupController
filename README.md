@@ -157,11 +157,8 @@ typedef NS_ENUM(NSInteger, PopupTransitStyle) {
 - (void)dismissWithDuration:(NSTimeInterval)duration elasticAnimated:(BOOL)isElasticAnimated;
 
 // - parameters等于present时对应设置的values
-- (void)dismiss;
-```    
-  
-* 便利构造器
-```objc
+- (void)dismiss;  
+
 // Convenience method for creating popupController with custom values. 便利构造popupController并设置相应属性值
 + (instancetype)popupControllerWithLayoutType:(PopupLayoutType)layoutType
                                      maskType:(PopupMaskType)maskType
@@ -202,7 +199,7 @@ typedef NS_ENUM(NSInteger, PopupTransitStyle) {
  * 可以直接使用sl_popupController弹出视图
 ``` objc
     [self.sl_popupController presentContentView:customView];
- ```
+```
 * 自定义sl_popupController
 ```objc
     self.sl_popupController = [[SnailPopupController alloc] init];
