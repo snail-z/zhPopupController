@@ -22,13 +22,9 @@ To install OverlayController using [CocoaPods](https://cocoapods.org "CocoaPods"
 ```
 Then run pod install.  
 
-## Example 
-![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/alert_style1.gif?raw=true)
-![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/alert_style2.gif?raw=true)
-![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/qzone_style.gif?raw=true)  
-![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/sidebar_style.gif?raw=true)
-![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/full_style.gif?raw=true)
-![image](https://github.com/snail-z/SnailPopupController/blob/master/previews/shared_style.gif?raw=true)
+## Example   
+  
+  <p align="center"><img src="https://github.com/snail-z/SnailPopupController/blob/master/previews/SnailPopupController.gif?raw=true" width="204px" height="365px"></p>
 
 
 ## Import
