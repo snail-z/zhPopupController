@@ -7,33 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		40315650F528D6CF86BD241F55C4A0A7 /* Pods-SnailPopupControllerDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9F4B4BBE945BD0D46FD1FEE49D3753 /* Pods-SnailPopupControllerDemo-dummy.m */; };
-		B411EC1DDAF500C4176ABC617ED7EE2F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
-		C3F14D4EDC999E607C0C2B67A1B9CD33 /* Pods-SnailPopupControllerDemo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D8ABE1479AF4A19D27AE2B9B9D73478A /* Pods-SnailPopupControllerDemo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		054EF233CFC95923E2727AA5F84B431F /* SnailPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = DE119CE5C4B6E66E6770FBC18EA1F011 /* SnailPopupController.m */; };
+		4B24D9A862ED89399D6C393DACD78E99 /* SnailPopupController-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B53BF73C0F399BBE7748E69090F591 /* SnailPopupController-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85BBF14769C06D648C4FC3D42154129A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		A59741FF708862279201E06F6B863D3E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
+		AC86562B340F04C64AB26ACA80E2AC98 /* Pods-SnailPopupControllerDemo-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9F4B4BBE945BD0D46FD1FEE49D3753 /* Pods-SnailPopupControllerDemo-dummy.m */; };
+		C757621576589AD33BB28C3E4FF72645 /* SnailPopupController.h in Headers */ = {isa = PBXBuildFile; fileRef = EC81029600CA755CE8CBA2FCD3D2D9CC /* SnailPopupController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		DE4A14325E8ABAB815F6369F01484162 /* SnailPopupController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 834F27E3C60AC1BC9063866BA2035C6D /* SnailPopupController-dummy.m */; };
+		EBC20554177D10D3E4F4E7E3F714BFD3 /* Pods-SnailPopupControllerDemo-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D8ABE1479AF4A19D27AE2B9B9D73478A /* Pods-SnailPopupControllerDemo-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C2360E9E621592A384D630615B303C6B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E119478A13F96775EA22FA566F568E90;
+			remoteInfo = SnailPopupController;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		068066D6FAEC5FEBD5BCE89FDA3F5623 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2DACFFD4DD932188009F43A71DEE2D47 /* Pods-SnailPopupControllerDemo-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SnailPopupControllerDemo-frameworks.sh"; sourceTree = "<group>"; };
+		35187FF19B58D2BBCC6A051DBCFD2B6A /* SnailPopupController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnailPopupController-prefix.pch"; sourceTree = "<group>"; };
+		376CDA09CA1E20DDDDE767D782113539 /* SnailPopupController.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SnailPopupController.modulemap; sourceTree = "<group>"; };
 		388D59CFE44256493DDD0899939F326D /* Pods-SnailPopupControllerDemo-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SnailPopupControllerDemo-acknowledgements.markdown"; sourceTree = "<group>"; };
 		3BBF685534267F1B7D6D6F3034A77DEC /* Pods-SnailPopupControllerDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SnailPopupControllerDemo.release.xcconfig"; sourceTree = "<group>"; };
+		555D6A57E707AF98881B8BF7241F5CFD /* SnailPopupController.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SnailPopupController.framework; path = SnailPopupController.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5649A836DC554791C02A16AA2CF1C6A3 /* SnailPopupController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SnailPopupController.xcconfig; sourceTree = "<group>"; };
 		64B0760BED09B29CD006D5508BB82C1E /* Pods-SnailPopupControllerDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SnailPopupControllerDemo.debug.xcconfig"; sourceTree = "<group>"; };
-		8DC4295CD493144E5001D8062397476D /* Pods_SnailPopupControllerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SnailPopupControllerDemo.framework; path = "Pods-SnailPopupControllerDemo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		834F27E3C60AC1BC9063866BA2035C6D /* SnailPopupController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SnailPopupController-dummy.m"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		980CF9B482FF1F6AC8C9DE050C43A60B /* Pods-SnailPopupControllerDemo.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SnailPopupControllerDemo.modulemap"; sourceTree = "<group>"; };
+		A6B53BF73C0F399BBE7748E69090F591 /* SnailPopupController-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SnailPopupController-umbrella.h"; sourceTree = "<group>"; };
 		B118ED0F46C861B53E5BE86AC7E2FF7E /* Pods-SnailPopupControllerDemo-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SnailPopupControllerDemo-acknowledgements.plist"; sourceTree = "<group>"; };
 		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		D24C6A7801FF23E2F72EBDB532C2B4D0 /* Pods-SnailPopupControllerDemo-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SnailPopupControllerDemo-resources.sh"; sourceTree = "<group>"; };
+		D84B1A4A5B154B20D114E8AD667513DA /* Pods_SnailPopupControllerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SnailPopupControllerDemo.framework; path = "Pods-SnailPopupControllerDemo.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8ABE1479AF4A19D27AE2B9B9D73478A /* Pods-SnailPopupControllerDemo-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SnailPopupControllerDemo-umbrella.h"; sourceTree = "<group>"; };
+		DE119CE5C4B6E66E6770FBC18EA1F011 /* SnailPopupController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SnailPopupController.m; path = Sources/SnailPopupController.m; sourceTree = "<group>"; };
 		EA9F4B4BBE945BD0D46FD1FEE49D3753 /* Pods-SnailPopupControllerDemo-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SnailPopupControllerDemo-dummy.m"; sourceTree = "<group>"; };
+		EC81029600CA755CE8CBA2FCD3D2D9CC /* SnailPopupController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SnailPopupController.h; path = Sources/SnailPopupController.h; sourceTree = "<group>"; };
+		FA10085855C59A6DF7534864AFA76829 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		FF5D5D72D9272973DC67EBF6CB4FADD2 /* Frameworks */ = {
+		C5FB1E02EA2DC7F1E649F2CA196149C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B411EC1DDAF500C4176ABC617ED7EE2F /* Foundation.framework in Frameworks */,
+				A59741FF708862279201E06F6B863D3E /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CC4B5885C2B04D3852BE973A9A6C667D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				85BBF14769C06D648C4FC3D42154129A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,9 +103,19 @@
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				CCBC45D835EEA6F1923EB69426488D13 /* Products */,
+				E5F0AAB757D8C4AAB6CAD87AE2E04DCB /* Pods */,
+				88CFF3C31D81A2E3CCFF1A5F12529F09 /* Products */,
 				D78722C71312A6CAAF4454F8A2126080 /* Targets Support Files */,
 			);
+			sourceTree = "<group>";
+		};
+		88CFF3C31D81A2E3CCFF1A5F12529F09 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D84B1A4A5B154B20D114E8AD667513DA /* Pods_SnailPopupControllerDemo.framework */,
+				555D6A57E707AF98881B8BF7241F5CFD /* SnailPopupController.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
@@ -84,14 +126,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CCBC45D835EEA6F1923EB69426488D13 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				8DC4295CD493144E5001D8062397476D /* Pods_SnailPopupControllerDemo.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		D78722C71312A6CAAF4454F8A2126080 /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -100,35 +134,95 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
+		DCAA5CA772C15DF0882B42E94B5523FE /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FA10085855C59A6DF7534864AFA76829 /* Info.plist */,
+				376CDA09CA1E20DDDDE767D782113539 /* SnailPopupController.modulemap */,
+				5649A836DC554791C02A16AA2CF1C6A3 /* SnailPopupController.xcconfig */,
+				834F27E3C60AC1BC9063866BA2035C6D /* SnailPopupController-dummy.m */,
+				35187FF19B58D2BBCC6A051DBCFD2B6A /* SnailPopupController-prefix.pch */,
+				A6B53BF73C0F399BBE7748E69090F591 /* SnailPopupController-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SnailPopupController";
+			sourceTree = "<group>";
+		};
+		E2CF792E2AEEB464C988E33A9276E2E2 /* SnailPopupController */ = {
+			isa = PBXGroup;
+			children = (
+				EC81029600CA755CE8CBA2FCD3D2D9CC /* SnailPopupController.h */,
+				DE119CE5C4B6E66E6770FBC18EA1F011 /* SnailPopupController.m */,
+				DCAA5CA772C15DF0882B42E94B5523FE /* Support Files */,
+			);
+			name = SnailPopupController;
+			path = SnailPopupController;
+			sourceTree = "<group>";
+		};
+		E5F0AAB757D8C4AAB6CAD87AE2E04DCB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E2CF792E2AEEB464C988E33A9276E2E2 /* SnailPopupController */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		327F892FBAC9FE42F2F5FD4EDD9EB7EF /* Headers */ = {
+		3FCFE0536AC7E60C60CF623E8F455033 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C3F14D4EDC999E607C0C2B67A1B9CD33 /* Pods-SnailPopupControllerDemo-umbrella.h in Headers */,
+				4B24D9A862ED89399D6C393DACD78E99 /* SnailPopupController-umbrella.h in Headers */,
+				C757621576589AD33BB28C3E4FF72645 /* SnailPopupController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		51BEC6028D3701E1477A643B77C66B05 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EBC20554177D10D3E4F4E7E3F714BFD3 /* Pods-SnailPopupControllerDemo-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		1FCF0341C73B015040A3BD301B028E88 /* Pods-SnailPopupControllerDemo */ = {
+		2B7DCA0A78EE837D61491F538C2B8588 /* Pods-SnailPopupControllerDemo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 02921B77E0ACD25109DA1B9375392BCF /* Build configuration list for PBXNativeTarget "Pods-SnailPopupControllerDemo" */;
+			buildConfigurationList = 160C91D063B1D0ED1299BF78C2A592D2 /* Build configuration list for PBXNativeTarget "Pods-SnailPopupControllerDemo" */;
 			buildPhases = (
-				2C7BE0B5559E25F435EBD88E443DDF73 /* Sources */,
-				FF5D5D72D9272973DC67EBF6CB4FADD2 /* Frameworks */,
-				327F892FBAC9FE42F2F5FD4EDD9EB7EF /* Headers */,
+				BC4015E47F642E3774D08FF7F066D7DC /* Sources */,
+				C5FB1E02EA2DC7F1E649F2CA196149C1 /* Frameworks */,
+				51BEC6028D3701E1477A643B77C66B05 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8F8A35FF28677C8F20E65C87A52F4EC2 /* PBXTargetDependency */,
+			);
+			name = "Pods-SnailPopupControllerDemo";
+			productName = "Pods-SnailPopupControllerDemo";
+			productReference = D84B1A4A5B154B20D114E8AD667513DA /* Pods_SnailPopupControllerDemo.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		E119478A13F96775EA22FA566F568E90 /* SnailPopupController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5034FC7EE364A4384DC2EA085C23E4D1 /* Build configuration list for PBXNativeTarget "SnailPopupController" */;
+			buildPhases = (
+				D82DBE6D563F54652EE372879D983707 /* Sources */,
+				CC4B5885C2B04D3852BE973A9A6C667D /* Frameworks */,
+				3FCFE0536AC7E60C60CF623E8F455033 /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = "Pods-SnailPopupControllerDemo";
-			productName = "Pods-SnailPopupControllerDemo";
-			productReference = 8DC4295CD493144E5001D8062397476D /* Pods_SnailPopupControllerDemo.framework */;
+			name = SnailPopupController;
+			productName = SnailPopupController;
+			productReference = 555D6A57E707AF98881B8BF7241F5CFD /* SnailPopupController.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -148,25 +242,44 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = CCBC45D835EEA6F1923EB69426488D13 /* Products */;
+			productRefGroup = 88CFF3C31D81A2E3CCFF1A5F12529F09 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				1FCF0341C73B015040A3BD301B028E88 /* Pods-SnailPopupControllerDemo */,
+				2B7DCA0A78EE837D61491F538C2B8588 /* Pods-SnailPopupControllerDemo */,
+				E119478A13F96775EA22FA566F568E90 /* SnailPopupController */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2C7BE0B5559E25F435EBD88E443DDF73 /* Sources */ = {
+		BC4015E47F642E3774D08FF7F066D7DC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40315650F528D6CF86BD241F55C4A0A7 /* Pods-SnailPopupControllerDemo-dummy.m in Sources */,
+				AC86562B340F04C64AB26ACA80E2AC98 /* Pods-SnailPopupControllerDemo-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D82DBE6D563F54652EE372879D983707 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DE4A14325E8ABAB815F6369F01484162 /* SnailPopupController-dummy.m in Sources */,
+				054EF233CFC95923E2727AA5F84B431F /* SnailPopupController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8F8A35FF28677C8F20E65C87A52F4EC2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = SnailPopupController;
+			target = E119478A13F96775EA22FA566F568E90 /* SnailPopupController */;
+			targetProxy = C2360E9E621592A384D630615B303C6B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
@@ -213,44 +326,9 @@
 			};
 			name = Debug;
 		};
-		220A4CAA7A18D28F44A792911C247A12 /* Release */ = {
+		35AC580F58834A010CCA6C6920748E42 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3BBF685534267F1B7D6D6F3034A77DEC /* Pods-SnailPopupControllerDemo.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-SnailPopupControllerDemo/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SnailPopupControllerDemo/Pods-SnailPopupControllerDemo.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_SnailPopupControllerDemo;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		3995009CB6D4D301F88B6A2D391F842F /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 64B0760BED09B29CD006D5508BB82C1E /* Pods-SnailPopupControllerDemo.debug.xcconfig */;
+			baseConfigurationReference = 5649A836DC554791C02A16AA2CF1C6A3 /* SnailPopupController.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -263,18 +341,14 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-SnailPopupControllerDemo/Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/SnailPopupController/SnailPopupController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SnailPopupController/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-SnailPopupControllerDemo/Pods-SnailPopupControllerDemo.modulemap";
+				MODULEMAP_FILE = "Target Support Files/SnailPopupController/SnailPopupController.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_SnailPopupControllerDemo;
+				PRODUCT_NAME = SnailPopupController;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -323,14 +397,115 @@
 			};
 			name = Release;
 		};
+		54BE7C12539AB2A4972039654DFD26F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BBF685534267F1B7D6D6F3034A77DEC /* Pods-SnailPopupControllerDemo.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-SnailPopupControllerDemo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SnailPopupControllerDemo/Pods-SnailPopupControllerDemo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SnailPopupControllerDemo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		8165552CFFD5A06A9CEB2438E06A926A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64B0760BED09B29CD006D5508BB82C1E /* Pods-SnailPopupControllerDemo.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Target Support Files/Pods-SnailPopupControllerDemo/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-SnailPopupControllerDemo/Pods-SnailPopupControllerDemo.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = Pods_SnailPopupControllerDemo;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D6BF50178B8A0C075382F8A3B231EBCC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5649A836DC554791C02A16AA2CF1C6A3 /* SnailPopupController.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/SnailPopupController/SnailPopupController-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SnailPopupController/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SnailPopupController/SnailPopupController.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = SnailPopupController;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		02921B77E0ACD25109DA1B9375392BCF /* Build configuration list for PBXNativeTarget "Pods-SnailPopupControllerDemo" */ = {
+		160C91D063B1D0ED1299BF78C2A592D2 /* Build configuration list for PBXNativeTarget "Pods-SnailPopupControllerDemo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3995009CB6D4D301F88B6A2D391F842F /* Debug */,
-				220A4CAA7A18D28F44A792911C247A12 /* Release */,
+				8165552CFFD5A06A9CEB2438E06A926A /* Debug */,
+				54BE7C12539AB2A4972039654DFD26F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -340,6 +515,15 @@
 			buildConfigurations = (
 				015A368F878AC3E2CEAE21DDE8026304 /* Debug */,
 				44CDBB6D11DE06DB64D6268622BDC47E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5034FC7EE364A4384DC2EA085C23E4D1 /* Build configuration list for PBXNativeTarget "SnailPopupController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				35AC580F58834A010CCA6C6920748E42 /* Debug */,
+				D6BF50178B8A0C075382F8A3B231EBCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

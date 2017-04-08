@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		61064F171E97EB5100275D83 /* SnailPopupController.m in Sources */ = {isa = PBXBuildFile; fileRef = 61064F161E97EB5100275D83 /* SnailPopupController.m */; };
 		615058001E8DFEE10053F1F6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 615057FF1E8DFEE10053F1F6 /* main.m */; };
 		615058031E8DFEE10053F1F6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 615058021E8DFEE10053F1F6 /* AppDelegate.m */; };
 		615058061E8DFEE10053F1F6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 615058051E8DFEE10053F1F6 /* ViewController.m */; };
@@ -58,8 +57,6 @@
 
 /* Begin PBXFileReference section */
 		3B084DCDC029F4BF2D6B3200 /* Pods_SnailPopupControllerDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SnailPopupControllerDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		61064F151E97EB5100275D83 /* SnailPopupController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnailPopupController.h; sourceTree = "<group>"; };
-		61064F161E97EB5100275D83 /* SnailPopupController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnailPopupController.m; sourceTree = "<group>"; };
 		615057FB1E8DFEE10053F1F6 /* SnailPopupControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SnailPopupControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		615057FF1E8DFEE10053F1F6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		615058011E8DFEE10053F1F6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -159,8 +156,6 @@
 		615057F21E8DFEE10053F1F6 = {
 			isa = PBXGroup;
 			children = (
-				61064F151E97EB5100275D83 /* SnailPopupController.h */,
-				61064F161E97EB5100275D83 /* SnailPopupController.m */,
 				615058351E8DFFBA0053F1F6 /* Classes */,
 				615057FD1E8DFEE10053F1F6 /* SnailPopupControllerDemo */,
 				615058591E8E0EB10053F1F6 /* Utilities */,
@@ -490,7 +485,6 @@
 				61EDCBF01E966D4800FC1321 /* SnailSheetView.m in Sources */,
 				61EDCBE21E95EDF700FC1321 /* UIView+AddConstraints.m in Sources */,
 				615058751E8E795D0053F1F6 /* UIScreen+Extend.m in Sources */,
-				61064F171E97EB5100275D83 /* SnailPopupController.m in Sources */,
 				6150586C1E8E3C020053F1F6 /* NSObject+AssociatedObject.m in Sources */,
 				615058551E8E0C3C0053F1F6 /* SnailCurtainView.m in Sources */,
 				615058631E8E2CAF0053F1F6 /* UIView+Layout.m in Sources */,

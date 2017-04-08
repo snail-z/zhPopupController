@@ -1,0 +1,6 @@
+framework module SnailPopupController {
+  umbrella header "SnailPopupController-umbrella.h"
+
+  export *
+  module * { export * }
+}
