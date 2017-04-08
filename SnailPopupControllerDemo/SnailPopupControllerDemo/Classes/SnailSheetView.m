@@ -58,15 +58,14 @@
         _tableView.backgroundColor = [UIColor clearColor];
         [self addSubview:_tableView];
         
-        SnailSheetViewLayout *layout = [SnailSheetViewLayout new];
-        _headerLabel = [self labelWithSize:CGSizeMake(frame.size.width, layout.headerHeight)
+        _headerLabel = [self labelWithSize:CGSizeMake(frame.size.width, SHEETVIEW_HEADER_HEIGHT)
                                       text:@""
                                  textColor:[UIColor darkGrayColor]
                                       font:[UIFont systemFontOfSize:12]
                                     action:@selector(headerClicked)];
         _tableView.tableHeaderView = _headerLabel;
         
-        _footerLabel = [self labelWithSize:CGSizeMake(frame.size.width, layout.footerHeight)
+        _footerLabel = [self labelWithSize:CGSizeMake(frame.size.width, SHEETVIEW_FOOTER_HEIGHT)
                                       text:@"取消"
                                  textColor:[UIColor blackColor]
                                       font:[UIFont systemFontOfSize:17]
@@ -135,37 +134,15 @@
     [_tableView reloadData];
 }
 
-- (void)setHeaderLabel:(UILabel *)headerLabel {
-    _headerLabel = headerLabel;
-    _tableView.tableHeaderView = _headerLabel;
-    [self updateLayout];
-}
-
-- (void)setFooterLabel:(UILabel *)footerLabel {
-    _footerLabel = footerLabel;
-    _tableView.tableFooterView = _footerLabel;
-    [self updateLayout];
-}
-
-- (void)updateLayout {
-    CGSize size1 = CGSizeMake(self.width, self.sl_layout.headerHeight);
-    if (!_headerLabel) size1 = CGSizeZero;
-    _headerLabel.size = size1;
-    CGSize size2 = CGSizeMake(self.width, self.sl_layout.footerHeight);
-    if (!_footerLabel) size2 = CGSizeZero;
-    _headerLabel.size = size2;
-    [_tableView reloadData];
-}
-
 - (void)autoresizingFlexibleHeight {
-    CGFloat h1 = 0, h2 = 0;
-    if (nil != _headerLabel) {
-        h1 = self.sl_layout.headerHeight;
+    CGFloat height = self.sectionHeight * _models.count;
+    if (!CGRectEqualToRect(_headerLabel.frame, CGRectZero)) {
+        height += SHEETVIEW_HEADER_HEIGHT;
     }
-    if (nil != _footerLabel) {
-        h2 = self.sl_layout.footerHeight;
+    if (!CGRectEqualToRect(CGRectZero, _footerLabel.frame)) {
+        height += SHEETVIEW_FOOTER_HEIGHT;
     }
-    self.height = _tableView.height = h1 + h2 + _models.count * self.sectionHeight;
+    self.height = _tableView.height = height;
 }
 
 @end

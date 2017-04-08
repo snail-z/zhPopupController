@@ -59,18 +59,18 @@ typedef NS_ENUM(NSInteger, PopupTransitStyle) {
 @property (nonatomic, assign) CGFloat maskAlpha; // 设置蒙版视图的透明度，default = 0.5
 
 // Must set layoutType = PopupLayoutTypeCenter
-@property (nonatomic, assign) BOOL isDismissOppositeDirection; // 是否反方向消失，default = NO
+@property (nonatomic, assign) BOOL dismissOppositeDirection; // 是否反方向消失，default = NO
 
-@property (nonatomic, assign) BOOL isDismissOnMaskTouched; // 点击蒙版视图是否响应dismiss事件，default = YES
+@property (nonatomic, assign) BOOL dismissOnMaskTouched; // 点击蒙版视图是否响应dismiss事件，default = YES
 
-@property (nonatomic, assign) BOOL isAllowPan; // 是否允许视图拖动，default = NO
+@property (nonatomic, assign) BOOL allowPan; // 是否允许视图拖动，default = NO
 
-@property (nonatomic, assign) BOOL isDropTransitionAnimated; // 视图倾斜掉落动画，当transitStyle为PopupTransitStyleFromTop样式时可以设置为YES使用掉落动画，default = NO
+@property (nonatomic, assign) BOOL dropTransitionAnimated; // 视图倾斜掉落动画，当transitStyle为PopupTransitStyleFromTop样式时可以设置为YES使用掉落动画，default = NO
 
 @property (nonatomic, assign, readonly) BOOL isPresenting; // 视图是否正在显示中
 
 // Block gets called when mask touched. 蒙版触摸事件block，主要用来自定义dismiss动画时间及弹性效果
-@property (nonatomic, copy) void (^maskClicked)(SnailPopupController *popupController);
+@property (nonatomic, copy) void (^maskTouched)(SnailPopupController *popupController);
 
 // Should implement this block before the presenting. 应该在present前实现的block
 @property (nonatomic, copy) void (^willPresent)(SnailPopupController *popupController); // ContentView will present. 视图将要呈现
@@ -114,15 +114,15 @@ typedef NS_ENUM(NSInteger, PopupTransitStyle) {
 // Convenience method for creating popupController with custom values. 便利构造popupController并设置相应属性值
 + (instancetype)popupControllerWithLayoutType:(PopupLayoutType)layoutType
                                      maskType:(PopupMaskType)maskType
-                         dismissOnMaskTouched:(BOOL)isDismissOnMaskTouched
-                                     allowPan:(BOOL)isAllowPan;
+                         dismissOnMaskTouched:(BOOL)dismissOnMaskTouched
+                                     allowPan:(BOOL)allowPan;
 
 // When layoutType = PopupLayoutTypeCenter
 + (instancetype)popupControllerLayoutInCenterWithTransitStyle:(PopupTransitStyle)transitStyle
                                                      maskType:(PopupMaskType)maskType
-                                         dismissOnMaskTouched:(BOOL)isDismissOnMaskTouched
-                                     dismissOppositeDirection:(BOOL)isDismissOppositeDirection
-                                                     allowPan:(BOOL)isAllowPan;
+                                         dismissOnMaskTouched:(BOOL)dismissOnMaskTouched
+                                     dismissOppositeDirection:(BOOL)dismissOppositeDirection
+                                                     allowPan:(BOOL)allowPan;
 
 @end
 

@@ -12,14 +12,14 @@
 
 - (SnailAlertView *)alertView1 {
     
-    SnailAlertView *alertView = [[SnailAlertView alloc] initWithTitle:@"提示" message:@"切换城市失败，是否重试？" fixedWidth:300];
+    SnailAlertView *alertView = [[SnailAlertView alloc] initWithTitle:@"提示" message:@"切换城市失败，是否重试？" fixedWidth:290];
     alertView.linesColor = [UIColor colorWithHexString:@"#FC7541"];
     return alertView;
 }
 
 - (SnailAlertView *)alertView2 {
     
-    SnailAlertView *alertView = [[SnailAlertView alloc] initWithTitle:@"先来\n告诉我们你的喜好吧" message:@"我们会通过你的喜欢！了解你的喜好并为你推荐作品" fixedWidth:280];
+    SnailAlertView *alertView = [[SnailAlertView alloc] initWithTitle:@"先来\n告诉我们你的喜好吧" message:@"我们会通过你的喜欢！了解你的喜好并为你推荐作品" fixedWidth:250];
     alertView.titleLabel.textColor = [UIColor r:80 g:72 b:83];
     alertView.titleLabel.font = [UIFont boldSystemFontOfSize:20];
     alertView.messageLabel.textColor = [UIColor blackColor];
@@ -53,8 +53,8 @@
 
 - (SnailFullView *)fullView {
     
-    SnailFullView *fullView = [SnailFullView new];
-    fullView.size = [UIScreen size];
+    SnailFullView *fullView = [[SnailFullView alloc] initWithFrame:self.view.frame];
+//    fullView.size = [UIScreen size];
     NSArray *array = @[@"文字", @"照片视频", @"头条文章", @"红包", @"直播", @"点评", @"好友圈", @"更多", @"音乐", @"商品", @"签到", @"秒拍", @"头条文章", @"红包", @"直播", @"点评"];
     NSMutableArray *models = [NSMutableArray arrayWithCapacity:array.count];
     for (NSString *string in array) {

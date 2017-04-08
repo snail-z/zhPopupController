@@ -107,7 +107,7 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
             [string addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, message.length)];
             _messageLabel.attributedText = string;
 
-            _messageLabel.size = [_messageLabel sizeThatFits:CGSizeMake(_contentSize.width-2*_paddingLeft, MAXFLOAT)];
+            _messageLabel.size = [_messageLabel sizeThatFits:CGSizeMake(_contentSize.width - 2*_paddingLeft, MAXFLOAT)];
             _messageLabel.y = _titleLabel.bottom + _spacing;
             _messageLabel.centerX = _contentSize.width / 2;
             _contentSize.height = _messageLabel.bottom;
@@ -123,6 +123,33 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
 
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message {
     return [self initWithTitle:title message:message fixedWidth:0];
+}
+
+- (void)clearActions:(NSMutableSet *)actions {
+    NSEnumerator *enumerator = [actions objectEnumerator];
+    NSString * value;
+    while (value = [enumerator nextObject]) {
+        if ([value isKindOfClass:[CALayer class]]) {
+            [((CALayer *)value) removeFromSuperlayer];
+        }
+        if ([value isKindOfClass:[SnailAlertButton class]]) {
+            [((SnailAlertButton *)value) removeFromSuperview];
+        }
+    }
+    [actions removeAllObjects];
+}
+
+- (CALayer *)lineWithTop:(CGFloat)top horizontal:(BOOL)isHorizontalLine {
+    CALayer *layer = [CALayer layer];
+    UIColor *color = _linesColor ? _linesColor : [UIColor grayColor];
+    layer.backgroundColor = color.CGColor; // default = grayColor
+    if (isHorizontalLine) { // horizontal line
+        layer.size = CGSizeMake(_contentSize.width, 1 / [UIScreen mainScreen].scale);
+    } else {
+        layer.size = CGSizeMake(1 / [UIScreen mainScreen].scale, ACTION_HEIGHT);
+    }
+    layer.origin = CGPointMake(0, top);
+    return layer;
 }
 
 // Horizontal two views
@@ -202,32 +229,7 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
     [self sl_setAssociatedValue:action withKey:SnailAlertViewActionKey];
 }
 
-- (void)clearActions:(NSMutableSet *)actions {
-    NSEnumerator *enumerator = [actions objectEnumerator];
-    NSString * value;
-    while (value = [enumerator nextObject]) {
-        if ([value isKindOfClass:[CALayer class]]) {
-            [((CALayer *)value) removeFromSuperlayer];
-        }
-        if ([value isKindOfClass:[SnailAlertButton class]]) {
-            [((SnailAlertButton *)value) removeFromSuperview];
-        }
-    }
-    [actions removeAllObjects];
-}
-
-- (CALayer *)lineWithTop:(CGFloat)top horizontal:(BOOL)isHorizontalLine {
-    CALayer *layer = [CALayer layer];
-    UIColor *color = _linesColor ? _linesColor : [UIColor grayColor];
-    layer.backgroundColor = color.CGColor; // default = grayColor
-    if (isHorizontalLine) { // horizontal line
-        layer.size = CGSizeMake(_contentSize.width, 1 / [UIScreen mainScreen].scale);
-    } else {
-        layer.size = CGSizeMake(1 / [UIScreen mainScreen].scale, ACTION_HEIGHT);
-    }
-    layer.origin = CGPointMake(0, top);
-    return layer;
-}
+#pragma mark - Setter
 
 - (void)setLinesColor:(UIColor *)linesColor {
     _linesColor = linesColor;
@@ -242,6 +244,7 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
         }
     }
 }
+
 - (void)setLinesHidden:(BOOL)linesHidden {
     _linesHidden = linesHidden;
     if (_linesHidden) {

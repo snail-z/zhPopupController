@@ -41,32 +41,32 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 
 @implementation SnailPopupController
 
-+ (instancetype)popupControllerWithLayoutType:(PopupLayoutType)layoutType
-                                     maskType:(PopupMaskType)maskType
-                         dismissOnMaskTouched:(BOOL)isDismissOnMaskTouched
-                                      allowPan:(BOOL)isAllowPan {
++(instancetype)popupControllerWithLayoutType:(PopupLayoutType)layoutType
+                                    maskType:(PopupMaskType)maskType
+                        dismissOnMaskTouched:(BOOL)dismissOnMaskTouched
+                                    allowPan:(BOOL)allowPan {
     
     SnailPopupController *popupController = [[SnailPopupController alloc] init];
     popupController.maskType = maskType;
     popupController.layoutType = layoutType;
-    popupController.isDismissOnMaskTouched = isDismissOnMaskTouched;
-    popupController.isAllowPan = isAllowPan;
+    popupController.dismissOnMaskTouched = dismissOnMaskTouched;
+    popupController.allowPan = allowPan;
     return popupController;
 }
 
 + (instancetype)popupControllerLayoutInCenterWithTransitStyle:(PopupTransitStyle)transitStyle
                                                      maskType:(PopupMaskType)maskType
-                                         dismissOnMaskTouched:(BOOL)isDismissOnMaskTouched
-                                     dismissOppositeDirection:(BOOL)isDismissOppositeDirection
-                                                     allowPan:(BOOL)isAllowPan {
-    
+                                         dismissOnMaskTouched:(BOOL)dismissOnMaskTouched
+                                     dismissOppositeDirection:(BOOL)dismissOppositeDirection
+                                                     allowPan:(BOOL)allowPan {
+
     SnailPopupController *popupController = [[SnailPopupController alloc] init];
     popupController.maskType = maskType;
     popupController.layoutType = PopupLayoutTypeCenter;
     popupController.transitStyle = transitStyle;
-    popupController.isDismissOnMaskTouched = isDismissOnMaskTouched;
-    popupController.isDismissOppositeDirection = isDismissOppositeDirection;
-    popupController.isAllowPan = isAllowPan;
+    popupController.dismissOnMaskTouched = dismissOnMaskTouched;
+    popupController.dismissOppositeDirection = dismissOppositeDirection;
+    popupController.allowPan = allowPan;
     return popupController;
 }
 
@@ -75,15 +75,15 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
     if (!self)  return nil;
     
     //  default value
-    _maskType                   = PopupMaskTypeDefault;
-    _layoutType                 = PopupLayoutTypeCenter;
-    _transitStyle               = PopupTransitStyleDefault;
-    _maskAlpha                  = 0.55;
-    _isDismissOnMaskTouched     = YES;
-    _isDismissOppositeDirection = NO;
-    _isDropTransitionAnimated   = NO;
-    _isAllowPan                 = NO;
-    _isPresenting               = NO;
+    _maskType                 = PopupMaskTypeDefault;
+    _layoutType               = PopupLayoutTypeCenter;
+    _transitStyle             = PopupTransitStyleDefault;
+    _maskAlpha                = 0.55;
+    _dismissOnMaskTouched     = YES;
+    _dismissOppositeDirection = NO;
+    _dropTransitionAnimated   = NO;
+    _allowPan                 = NO;
+    _isPresenting             = NO;
     
     // superview
     _superview = [self keyWindow];
@@ -91,8 +91,6 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
     // popupView
     _popupView = [[UIView alloc] init];
     _popupView.backgroundColor = [UIColor clearColor];
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
-    [_popupView addGestureRecognizer:pan];
     
     // maskView
     _maskView = [[UIView alloc] initWithFrame:_superview.bounds];
@@ -138,12 +136,6 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
     return _maskView;
 }
 
-- (UITapGestureRecognizer *)tap {
-    UITapGestureRecognizer *g = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
-    g.delegate = self;
-    return g;
-}
-
 - (UIView *)maskBlurStyle:(UIBarStyle)barStyle {
     UIToolbar *mask = [[UIToolbar alloc] initWithFrame:_superview.bounds];
     mask.barStyle = barStyle;
@@ -151,7 +143,21 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
     return mask;
 }
 
+- (UITapGestureRecognizer *)tap {
+    UITapGestureRecognizer *g = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+    g.delegate = self;
+    return g;
+}
+
 #pragma mark - Setter
+
+- (void)setAllowPan:(BOOL)allowPan {
+    _allowPan = allowPan;
+    if (_allowPan) {
+        UIPanGestureRecognizer *g = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePan:)];
+        [_popupView addGestureRecognizer:g];
+    }
+}
 
 - (void)setMaskType:(PopupMaskType)maskType {
     _maskType = maskType;
@@ -210,7 +216,7 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
         if (_transitStyle != PopupTransitStyleDefault) {
             NSLog(@"\n ◎ Set 'transitStyle' is invalid. when 'layoutType' is not 'PopupLayoutTypeCenter'.");
         }
-        if (_isDismissOppositeDirection) {
+        if (_dismissOppositeDirection) {
             NSLog(@"\n ◎ Set 'isDismissOppositeDirection' is invalid. when 'layoutType' is not 'PopupLayoutTypeCenter'.");
         }
     }
@@ -233,7 +239,7 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
         }
     }
     
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:3];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:2];
     [parameters setValue:@(duration) forKey:@"duration"];
     [parameters setValue:@(isElasticAnimated) forKey:@"isElasticAnimated"];
     objc_setAssociatedObject(self, PopupControllerParametersKey, parameters, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -430,22 +436,22 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
             
             switch (_transitStyle) {
                 case PopupTransitStyleFromTop:
-                    point.y += _isDismissOppositeDirection ? -move : move;
+                    point.y += _dismissOppositeDirection ? -move : move;
                     break;
                 case PopupTransitStyleFromBottom:
-                    point.y += _isDismissOppositeDirection ? move : -move;
+                    point.y += _dismissOppositeDirection ? move : -move;
                     break;
                 case PopupTransitStyleFromLeft:
-                    point.x += _isDismissOppositeDirection ? -move : move;
+                    point.x += _dismissOppositeDirection ? -move : move;
                     break;
                 case PopupTransitStyleFromRight:
-                    point.x += _isDismissOppositeDirection ? move : -move;
+                    point.x += _dismissOppositeDirection ? move : -move;
                     break;
                 case PopupTransitStyleSlightScale:
-                    _popupView.transform = _isDismissOppositeDirection ? CGAffineTransformMakeScale(1.05, 1.05) : CGAffineTransformMakeScale(0.95, 0.95);
+                    _popupView.transform = _dismissOppositeDirection ? CGAffineTransformMakeScale(1.05, 1.05) : CGAffineTransformMakeScale(0.95, 0.95);
                     break;
                 case PopupTransitStyleShrinkInOut:
-                    _popupView.transform = _isDismissOppositeDirection ? CGAffineTransformMakeScale(0.95, 0.95) : CGAffineTransformMakeScale(1.05, 1.05);
+                    _popupView.transform = _dismissOppositeDirection ? CGAffineTransformMakeScale(0.95, 0.95) : CGAffineTransformMakeScale(1.05, 1.05);
                     break;
                 case PopupTransitStyleDefault: break;
                 default: break;
@@ -465,8 +471,8 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 }
 
 - (void)dropAnimatedInitial {
-    if (_isDropTransitionAnimated && self.dropEligible) {
-        _isDismissOppositeDirection = YES;
+    if (_dropTransitionAnimated && self.dropEligible) {
+        _dismissOppositeDirection = YES;
         CGFloat ty = (_maskView.bounds.size.height + _popupView.frame.size.height) * 0.5;
         CATransform3D transform = CATransform3DMakeTranslation(0, -ty, 0);
         transform = CATransform3DRotate(transform, RANDOM_ANGLE(40, -40) * M_PI / 180, 0, 0, 1.0);
@@ -475,13 +481,13 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 }
 
 - (void)dropAnimatedFinished {
-    if (_isDropTransitionAnimated && self.dropEligible) {
+    if (_dropTransitionAnimated && self.dropEligible) {
         _popupView.layer.transform = CATransform3DIdentity;
     }
 }
 
 - (void)dropAnimatedDismissed {
-    if (_isDropTransitionAnimated && self.dropEligible) {
+    if (_dropTransitionAnimated && self.dropEligible) {
         CGFloat ty = _maskView.bounds.size.height;
         CATransform3D transform = CATransform3DMakeTranslation(0, ty, 0);
         transform = CATransform3DRotate(transform, RANDOM_ANGLE(40, -40) * M_PI / 180, 0, 0, 1.0);
@@ -502,7 +508,7 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 - (void)maskAlphaElastic {
     if (_maskType == PopupMaskTypeBlackBlur || _maskType == PopupMaskTypeWhiteBlur) {
         _maskView.alpha = 0.95;
-    } else {
+    } else if (_maskType == PopupMaskTypeDefault) {
         _maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:_maskAlpha - _maskAlpha * 0.15];
     }
 }
@@ -511,7 +517,7 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
     if (_maskType == PopupMaskTypeBlackBlur || _maskType == PopupMaskTypeWhiteBlur) {
         _maskView.alpha = 1;
     } else {
-        _maskView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:_maskAlpha];
+        [self setMaskType:_maskType];
     }
 }
 
@@ -586,24 +592,24 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
             
             switch (_transitStyle) {
                 case PopupTransitStyleFromTop:
-                    return _isDismissOppositeDirection ? CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupView.bounds.size.height * 0.5) : CGPointMake(_maskView.center.x, -_popupView.bounds.size.height * 0.5);
+                    return _dismissOppositeDirection ? CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupView.bounds.size.height * 0.5) : CGPointMake(_maskView.center.x, -_popupView.bounds.size.height * 0.5);
                     
                 case PopupTransitStyleFromBottom:
-                    return _isDismissOppositeDirection ? CGPointMake(_maskView.center.x, -_popupView.bounds.size.height * 0.5) : CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupView.bounds.size.height * 0.5);
+                    return _dismissOppositeDirection ? CGPointMake(_maskView.center.x, -_popupView.bounds.size.height * 0.5) : CGPointMake(_maskView.center.x, _maskView.bounds.size.height + _popupView.bounds.size.height * 0.5);
                     
                 case PopupTransitStyleFromLeft:
-                    return _isDismissOppositeDirection ? CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width * 0.5, _maskView.center.y) : CGPointMake(-_popupView.bounds.size.width * 0.5, _maskView.center.y);
+                    return _dismissOppositeDirection ? CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width * 0.5, _maskView.center.y) : CGPointMake(-_popupView.bounds.size.width * 0.5, _maskView.center.y);
                     
                 case PopupTransitStyleFromRight:
-                    return _isDismissOppositeDirection ? CGPointMake(-_popupView.bounds.size.width * 0.5, _maskView.center.y) : CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width * 0.5, _maskView.center.y);
+                    return _dismissOppositeDirection ? CGPointMake(-_popupView.bounds.size.width * 0.5, _maskView.center.y) : CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width * 0.5, _maskView.center.y);
                     
                 case PopupTransitStyleSlightScale: {
-                    _popupView.transform = _isDismissOppositeDirection ? CGAffineTransformMakeScale(0.95, 0.95) : CGAffineTransformMakeScale(1.05, 1.05);
+                    _popupView.transform = _dismissOppositeDirection ? CGAffineTransformMakeScale(0.95, 0.95) : CGAffineTransformMakeScale(1.05, 1.05);
                     _maskView.alpha = 0;
                     return _maskView.center;
                 }
                 case PopupTransitStyleShrinkInOut:
-                    _popupView.transform = _isDismissOppositeDirection ? CGAffineTransformMakeScale(1.95, 1.95) : CGAffineTransformMakeScale(0.05, 0.05);
+                    _popupView.transform = _dismissOppositeDirection ? CGAffineTransformMakeScale(1.95, 1.95) : CGAffineTransformMakeScale(0.05, 0.05);
                     return _maskView.center;
                     
                 case PopupTransitStyleDefault:
@@ -677,9 +683,9 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 #pragma mark - Action selector
 
 - (void)handleTap:(UITapGestureRecognizer *)g {
-    if (_isDismissOnMaskTouched) {
-        if (nil != self.maskClicked) {
-            self.maskClicked(self);
+    if (_dismissOnMaskTouched) {
+        if (nil != self.maskTouched) {
+            self.maskTouched(self);
         } else {
             [self dismiss];
         }
@@ -687,7 +693,7 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 }
 
 - (void)handlePan:(UIPanGestureRecognizer *)g {
-    if (!_isAllowPan || !_isPresenting) {
+    if (!_allowPan || !_isPresenting) {
         return;
     }
     
@@ -789,19 +795,19 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
                                     _transitStyle = PopupTransitStyleFromBottom;
                                 }
                             }
-                            _isDismissOppositeDirection = NO;
+                            _dismissOppositeDirection = NO;
                         } break;
                         case PopupTransitStyleFromTop:
-                            _isDismissOppositeDirection = !(g.view.center.y < _maskView.bounds.size.height * 0.25);
+                            _dismissOppositeDirection = !(g.view.center.y < _maskView.bounds.size.height * 0.25);
                             break;
                         case PopupTransitStyleFromBottom:
-                            _isDismissOppositeDirection = g.view.center.y < _maskView.bounds.size.height * 0.25;
+                            _dismissOppositeDirection = g.view.center.y < _maskView.bounds.size.height * 0.25;
                             break;
                         case PopupTransitStyleFromLeft:
-                            _isDismissOppositeDirection = !(g.view.center.x < _maskView.bounds.size.width * 0.25);
+                            _dismissOppositeDirection = !(g.view.center.x < _maskView.bounds.size.width * 0.25);
                             break;
                         case PopupTransitStyleFromRight:
-                            _isDismissOppositeDirection = g.view.center.x < _maskView.bounds.size.width * 0.25;
+                            _dismissOppositeDirection = g.view.center.x < _maskView.bounds.size.width * 0.25;
                             break;
                         default: break;
                     }

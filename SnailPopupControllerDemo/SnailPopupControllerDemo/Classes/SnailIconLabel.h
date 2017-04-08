@@ -8,18 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-typedef NS_ENUM(NSInteger, slTextAlignment) {
-    slTextAlignmentMarginal  = 0,    // Visually marginal aligned
-    slTextAlignmentCenter    = 1,    // Visually centered aligned
-    slTextAlignmentNatural   = 2,    // Indicates the default alignment for natural
-};
-
 @class SnailIconLabelModel;
 
 @interface SnailIconLabel : UIControl
 
 @property (nonatomic, strong, readonly) UIImageView *iconView;
-
 @property (nonatomic, strong, readonly) UILabel *textLabel;
 
 // UIEdgeInsets insets = {top, left, bottom, right}
@@ -27,17 +20,15 @@ typedef NS_ENUM(NSInteger, slTextAlignment) {
 // Can use the "bottom" or "right" to adjust the space between subviews.
 
 @property (nonatomic, assign) BOOL horizontalLayout; // default is NO. if YES, layout subviews horizontally.
-// The text not fold line when horizontal layout. 横向布局时文本不折行
 
 @property (nonatomic, assign) BOOL autoresizingFlexibleSize; // default is NO. if YES, self.frame are adjusted according to flexibleSize if subviews size changes
-// 如果设置YES，textLabel会根据文本计算自身size，SnailIconLabel自身size也对应改变
 
 @property (nonatomic, assign) CGFloat sizeLimit; // textLabel根据文本计算size时，如果纵向布局则限高，横向布局则限宽
 
-// 手动设置布局样式，autoresizingFlexibleSize = NO时有作用
-@property (nonatomic, assign) slTextAlignment textAlignment; // default is slTextAlignmentNatural.
-
 @property (nonatomic, strong) SnailIconLabelModel *model; // Model of the assignment.
+
+- (void)updateLayoutBySize:(CGSize)size
+                  finished:(void (^)(SnailIconLabel *item))finished; // 设置属性值后需要更新布局
 
 @end
 

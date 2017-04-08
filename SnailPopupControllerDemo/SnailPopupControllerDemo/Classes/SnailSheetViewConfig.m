@@ -30,16 +30,6 @@
     return _itemSize.width;
 }
 
-- (CGFloat)headerHeight {
-    if (_headerHeight > 0) return _headerHeight;
-    return 30; // Header default height.
-}
-
-- (CGFloat)footerHeight {
-    if (_footerHeight > 0) return _footerHeight;
-    return 50; // Footer default height.
-}
-
 @end
 
 @implementation SnailSheetViewAppearance

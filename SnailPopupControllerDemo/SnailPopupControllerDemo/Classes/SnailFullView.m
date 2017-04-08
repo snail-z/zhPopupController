@@ -24,8 +24,14 @@
 @implementation SnailFullView
 
 - (instancetype)init {
-    if (self = [super init]) {
-        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullViewTapped:)]];
+    return [self initWithFrame:CGRectZero];
+}
+
+- (instancetype)initWithFrame:(CGRect)frame {
+    if (self = [super initWithFrame:frame]) {
+        
+        [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fullViewClicked:)]];
+        
         _dateLabel = [UILabel new];
         _dateLabel.font = [UIFont fontWithName:@"Heiti SC" size:42];
         _dateLabel.textColor = [UIColor r:21 g:21 b:21];
@@ -54,15 +60,6 @@
         [self commonInitialization];
     }
     return self;
-}
-
-- (void)fullViewTapped:(UITapGestureRecognizer *)recognizer {
-    __weak typeof(self) _self = self;
-    [self animationsCompletion:^(SnailFullView *fullView) {
-        if (nil != self.didClickFullView) {
-            _self.didClickFullView((SnailFullView *)recognizer.view);
-        }
-    }];
 }
 
 - (void)setContent {
@@ -96,10 +93,7 @@
     _scrollContainer.delegate = self;
     [self addSubview:_scrollContainer];
     
-    if (0 == _itemSize.width && 0 == _itemSize.height) {
-        _itemSize.width = 60;
-        _itemSize.height = 95;
-    }
+    _itemSize = CGSizeMake(60, 95);
     _gap = 15;
     _space = ([UIScreen width] - ROW_COUNT * _itemSize.width) / (ROW_COUNT + 1);
     
@@ -120,10 +114,6 @@
 
 - (void)setModels:(NSArray<SnailIconLabelModel *> *)models {
     
-    [UIView animateWithDuration:0.5 animations:^{
-        _closeIcon.transform = CGAffineTransformMakeRotation(M_PI_4);
-    } completion:NULL];
-    
     _items = @[].mutableCopy;
     [_pageViews enumerateObjectsUsingBlock:^(UIImageView * _Nonnull imageView, NSUInteger idx, BOOL * _Nonnull stop) {
         for (NSInteger i = 0; i < ROWS * ROW_COUNT; i++) {
@@ -131,31 +121,31 @@
             NSInteger v = i / ROW_COUNT;
             
             SnailIconLabel *item = [SnailIconLabel new];
-            item.tag = i + idx * (ROWS *ROW_COUNT);
-            item.size = _itemSize;
-            item.x = _space + (_itemSize.width  + _space) * l;
-            item.y = (_itemSize.height + _gap) * v + _gap + 100;
             [imageView addSubview:item];
             [_items addObject:item];
-            [item addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)]];
+            item.tag = i + idx * (ROWS *ROW_COUNT);
             if (item.tag < models.count) {
+                [item addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)]];
                 item.model = [models objectAtIndex:item.tag];
                 item.iconView.userInteractionEnabled = NO;
                 item.textLabel.font = [UIFont systemFontOfSize:14];
                 item.textLabel.textColor = [UIColor r:82 g:82 b:82];
+                [item updateLayoutBySize:_itemSize finished:^(SnailIconLabel *item) {
+                    item.x = _space + (_itemSize.width  + _space) * l;
+                    item.y = (_itemSize.height + _gap) * v + _gap + 100;
+                }];
             }
-            
-            item.alpha = 0;
-            item.transform = CGAffineTransformMakeTranslation(0, ROWS * _itemSize.height);
-            [UIView animateWithDuration:0.75
-                                  delay:i * 0.03
-                 usingSpringWithDamping:0.6
-                  initialSpringVelocity:0
-                                options:UIViewAnimationOptionCurveLinear
-                             animations:^{
-                                 item.alpha = 1;
-                                 item.transform = CGAffineTransformIdentity;
-                             } completion:NULL];
+        }
+    }];
+    
+    [self startAnimationsCompletion:NULL];
+}
+
+- (void)fullViewClicked:(UITapGestureRecognizer *)recognizer {
+    __weak typeof(self) _self = self;
+    [self endAnimationsCompletion:^(SnailFullView *fullView) {
+        if (nil != self.didClickFullView) {
+            _self.didClickFullView((SnailFullView *)recognizer.view);
         }
     }];
 }
@@ -174,8 +164,34 @@
     [_scrollContainer setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
-- (void)animationsCompletion:(void (^)(SnailFullView *))completion {
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSInteger index = scrollView.contentOffset.x /[UIScreen width] + 0.5;
+    _closeButton.userInteractionEnabled = index > 0;
+    [_closeIcon setImage:[UIImage imageNamed:(index ? @"sina_返回" : @"sina_关闭")] forState:UIControlStateNormal];
+}
 
+- (void)startAnimationsCompletion:(void (^ __nullable)(BOOL finished))completion {
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        _closeIcon.transform = CGAffineTransformMakeRotation(M_PI_4);
+    } completion:NULL];
+    
+    [_items enumerateObjectsUsingBlock:^(SnailIconLabel *item, NSUInteger idx, BOOL * _Nonnull stop) {
+        item.alpha = 0;
+        item.transform = CGAffineTransformMakeTranslation(0, ROWS * _itemSize.height);
+        [UIView animateWithDuration:0.85
+                              delay:idx * 0.035
+             usingSpringWithDamping:0.6
+              initialSpringVelocity:0
+                            options:UIViewAnimationOptionCurveLinear
+                         animations:^{
+                             item.alpha = 1;
+                             item.transform = CGAffineTransformIdentity;
+                         } completion:completion];
+    }];
+}
+
+- (void)endAnimationsCompletion:(void (^)(SnailFullView *))completion {
     if (!_closeButton.userInteractionEnabled) {
         [UIView animateWithDuration:0.35 animations:^{
             _closeIcon.transform = CGAffineTransformIdentity;
@@ -183,9 +199,8 @@
     }
     
     [_items enumerateObjectsUsingBlock:^(SnailIconLabel * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
-        
-        [UIView animateWithDuration:0.32
-                              delay:0.03 * (_items.count - idx)
+        [UIView animateWithDuration:0.35
+                              delay:0.025 * (_items.count - idx)
                             options:UIViewAnimationOptionCurveLinear
                          animations:^{
                              
@@ -199,12 +214,6 @@
                              }
                          }];
     }];
-}
-
--(void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    NSInteger index = scrollView.contentOffset.x /[UIScreen width] + 0.5;
-    _closeButton.userInteractionEnabled = index > 0;
-    [_closeIcon setImage:[UIImage imageNamed:(index ? @"sina_返回" : @"sina_关闭")] forState:UIControlStateNormal];
 }
 
 @end

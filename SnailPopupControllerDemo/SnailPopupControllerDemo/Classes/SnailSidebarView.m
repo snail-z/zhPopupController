@@ -30,19 +30,19 @@
 - (SnailIconLabel *)itemWithText:(NSString *)text imageNamed:(NSString *)imageNamed {
     SnailIconLabel *item = [SnailIconLabel new];
     item.autoresizingFlexibleSize = YES;
-    item.textLabel.text = text;
     item.textLabel.textColor = [UIColor whiteColor];
     item.textLabel.font = [UIFont systemFontOfSize:13];
-    item.iconView.image = [UIImage imageNamed:imageNamed];
     item.imageEdgeInsets = UIEdgeInsetsMake(5, 15, 10, 15);
-    item.size = CGSizeMake(60, 90);
-    item.bottom = [UIScreen height];
+    item.model = [SnailIconLabelModel modelWithTitle:text image:[UIImage imageNamed:imageNamed]];
+    [item updateLayoutBySize:CGSizeMake(60, 90) finished:^(SnailIconLabel *item) {
+        item.bottom = [UIScreen height] - 20;
+    }];
     return item;
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    _settingItem.x =  [UIScreen width] * 0.05;
+    _settingItem.x =  50;
     _nightItem.right = self.width - 50;
 }
 
@@ -53,20 +53,19 @@
     [models enumerateObjectsUsingBlock:^(NSString *text, NSUInteger idx, BOOL * _Nonnull stop) {
         
         SnailIconLabel *item = [[SnailIconLabel alloc] init];
-        item.horizontalLayout = YES;
-        item.autoresizingFlexibleSize = YES;
-        item.iconView.image = [UIImage imageNamed:[NSString stringWithFormat:@"sidebar_%@", text]];
         item.textLabel.font = [UIFont systemFontOfSize:15];
-        item.textLabel.text = text;
         item.textLabel.textColor = [UIColor whiteColor];
         item.textLabel.font = [UIFont systemFontOfSize:16.f];
         item.imageEdgeInsets = UIEdgeInsetsMake(12, 0, 12, 30);
-        item.size = CGSizeMake(150, 50);
-        item.x = 30;
-        item.centerX = self.width / 2;
-        item.y = (_gap + item.height) * idx + 150;
+        item.horizontalLayout = YES;
+        item.autoresizingFlexibleSize = YES;
+        item.model = [SnailIconLabelModel modelWithTitle:text image:[UIImage imageNamed:[NSString stringWithFormat:@"sidebar_%@", text]]];
         [self addSubview:item];
         [_items addObject:item];
+        [item updateLayoutBySize:CGSizeMake(150, 50) finished:^(SnailIconLabel *item) {
+            item.y = (_gap + item.height) * idx + 150;
+            item.centerX = self.width / 2;
+        }];
         item.tag = idx;
         [item addTarget:self action:@selector(itemClicked:) forControlEvents:UIControlEventTouchUpInside];
     }];

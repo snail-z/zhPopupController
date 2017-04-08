@@ -22,10 +22,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSArray *models;
 @property (nonatomic, weak, nullable) id <SnailSheetViewDelegate> delegate;
-@property (nonatomic, strong, nullable) UILabel *headerLabel;
-@property (nonatomic, strong, nullable) UILabel *footerLabel;
 @property (nonatomic, copy) void (^didClickHeader)(SnailSheetView *sheetView);
 @property (nonatomic, copy) void (^didClickFooter)(SnailSheetView *sheetView);
+@property (nonatomic, strong, readonly) UILabel *headerLabel;
+@property (nonatomic, strong, readonly) UILabel *footerLabel;
 - (void)autoresizingFlexibleHeight;
 
 @end
@@ -33,9 +33,9 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol SnailSheetViewConfig <NSObject>
 
 @required
-- (SnailSheetViewLayout *)layoutOfItemInSheetView:(SnailSheetView *)sheetView; //  布局相关
+- (SnailSheetViewLayout *)layoutOfItemInSheetView:(SnailSheetView *)sheetView; // 布局相关
 @optional
-- (SnailSheetViewAppearance *)appearanceOfItemInSheetView:(SnailSheetView *)sheetView; //  外观颜色相关
+- (SnailSheetViewAppearance *)appearanceOfItemInSheetView:(SnailSheetView *)sheetView; // 外观颜色相关
 
 @end
 

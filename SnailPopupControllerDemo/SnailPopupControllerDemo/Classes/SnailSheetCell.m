@@ -66,9 +66,8 @@ static NSString *sl_CellIdentifier = @"sl_sheetCollectionCell";
     SnailSheetCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:sl_CellIdentifier forIndexPath:indexPath];
     if (indexPath.row < _arrays.count) {
         id object = [_arrays objectAtIndex:indexPath.row];
-        if ([object isKindOfClass:[SnailSheetItemModel class]]) {
-            [cell setLayout:_sl_layout appearance:_sl_appearance model:object];
-        }
+        NSAssert([object isKindOfClass:[SnailSheetItemModel class]], @"SnailSheetView - 传入的数据必须使用SnailSheetItemModel进行打包，不能是其它对象！");
+        [cell setLayout:_sl_layout appearance:_sl_appearance model:object];
     }
     cell.imageView.tag = indexPath.row;
     [cell.imageView addTarget:self action:@selector(itemClicked:) forControlEvents:UIControlEventTouchUpInside];

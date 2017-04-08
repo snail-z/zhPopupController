@@ -35,9 +35,9 @@
 }
 
 - (void)setModels:(NSArray<SnailIconLabelModel *> *)models {
-    if (0 == _itemSize.width && 0 == _itemSize.height) { // 设置item的默认宽高
-        _itemSize.width = 60;
-        _itemSize.height = 90;
+  
+    if (CGSizeEqualToSize(CGSizeZero, _itemSize)) {
+        _itemSize = CGSizeMake(60, 90);
     }
     CGFloat _gap = 35;
     CGFloat _space = (self.width - ROW_COUNT * _itemSize.width) / (ROW_COUNT + 1);
@@ -48,14 +48,16 @@
         NSInteger v = idx / ROW_COUNT;
         
         SnailIconLabel *item = [SnailIconLabel new];
-        item.size = CGSizeMake(_itemSize.width , _itemSize.height + 20);
-        item.x = _space + (_itemSize.width  + _space) * l;
-        item.y = _gap + (_itemSize.height + _gap) * v + 45;
         [self addSubview:item];
+        [_items addObject:item];
         item.model = model;
         item.iconView.tag = idx;
-        [item.iconView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconWhenTapped:)]];
-        [_items addObject:item];
+        [item.iconView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconClicked:)]];
+        [item updateLayoutBySize:CGSizeMake(_itemSize.width , _itemSize.height + 20)
+                        finished:^(SnailIconLabel *item) {
+                            item.x = _space + (_itemSize.width  + _space) * l;
+                            item.y = _gap + (_itemSize.height + _gap) * v + 45;
+        }];
         
         if (idx == models.count - 1) {
             self.height = item.bottom + 20;
@@ -69,7 +71,7 @@
     }
 }
 
-- (void)iconWhenTapped:(UITapGestureRecognizer *)g {
+- (void)iconClicked:(UITapGestureRecognizer *)g {
     if (nil != self.didClickItems) {
         self.didClickItems(self, g.view.tag);
     }

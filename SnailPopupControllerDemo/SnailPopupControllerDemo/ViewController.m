@@ -77,12 +77,9 @@ static void *sl_CellButtonKey = &sl_CellButtonKey;
         }];
         [cell sl_setAssociatedValue:button withKey:sl_CellButtonKey];
     }
-    id object = [cell sl_getAssociatedValueForKey:sl_CellButtonKey];
-    if (object != nil && [object isKindOfClass:[UIButton class]]) {
-        UIButton *button = (UIButton *)object;
-        [button setTitle:_styles[indexPath.row] forState:UIControlStateNormal];
-        button.tag = indexPath.row;
-    }
+    UIButton *button = (UIButton *)[cell sl_getAssociatedValueForKey:sl_CellButtonKey];
+    [button setTitle:_styles[indexPath.row] forState:UIControlStateNormal];
+    button.tag = indexPath.row;
     return cell;
 }
 
@@ -109,7 +106,7 @@ static void *sl_CellButtonKey = &sl_CellButtonKey;
     
     self.sl_popupController = [SnailPopupController new];
     self.sl_popupController.transitStyle = PopupTransitStyleFromTop;
-    self.sl_popupController.isDropTransitionAnimated = YES;
+    self.sl_popupController.dropTransitionAnimated = YES;
     [self.sl_popupController presentContentView:alert duration:0.75 elasticAnimated:YES];
 }
 
@@ -141,8 +138,9 @@ static void *sl_CellButtonKey = &sl_CellButtonKey;
     
     self.sl_popupController = [SnailPopupController new];
     self.sl_popupController.layoutType = PopupLayoutTypeTop;
+    self.sl_popupController.allowPan = YES;
     @weakify(self);
-    self.sl_popupController.maskClicked = ^(SnailPopupController * _Nonnull popupController) {
+    self.sl_popupController.maskTouched = ^(SnailPopupController * _Nonnull popupController) {
         [weak_self.sl_popupController dismissWithDuration:0.25 elasticAnimated:NO];
     };
     [self.sl_popupController presentContentView:curtainView duration:0.75 elasticAnimated:YES];
@@ -157,7 +155,7 @@ static void *sl_CellButtonKey = &sl_CellButtonKey;
     
     self.sl_popupController = [SnailPopupController new];
     self.sl_popupController.layoutType = PopupLayoutTypeLeft;
-    self.sl_popupController.isAllowPan = YES;
+    self.sl_popupController.allowPan = YES;
     [self.sl_popupController presentContentView:sidebar];
 }
 
@@ -172,13 +170,14 @@ static void *sl_CellButtonKey = &sl_CellButtonKey;
             [UIAlertController showAlert:fullView.items[index].textLabel.text];
         };
         
-        [fullView animationsCompletion:^(SnailFullView *fullView) {
+        [fullView endAnimationsCompletion:^(SnailFullView *fullView) {
             [self.sl_popupController dismiss];
         }];
     };
     
     self.sl_popupController = [SnailPopupController new];
     self.sl_popupController.maskType = PopupMaskTypeWhiteBlur;
+    self.sl_popupController.allowPan = YES;
     [self.sl_popupController presentContentView:full];
 }
 
@@ -191,7 +190,6 @@ static void *sl_CellButtonKey = &sl_CellButtonKey;
     
     self.sl_popupController = [SnailPopupController new];
     self.sl_popupController.layoutType = PopupLayoutTypeBottom;
-    self.sl_popupController.isAllowPan = YES;
     [self.sl_popupController presentContentView:sheet];
 }
 

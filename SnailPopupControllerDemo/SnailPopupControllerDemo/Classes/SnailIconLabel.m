@@ -38,15 +38,7 @@
     _autoresizingFlexibleSize = NO;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    if (_horizontalLayout) {
-        [self horizontalLayoutSubviews];
-    } else {
-        [self verticalLayoutSubviews];
-    }
-}
-
+/// 水平布局
 - (void)horizontalLayoutSubviews {
     
     CGFloat sideLength = self.frame.size.height - self.imageEdgeInsets.top - self.imageEdgeInsets.bottom;
@@ -81,6 +73,7 @@
     }
 }
 
+/// 竖直布局
 - (void)verticalLayoutSubviews {
     CGFloat sideLength = self.frame.size.width - self.imageEdgeInsets.left - self.imageEdgeInsets.right;
     _iconView.frame = CGRectMake(self.imageEdgeInsets.left, self.imageEdgeInsets.top, sideLength, sideLength);
@@ -93,7 +86,7 @@
         
         if (!_autoresizingFlexibleSize) {
             _textLabel.frame = CGRectMake(0, y, w, h);
-        } else { // 自动尺寸
+        } else {
          
             CGSize size = [_textLabel sizeThatFits:CGSizeMake(w, h)];
             CGFloat x = (self.frame.size.width - size.width) / 2;
@@ -116,26 +109,21 @@
     }
 }
 
-- (void)textAlignmentStyle {
-    switch (_textAlignment) {
-        case slTextAlignmentCenter: {
-            CGFloat w = _imageEdgeInsets.left + _iconView.frame.size.width;
-            CGFloat x = w + (self.frame.size.width - w) / 2;
-            _textLabel.center = CGPointMake(x, _textLabel.center.y);
-        } break;
-        case slTextAlignmentMarginal: {
-            CGRect frame = _textLabel.frame;
-            frame.origin.x = self.frame.size.width - _textLabel.frame.size.width;;
-            _textLabel.frame = frame;
-        } break;
-        default: break;
-    }
-}
-
 - (void)setModel:(SnailIconLabelModel *)model {
     _textLabel.text = model.text;
     _iconView.image = model.icon;
-    [self layoutIfNeeded];
+}
+
+- (void)updateLayoutBySize:(CGSize)size finished:(void (^)(SnailIconLabel *))finished {
+    CGRect frame = self.frame;
+    frame.size = size;
+    self.frame = frame;
+    if (_horizontalLayout) {
+        [self horizontalLayoutSubviews];
+    } else {
+        [self verticalLayoutSubviews];
+    }
+    finished(self);
 }
 
 @end

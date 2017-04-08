@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#define SHEETVIEW_HEADER_HEIGHT 30
+#define SHEETVIEW_FOOTER_HEIGHT 50
+
 @interface SnailSheetViewLayout : NSObject
 
 // layout shortcut
@@ -17,18 +20,11 @@
                    imageViewWidth:(CGFloat)imageViewWidth
                         subSpacing:(CGFloat)subSpacing;
 
-// You must set itemSize
-@property (nonatomic, assign) CGSize  itemSize;
-// Optional
+@property (nonatomic, assign) CGSize itemSize; // Must set itemSize
 @property (nonatomic, assign) UIEdgeInsets itemEdgeInset; // 边距
-@property (nonatomic, assign) CGFloat itemSpacing;
-@property (nonatomic, assign) CGFloat imageViewWidth; // imageView.height = imageView.width
+@property (nonatomic, assign) CGFloat itemSpacing; // item1 <- itemSpacing -> item2
+@property (nonatomic, assign) CGFloat imageViewWidth; // imageView.height = imageView.width = imageViewWidth
 @property (nonatomic, assign) CGFloat subSpacing; // textLabel.y = imageView.bottom + subSpacing
-
-/* 若外部自定义headerLabel和footerLabel，需要设置对应的高度!
-   若是使用默认的headerLabel和footerLabel时，可以在SnailSheetViewLayout.m中修改默认高度。为防止自适应高度计算错误，外部最好不要修改! */
-@property (nonatomic, assign) CGFloat headerHeight;
-@property (nonatomic, assign) CGFloat footerHeight;
 
 @end
 
