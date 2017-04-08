@@ -24,7 +24,7 @@ Then run pod install.
 
 ## Example   
   
-<img src="https://github.com/snail-z/SnailPopupController/blob/master/previews/SnailPopupController.gif?raw=true" width="204px" height="365px">
+<img src="https://github.com/snail-z/SnailPopupController/blob/master/preview/SnailPopupController_gif.gif?raw=true" width="204px" height="365px">
 
 
 ## Import
