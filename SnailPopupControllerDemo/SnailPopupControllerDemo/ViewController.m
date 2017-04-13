@@ -10,7 +10,7 @@
 #import "SnailPopupController.h"
 #import "ViewController+Extension.h"
 
-@interface ViewController () <UITableViewDelegate, UITableViewDataSource, SnailSheetViewConfig, SnailSheetViewDelegate> {
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource, SnailSheetViewConfigDelegate, SnailSheetViewDelegate> {
     NSArray *_styles;
 }
 @property (nonatomic, strong) UITableView *tableView;

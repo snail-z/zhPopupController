@@ -9,13 +9,6 @@
 #import "SnailPopupController.h"
 #import <objc/runtime.h>
 
-#define dispatch_main_sync_safe(block)\
-if ([NSThread isMainThread]) {\
-block();\
-} else {\
-dispatch_sync(dispatch_get_main_queue(), block);\
-}
-
 #ifndef __OPTIMIZE__
 #define NSLog(...) NSLog(__VA_ARGS__)
 #else
@@ -182,17 +175,8 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
         _popupView.frame = _contentView.frame;
         _popupView.backgroundColor = _contentView.backgroundColor;
         if (_contentView.layer.cornerRadius > 0) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                CAShapeLayer *roundRectLayer = [[CAShapeLayer alloc] init];
-                roundRectLayer.bounds = _popupView.layer.bounds;
-                roundRectLayer.frame  = _popupView.layer.bounds;
-                UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:_popupView.layer.bounds cornerRadius:_contentView.layer.cornerRadius];
-                roundRectLayer.path = path.CGPath;
-                dispatch_main_sync_safe(^{
-                    _popupView.layer.mask = roundRectLayer;
-                    _popupView.clipsToBounds = NO;
-                });
-            });
+            _popupView.layer.cornerRadius = _contentView.layer.cornerRadius;
+            _popupView.clipsToBounds = NO;
         }
         [_popupView addSubview:_contentView];
         [_maskView addSubview:_popupView];
@@ -373,7 +357,7 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
         
         [UIView animateWithDuration:duration
                               delay:0.0
-                            options:UIViewAnimationOptionCurveLinear
+                            options:UIViewAnimationOptionCurveEaseOut
                          animations:^{
                              
                              [self dropAnimatedDismissed];
@@ -466,14 +450,16 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 #pragma mark - Drop Animated
 
 - (BOOL)dropEligible {
-    if (_layoutType == PopupLayoutTypeCenter && _transitStyle == PopupTransitStyleFromTop) return YES;
+    if (_layoutType == PopupLayoutTypeCenter && _transitStyle == PopupTransitStyleFromTop) {
+        return YES;
+    }
     return NO;
 }
 
 - (void)dropAnimatedInitial {
-    if (_dropTransitionAnimated && self.dropEligible) {
+    if (_dropTransitionAnimated && [self dropEligible]) {
         _dismissOppositeDirection = YES;
-        CGFloat ty = (_maskView.bounds.size.height + _popupView.frame.size.height) * 0.5;
+        CGFloat ty = (_maskView.bounds.size.height + _popupView.frame.size.height) / 2;
         CATransform3D transform = CATransform3DMakeTranslation(0, -ty, 0);
         transform = CATransform3DRotate(transform, RANDOM_ANGLE(40, -40) * M_PI / 180, 0, 0, 1.0);
         _popupView.layer.transform = transform;
@@ -481,13 +467,13 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 }
 
 - (void)dropAnimatedFinished {
-    if (_dropTransitionAnimated && self.dropEligible) {
+    if (_dropTransitionAnimated && [self dropEligible]) {
         _popupView.layer.transform = CATransform3DIdentity;
     }
 }
 
 - (void)dropAnimatedDismissed {
-    if (_dropTransitionAnimated && self.dropEligible) {
+    if (_dropTransitionAnimated && [self dropEligible]) {
         CGFloat ty = _maskView.bounds.size.height;
         CATransform3D transform = CATransform3DMakeTranslation(0, ty, 0);
         transform = CATransform3DRotate(transform, RANDOM_ANGLE(40, -40) * M_PI / 180, 0, 0, 1.0);
@@ -571,12 +557,14 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
                     _popupView.transform = CGAffineTransformMakeScale(1.05, 1.05);
                     return _maskView.center;
                 }
-                case PopupTransitStyleShrinkInOut:
+                case PopupTransitStyleShrinkInOut: {
                     _popupView.transform = CGAffineTransformMakeScale(0.1, 0.1);
                     return _maskView.center;
-                case PopupTransitStyleDefault:
+                }
+                case PopupTransitStyleDefault: {
                     _maskView.alpha = 0;
                     return _maskView.center;
+                }
                 default: return [self pointInitialDirection:_transitStyle];
             }
             
@@ -816,7 +804,6 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
                 
             } else {
                 // restore view location.
-                
                 id object = objc_getAssociatedObject(self, PopupControllerParametersKey);
                 NSNumber *flagNumber = [object valueForKey:@"isElasticAnimated"];
                 BOOL flag = NO;

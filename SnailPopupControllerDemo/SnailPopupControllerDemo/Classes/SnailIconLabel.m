@@ -16,26 +16,22 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        [self commonInitialization];
+        _iconView = [[UIImageView alloc] init];
+        _iconView.userInteractionEnabled = YES;
+        [self addSubview:_iconView];
+        
+        _textLabel = [[UILabel alloc] init];
+        _textLabel.userInteractionEnabled = NO;
+        _textLabel.numberOfLines = 0;
+        _textLabel.textColor = [UIColor darkGrayColor];
+        _textLabel.font = [UIFont systemFontOfSize:12];
+        _textLabel.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:_textLabel];
+        
+        _horizontalLayout = NO;
+        _autoresizingFlexibleSize = NO;
     }
     return self;
-}
-
-- (void)commonInitialization {
-    _iconView = [[UIImageView alloc] init];
-    _iconView.userInteractionEnabled = YES;
-    [self addSubview:_iconView];
-    
-    _textLabel = [[UILabel alloc] init];
-    _textLabel.userInteractionEnabled = NO;
-    _textLabel.numberOfLines = 0;
-    _textLabel.textColor = [UIColor darkGrayColor];
-    _textLabel.font = [UIFont systemFontOfSize:12];
-    _textLabel.textAlignment = NSTextAlignmentCenter;
-    [self addSubview:_textLabel];
-    
-    _horizontalLayout = NO;
-    _autoresizingFlexibleSize = NO;
 }
 
 /// 水平布局
@@ -100,7 +96,7 @@
             self.frame = frame;
         }
         
-    } else { // 无文本
+    } else {
         if (_autoresizingFlexibleSize) {
             CGRect frame = self.frame;
             frame.size.height = frame.size.width;

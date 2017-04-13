@@ -11,17 +11,20 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol SnailSheetViewConfig, SnailSheetViewDelegate;
+@protocol SnailSheetViewConfigDelegate, SnailSheetViewDelegate;
 
 @interface SnailSheetView : UIView
 
-- (nonnull instancetype)init __attribute__ ((unavailable("You cannot initialize through init - please use initWithConfig:frame:")));
-- (instancetype)initWithFrame:(CGRect)frame __attribute__ ((unavailable("You cannot initialize through init - please use initWithConfig:frame:")));
-- (instancetype)initWithCoder:(NSCoder *)aDecoder __attribute__ ((unavailable("You cannot initialize through init - please use initWithConfig:frame:")));
-- (instancetype)initWithConfig:(id <SnailSheetViewConfig>)config frame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
+- (instancetype)init __attribute__ ((unavailable("You cannot initialize through init - please use initWithConfig:frame:")));
+- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
+- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
+
+- (instancetype)initWithFrame:(CGRect)frame configDelegate:(id <SnailSheetViewConfigDelegate>)configDelegate NS_DESIGNATED_INITIALIZER;
+
+@property (nonatomic, weak, nullable) id <SnailSheetViewDelegate> delegate;
 
 @property (nonatomic, strong) NSArray *models;
-@property (nonatomic, weak, nullable) id <SnailSheetViewDelegate> delegate;
+
 @property (nonatomic, copy) void (^didClickHeader)(SnailSheetView *sheetView);
 @property (nonatomic, copy) void (^didClickFooter)(SnailSheetView *sheetView);
 @property (nonatomic, strong, readonly) UILabel *headerLabel;
@@ -30,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @end
 
-@protocol SnailSheetViewConfig <NSObject>
+@protocol SnailSheetViewConfigDelegate <NSObject>
 
 @required
 - (SnailSheetViewLayout *)layoutOfItemInSheetView:(SnailSheetView *)sheetView; // 布局相关

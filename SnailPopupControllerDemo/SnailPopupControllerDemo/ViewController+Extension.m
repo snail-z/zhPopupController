@@ -54,7 +54,6 @@
 - (SnailFullView *)fullView {
     
     SnailFullView *fullView = [[SnailFullView alloc] initWithFrame:self.view.frame];
-//    fullView.size = [UIScreen size];
     NSArray *array = @[@"文字", @"照片视频", @"头条文章", @"红包", @"直播", @"点评", @"好友圈", @"更多", @"音乐", @"商品", @"签到", @"秒拍", @"头条文章", @"红包", @"直播", @"点评"];
     NSMutableArray *models = [NSMutableArray arrayWithCapacity:array.count];
     for (NSString *string in array) {
@@ -67,10 +66,10 @@
     return fullView;
 }
 
-- (SnailSheetView *)sheetViewWithConfig:(id<SnailSheetViewConfig>)config {
+- (SnailSheetView *)sheetViewWithConfig:(id<SnailSheetViewConfigDelegate>)config {
     
     CGRect rect = CGRectMake(100, 100, [UIScreen width], 300);
-    SnailSheetView *sheet = [[SnailSheetView alloc] initWithConfig:config frame:rect];
+    SnailSheetView *sheet = [[SnailSheetView alloc] initWithFrame:rect configDelegate:config];
     sheet.headerLabel.text = @"此网页由 mp.weixin.qq.com 提供";
     sheet.models = [self sheetModels];
     [sheet autoresizingFlexibleHeight];

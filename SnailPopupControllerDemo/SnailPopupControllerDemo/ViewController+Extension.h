@@ -21,7 +21,7 @@
 - (SnailSidebarView *)sidebarView;
 - (SnailFullView *)fullView;
 
-- (SnailSheetView *)sheetViewWithConfig:(id<SnailSheetViewConfig>)config;
+- (SnailSheetView *)sheetViewWithConfig:(id<SnailSheetViewConfigDelegate>)config;
 - (NSArray *)sheetModels;
 
 @end

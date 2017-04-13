@@ -9,8 +9,7 @@
 #import "SnailFullView.h"
 
 @interface SnailFullView () <UIScrollViewDelegate> {
-    CGFloat _gap;
-    CGFloat _space;
+    CGFloat _gap, _space;
 }
 @property (nonatomic, strong) UILabel  *dateLabel;
 @property (nonatomic, strong) UILabel  *weekLabel;

@@ -43,9 +43,7 @@
 
 @interface SnailAlertView () {
     CGSize  _contentSize;
-    CGFloat _paddingTop;
-    CGFloat _paddingBottom;
-    CGFloat _paddingLeft; // paddingRight = paddingLeft
+    CGFloat _paddingTop, _paddingBottom, _paddingLeft; // paddingRight = paddingLeft
     CGFloat _spacing;
 }
 @property (nonatomic, strong) NSMutableSet *subActions;
@@ -127,7 +125,7 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
 
 - (void)clearActions:(NSMutableSet *)actions {
     NSEnumerator *enumerator = [actions objectEnumerator];
-    NSString * value;
+    NSString *value;
     while (value = [enumerator nextObject]) {
         if ([value isKindOfClass:[CALayer class]]) {
             [((CALayer *)value) removeFromSuperlayer];
@@ -140,15 +138,16 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
 }
 
 - (CALayer *)lineWithTop:(CGFloat)top horizontal:(BOOL)isHorizontalLine {
-    CALayer *layer = [CALayer layer];
     UIColor *color = _linesColor ? _linesColor : [UIColor grayColor];
-    layer.backgroundColor = color.CGColor; // default = grayColor
+    CALayer *layer = [CALayer layer];
+    layer.backgroundColor = color.CGColor;
+    CGRect rect = (CGRect){.origin = CGPointMake(0, top), .size = CGSizeZero};;
     if (isHorizontalLine) { // horizontal line
-        layer.size = CGSizeMake(_contentSize.width, 1 / [UIScreen mainScreen].scale);
+        rect.size = CGSizeMake(_contentSize.width, 1 / [UIScreen mainScreen].scale);
     } else {
-        layer.size = CGSizeMake(1 / [UIScreen mainScreen].scale, ACTION_HEIGHT);
+        rect.size = CGSizeMake(1 / [UIScreen mainScreen].scale, ACTION_HEIGHT);
     }
-    layer.origin = CGPointMake(0, top);
+    layer.frame = rect;
     return layer;
 }
 
@@ -159,7 +158,6 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
     NSAssert(okAction != nil, @"okAction cannot be nil.");
     
     [self clearActions:self.subActions];
-    
     [self sl_setAssociatedValue:nil withKey:SnailAlertViewActionKey];
     
     // horizontal layout
@@ -179,11 +177,9 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
     [self.layer addSublayer:line1];
     [self.layer addSublayer:line2];
     self.adjoinActions = [NSMutableSet setWithObjects:cancelAction, okAction, line1, line2, nil];
-    
     self.size = CGSizeMake(_contentSize.width, okAction.bottom);
 }
 
-// The vertical views
 - (void)addAction:(SnailAlertButton *)action {
     
     NSAssert(action != nil, @"action cannot be nil.");
@@ -191,7 +187,6 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
     [self clearActions:self.adjoinActions];
     
     id value = [self sl_getAssociatedValueForKey:SnailAlertViewActionKey];
-    
     if (nil != value && [value isKindOfClass:[SnailAlertButton class]]) {
         
         SnailAlertButton *lastAction = (SnailAlertButton *)value; // last

@@ -13,41 +13,27 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) SnailSheetViewLayout *sl_layout;
-@property (nonatomic, weak, nullable) id <SnailSheetViewConfig> config;
+@property (nonatomic, weak, nullable) id <SnailSheetViewConfigDelegate> config;
 
 @end
 
 @implementation SnailSheetView
 
-- (CGFloat)sectionHeight {
-    return self.sl_layout.itemEdgeInset.top + self.sl_layout.itemEdgeInset.bottom + self.sl_layout.itemSize.height;
-}
-
 - (SnailSheetViewLayout *)sl_layout {
     if (!_sl_layout) {
-        id<SnailSheetViewConfig> config = self.config;
         SnailSheetViewLayout *layout = [[SnailSheetViewLayout alloc] init];
-        if ([config respondsToSelector:@selector(layoutOfItemInSheetView:)]) {
-            layout = [config layoutOfItemInSheetView:self];
+        if ([self.config respondsToSelector:@selector(layoutOfItemInSheetView:)]) {
+             layout = [self.config layoutOfItemInSheetView:self];
         }
         _sl_layout = layout;
     }
     return _sl_layout;
 }
 
-- (SnailSheetViewAppearance *)sl_appearance {
-    id<SnailSheetViewConfig> config = self.config;
-    SnailSheetViewAppearance *appearance = [[SnailSheetViewAppearance alloc] init];
-    if ([config respondsToSelector:@selector(appearanceOfItemInSheetView:)]) {
-        appearance = [config appearanceOfItemInSheetView:self];
-    }
-    return appearance;
-}
-
-- (instancetype)initWithConfig:(id<SnailSheetViewConfig>)config frame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame configDelegate:(id<SnailSheetViewConfigDelegate>)configDelegate {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor r:240 g:240 b:240];
-        self.config = config;
+        self.config = configDelegate;
         
         _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
         _tableView.delegate = self;
@@ -111,10 +97,13 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *sl_CellIdentifier = @"sl_sheetCell";
-    SnailSheetCell *cell = [tableView dequeueReusableCellWithIdentifier:sl_CellIdentifier];
+    SnailSheetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sl_sheetCell"];
     if (!cell) {
-        cell = [[SnailSheetCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:sl_CellIdentifier layout:self.sl_layout appearance:self.sl_appearance];
+        SnailSheetViewAppearance *sl_appearance = [[SnailSheetViewAppearance alloc] init];
+        if ([self.config respondsToSelector:@selector(appearanceOfItemInSheetView:)]) {
+            sl_appearance = [self.config appearanceOfItemInSheetView:self];
+        }
+        cell = [[SnailSheetCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sl_sheetCell" layout:self.sl_layout appearance:sl_appearance];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     id object = [_models objectAtIndex:indexPath.row];
@@ -132,6 +121,10 @@
 - (void)setModels:(NSArray *)models {
     _models = models;
     [_tableView reloadData];
+}
+
+- (CGFloat)sectionHeight {
+    return self.sl_layout.itemEdgeInset.top + self.sl_layout.itemEdgeInset.bottom + self.sl_layout.itemSize.height;
 }
 
 - (void)autoresizingFlexibleHeight {

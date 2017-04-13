@@ -21,7 +21,6 @@
 @property (nonatomic, copy) void (^didClickFullView)(SnailFullView *fullView);
 @property (nonatomic, copy) void (^didClickItems)(SnailFullView *fullView, NSInteger index);
 
-- (void)endAnimationsCompletion:(void (^)(SnailFullView *fullView))completion;
-//- (void)animationsCompletion:(void (^)(SnailFullView *fullView))completion; // 动画结束后执行block
+- (void)endAnimationsCompletion:(void (^)(SnailFullView *fullView))completion; // 动画结束后执行block
 
 @end

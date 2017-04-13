@@ -25,10 +25,9 @@
 
 @property (nonatomic, assign) CGFloat sizeLimit; // textLabel根据文本计算size时，如果纵向布局则限高，横向布局则限宽
 
-@property (nonatomic, strong) SnailIconLabelModel *model; // Model of the assignment.
+@property (nonatomic, strong) SnailIconLabelModel *model;
 
-- (void)updateLayoutBySize:(CGSize)size
-                  finished:(void (^)(SnailIconLabel *item))finished; // 设置属性值后需要更新布局
+- (void)updateLayoutBySize:(CGSize)size finished:(void (^)(SnailIconLabel *item))finished; // 设置属性值后需要更新布局
 
 @end
 
