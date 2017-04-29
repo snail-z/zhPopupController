@@ -1,5 +1,5 @@
 # SnailPopupController 
-![enter image description here](https://img.shields.io/badge/pod-v2.0.4-brightgreen.svg)
+![enter image description here](https://img.shields.io/badge/pod-v2.0.5-brightgreen.svg)
 ![enter image description here](https://img.shields.io/badge/platform-iOS%207.0%2B-ff69b5152950834.svg) 
 <a href="https://github.com/snail-z/OverlayController-Swift/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg?style=flat"></a>
   
@@ -16,7 +16,7 @@ To install OverlayController using [CocoaPods](https://cocoapods.org "CocoaPods"
 
     target 'You Project' do
     
-      pod 'SnailPopupController', '~> 2.0.4'
+      pod 'SnailPopupController', '~> 2.0.5'
     
     end
 ```
