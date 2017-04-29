@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
 
 - (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message;
-- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message fixedWidth:(CGFloat)width;
+- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message width:(CGFloat)width;
 
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 @property (nonatomic, strong, readonly) UILabel *messageLabel;

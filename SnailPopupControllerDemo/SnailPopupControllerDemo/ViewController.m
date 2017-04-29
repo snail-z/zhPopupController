@@ -108,6 +108,11 @@ static void *sl_CellButtonKey = &sl_CellButtonKey;
     self.sl_popupController.transitStyle = PopupTransitStyleFromTop;
     self.sl_popupController.dropTransitionAnimated = YES;
     [self.sl_popupController presentContentView:alert duration:0.75 elasticAnimated:YES];
+    
+    self.sl_popupController = [SnailPopupController new];
+    self.sl_popupController.transitStyle = PopupTransitStyleFromTop;
+    self.sl_popupController.dropTransitionAnimated = YES;
+    [self.sl_popupController presentContentView:alert duration:0.75 elasticAnimated:YES];
 }
 
 - (void)example2 {

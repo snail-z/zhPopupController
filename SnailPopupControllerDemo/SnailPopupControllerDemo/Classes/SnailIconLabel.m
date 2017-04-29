@@ -69,7 +69,7 @@
     }
 }
 
-/// 竖直布局
+/// 纵向布局
 - (void)verticalLayoutSubviews {
     CGFloat sideLength = self.frame.size.width - self.imageEdgeInsets.left - self.imageEdgeInsets.right;
     _iconView.frame = CGRectMake(self.imageEdgeInsets.left, self.imageEdgeInsets.top, sideLength, sideLength);

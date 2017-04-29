@@ -69,7 +69,7 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
     return NO;
 }
 
-- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message fixedWidth:(CGFloat)width {
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message width:(CGFloat)width {
     if (self = [super init]) {
         self.backgroundColor = [UIColor whiteColor];
         self.layer.cornerRadius = 10;
@@ -120,7 +120,7 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
 }
 
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message {
-    return [self initWithTitle:title message:message fixedWidth:0];
+    return [self initWithTitle:title message:message width:0];
 }
 
 - (void)clearActions:(NSMutableSet *)actions {

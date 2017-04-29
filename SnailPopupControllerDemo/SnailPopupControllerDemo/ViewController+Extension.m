@@ -12,14 +12,14 @@
 
 - (SnailAlertView *)alertView1 {
     
-    SnailAlertView *alertView = [[SnailAlertView alloc] initWithTitle:@"提示" message:@"切换城市失败，是否重试？" fixedWidth:290];
+    SnailAlertView *alertView = [[SnailAlertView alloc] initWithTitle:@"提示" message:@"切换城市失败，是否重试？" width:290];
     alertView.linesColor = [UIColor colorWithHexString:@"#FC7541"];
     return alertView;
 }
 
 - (SnailAlertView *)alertView2 {
     
-    SnailAlertView *alertView = [[SnailAlertView alloc] initWithTitle:@"先来\n告诉我们你的喜好吧" message:@"我们会通过你的喜欢！了解你的喜好并为你推荐作品" fixedWidth:250];
+    SnailAlertView *alertView = [[SnailAlertView alloc] initWithTitle:@"先来\n告诉我们你的喜好吧" message:@"我们会通过你的喜欢！了解你的喜好并为你推荐作品" width:250];
     alertView.titleLabel.textColor = [UIColor r:80 g:72 b:83];
     alertView.titleLabel.font = [UIFont boldSystemFontOfSize:20];
     alertView.messageLabel.textColor = [UIColor blackColor];

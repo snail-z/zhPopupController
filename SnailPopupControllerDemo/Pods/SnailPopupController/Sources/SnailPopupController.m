@@ -632,10 +632,10 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 - (void)willChangeStatusBarOrientation {
     _maskView.frame = _superview.bounds;
     _popupView.center = [self finishedCenterPoint];
+    [self dismiss];
 }
 
 - (void)didChangeStatusBarOrientation {
-    
     if ([[UIDevice currentDevice].systemVersion compare:@"8.0" options:NSNumericSearch] == NSOrderedAscending) { // must manually fix orientation prior to iOS 8
         CGFloat angle;
         switch ([UIApplication sharedApplication].statusBarOrientation)
@@ -850,6 +850,7 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
     [[NSNotificationCenter defaultCenter]removeObserver:self
                                                    name:UIApplicationDidChangeStatusBarOrientationNotification
                                                  object:nil];
+    [self removeSubviews];
 }
 
 @end
