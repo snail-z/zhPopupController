@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
 
     s.name         = "SnailPopupController"
-    s.version      = "2.0.5"
+    s.version      = "2.0.6"
     s.summary      = "Simple Popup Controller For iOS"
     s.license      = { :type => "MIT", :file => "LICENCE" }
     s.author       = { "snail-z" => "40460770@qq.com" }

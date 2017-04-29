@@ -632,6 +632,7 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
 - (void)willChangeStatusBarOrientation {
     _maskView.frame = _superview.bounds;
     _popupView.center = [self finishedCenterPoint];
+    [self dismiss];
 }
 
 - (void)didChangeStatusBarOrientation {
@@ -850,6 +851,7 @@ static void *PopupControllerParametersKey = &PopupControllerParametersKey;
     [[NSNotificationCenter defaultCenter]removeObserver:self
                                                    name:UIApplicationDidChangeStatusBarOrientationNotification
                                                  object:nil];
+    [self removeSubviews];
 }
 
 @end
