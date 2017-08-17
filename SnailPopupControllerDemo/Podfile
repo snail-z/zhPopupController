@@ -1,6 +1,0 @@
-platform :ios, '8.0'
-use_frameworks!
-
-target 'SnailPopupControllerDemo' do
-	pod 'SnailPopupController', '~> 2.0.2'
-end 

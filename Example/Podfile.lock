@@ -1,0 +1,16 @@
+PODS:
+  - zhPopupController (0.1.0)
+
+DEPENDENCIES:
+  - zhPopupController (from `../`)
+
+EXTERNAL SOURCES:
+  zhPopupController:
+    :path: ../
+
+SPEC CHECKSUMS:
+  zhPopupController: e769077e7b1f4153b652b07787be5e29a8d5a0bb
+
+PODFILE CHECKSUM: 6f24e0c385f5a9d2720c9d454b2aef058d96dc94
+
+COCOAPODS: 1.3.1
