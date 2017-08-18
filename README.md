@@ -1,11 +1,11 @@
 # zhPopupController
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
-[![Version](https://img.shields.io/badge/pod-v0.1.0-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
+[![Version](https://img.shields.io/badge/pod-v0.1.1-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
 [![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
-popup your custom view easy, support custom mask style/transition effects/gesture to drag.
+Popup your custom view is easy, support custom mask style, transition effects and gesture to drag.
 
 
 
@@ -29,7 +29,7 @@ use_frameworks!
 
 target 'You Project' do
     
-	pod 'zhPopupController', '~> 0.1.0'
+	pod 'zhPopupController', '~> 0.1.1'
     
 end
 ```
