@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'zhPopupController_Example' do
+  pod 'zhPopupController', :path => '../'
+
+  target 'zhPopupController_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
