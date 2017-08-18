@@ -1,8 +1,7 @@
 {
   "name": "zhPopupController",
-  "version": "0.1.0",
-  "summary": "A short description of zhPopupController.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "0.1.1",
+  "summary": "Simple Popup Controller For iOS，popup your custom view easy.",
   "homepage": "https://github.com/snail-z/zhPopupController",
   "license": {
     "type": "MIT",
@@ -13,10 +12,10 @@
   },
   "source": {
     "git": "https://github.com/snail-z/zhPopupController.git",
-    "tag": "0.1.0"
+    "tag": "0.1.1"
   },
   "platforms": {
-    "ios": "8.0"
+    "ios": "7.0"
   },
   "source_files": "zhPopupController/Classes/**/*"
 }

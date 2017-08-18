@@ -785,7 +785,7 @@ static CGFloat zh_randomValue(int i, int j) {
 
 @end
 
-@implementation NSObject (SnailPopupController)
+@implementation NSObject (zhPopupController)
 
 - (zhPopupController *)zh_popupController {
     id popupController = objc_getAssociatedObject(self, _cmd);
