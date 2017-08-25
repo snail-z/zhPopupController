@@ -770,9 +770,6 @@ static CGFloat zh_randomValue(int i, int j) {
 }
 
 - (void)dealloc {
-#if DEBUG
-    NSLog(@"%@ dealloc.", NSStringFromClass(self.class));
-#endif
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     [[NSNotificationCenter defaultCenter]removeObserver:self
                                                    name:UIApplicationWillChangeStatusBarOrientationNotification
