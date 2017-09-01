@@ -1,5 +1,5 @@
 PODS:
-  - zhPopupController (0.1.1)
+  - zhPopupController (0.1.3)
 
 DEPENDENCIES:
   - zhPopupController (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  zhPopupController: 8db348d5c895fedb4c6ff5964e913d8fae482a6b
+  zhPopupController: 6c3b0998b5402e4805a7fc30c0a7df09345bce89
 
 PODFILE CHECKSUM: 6f24e0c385f5a9d2720c9d454b2aef058d96dc94
 

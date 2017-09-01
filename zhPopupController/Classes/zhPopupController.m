@@ -55,10 +55,8 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
 }
 
 - (UIView *)applicationWindow {
-    NSArray *windows = [[UIApplication sharedApplication] windows];
-    if (windows.count) {
-        return windows.firstObject;
-    }
+    UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+    if (keyWindow) return keyWindow;
     return [[UIApplication sharedApplication].delegate window];
 }
 
