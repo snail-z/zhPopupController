@@ -6,46 +6,75 @@
 //  Copyright © 2017年 zhanghao. All rights reserved.
 //
 
-#import "zhSheetViewConfig.h"
+#import "zhWallViewConfig.h"
 
-@implementation zhSheetViewLayout
+@implementation zhWallViewLayout
 
-+ (instancetype)layoutWithItemSize:(CGSize)itemSize
-                     itemEdgeInset:(UIEdgeInsets)itemEdgeInset
-                       itemSpacing:(CGFloat)itemSpacing
-                    imageViewWidth:(CGFloat)imageViewWidth
-                        subSpacing:(CGFloat)subSpacing {
-
-    zhSheetViewLayout *layout = [[zhSheetViewLayout alloc] init];
-    layout.itemSize = itemSize;
-    layout.itemEdgeInset = itemEdgeInset;
-    layout.itemSpacing = itemSpacing;
-    layout.imageViewWidth = imageViewWidth;
-    layout.subSpacing = subSpacing;
-    return layout;
+- (CGSize)itemSize {
+    if (CGSizeEqualToSize(_itemSize, CGSizeZero)) {
+        return CGSizeMake(70, 100);
+    }
+    return _itemSize;
 }
 
-- (CGFloat)imageWidth {
-    if (_imageViewWidth > 0) return _imageViewWidth;
-    return _itemSize.width;
+- (UIEdgeInsets)itemEdgeInset {
+    if (UIEdgeInsetsEqualToEdgeInsets(_itemEdgeInset, UIEdgeInsetsZero)) {
+        return UIEdgeInsetsMake(15, 10, 5, 10);
+    }
+    return _itemEdgeInset;
+}
+
+- (CGFloat)imageViewSideLength {
+    if (_imageViewSideLength > 0) {
+        return _imageViewSideLength;
+    }
+    return self.itemSize.width - 10;
+}
+
+- (CGFloat)itemPadding {
+    if (_itemPadding > 0) {
+        return _itemPadding;
+    }
+    return 5;
+}
+
+- (CGFloat)itemSubviewsSpacing {
+    if (_itemSubviewsSpacing > 0) {
+        return _itemSubviewsSpacing;
+    }
+    return 7;
+}
+
+- (CGFloat)wallHeaderHeight {
+    if (_wallHeaderHeight > 0) {
+        return _wallHeaderHeight;
+    }
+    return 30;
+}
+
+- (CGFloat)wallFooterHeight {
+    if (_wallFooterHeight > 0) {
+        return _wallFooterHeight;
+    }
+    return 50;
 }
 
 @end
 
-@implementation zhSheetViewAppearance
+@implementation zhWallViewAppearance
 
 - (UIColor *)sectionBackgroundColor {
     if (_sectionBackgroundColor) {
         return _sectionBackgroundColor;
     }
-    return [UIColor clearColor];
+    return [UIColor clearColor]; // default value
 }
 
 - (UIColor *)itemBackgroundColor {
     if (_itemBackgroundColor) {
         return _itemBackgroundColor;
     }
-    return [UIColor clearColor]; // default value
+    return [UIColor clearColor];
 }
 
 - (UIColor *)imageViewBackgroundColor {
@@ -99,13 +128,4 @@
 
 @end
 
-@implementation zhSheetItemModel
 
-+ (instancetype)modelWithText:(NSString *)text image:(UIImage *)image {
-    zhSheetItemModel *model = [[zhSheetItemModel alloc] init];
-    model.text = text;
-    model.image = image;
-    return model;
-}
-
-@end

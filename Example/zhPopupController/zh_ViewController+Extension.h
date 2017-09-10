@@ -8,20 +8,22 @@
 
 #import "zh_ViewController.h"
 #import "zhAlertView.h"
+#import "zhOverflyView.h"
 #import "zhCurtainView.h"
 #import "zhSidebarView.h"
 #import "zhFullView.h"
-#import "zhSheetView.h"
+#import "zhWallView.h"
 
 @interface zh_ViewController (Extension)
 
 - (zhAlertView *)alertView1;
 - (zhAlertView *)alertView2;
+- (zhOverflyView *)overflyView;
 - (zhCurtainView *)curtainView;
 - (zhSidebarView *)sidebarView;
 - (zhFullView *)fullView;
+- (zhWallView *)wallView;
 
-- (zhSheetView *)sheetViewWithConfig:(id<zhSheetViewConfigDelegate>)config;
-- (NSArray *)sheetModels;
+- (NSArray *)wallModels;
 
 @end

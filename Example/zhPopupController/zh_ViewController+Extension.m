@@ -11,20 +11,61 @@
 @implementation zh_ViewController (Extension)
 
 - (zhAlertView *)alertView1 {
-    
-    zhAlertView *alertView = [[zhAlertView alloc] initWithTitle:@"提示" message:@"切换城市失败，是否重试？" width:290];
-    alertView.linesColor = [UIColor colorWithHexString:@"#FC7541"];
+    zhAlertView *alertView = [[zhAlertView alloc] initWithTitle:@"提示"
+                                                        message:@"切换城市失败，是否重试？"
+                                                  constantWidth:290];
     return alertView;
 }
 
 - (zhAlertView *)alertView2 {
-    
-    zhAlertView *alertView = [[zhAlertView alloc] initWithTitle:@"先来\n告诉我们你的喜好吧" message:@"我们会通过你的喜欢！了解你的喜好并为你推荐作品" width:250];
+    zhAlertView *alertView = [[zhAlertView alloc] initWithTitle:@"先来\n告诉我们你的喜好吧"
+                                                        message:@"我们会通过你的喜欢！了解你的喜好并为你推荐作品"
+                                                  constantWidth:250];
     alertView.titleLabel.textColor = [UIColor r:80 g:72 b:83];
     alertView.titleLabel.font = [UIFont boldSystemFontOfSize:20];
     alertView.messageLabel.textColor = [UIColor blackColor];
-    alertView.linesHidden = YES;
     return alertView;
+}
+
+- (zhOverflyView *)overflyView {
+    
+    NSString *title1 = @"通知提醒", *title2 = @"重要消息不再错过";
+    NSString *text = [NSString stringWithFormat:@"%@\n%@", title1, title2];
+    NSMutableAttributedString *attiTitle = [[NSMutableAttributedString alloc] initWithString:text];
+    
+    [attiTitle addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:[text rangeOfString:title1]];
+    [attiTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[text rangeOfString:title1]];
+    
+    [attiTitle addAttribute:NSForegroundColorAttributeName value:[UIColor r:236 g:78 b:39] range:[text rangeOfString:title2]];
+    [attiTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[text rangeOfString:title2]];
+    
+    [attiTitle addAttribute:NSKernAttributeName value:@1.2 range:[text rangeOfString:title2]];//字距调整
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:5];
+    [attiTitle addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [text length])];//行距调整
+    
+    NSString *msg = @"    两国元首重点就当前朝鲜半岛局势交换了看法。习近平强调，中方坚定不移致力于实现朝鲜半岛无核化，维护国际核不扩散体系。同时要坚持和平解决的大方向，解决朝鲜半岛核问题，积极探寻长久解决之道。";
+    NSMutableAttributedString *attiMessage = [[NSMutableAttributedString alloc] initWithString:msg];
+    [attiMessage addAttribute:NSKernAttributeName value:@1.2 range:NSMakeRange(0, [msg length])];
+    NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle2 setLineSpacing:5];
+    [attiMessage addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [msg length])];
+    [attiMessage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17] range:NSMakeRange(0, [msg length])];
+    [attiMessage addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(0, [msg length])];
+    
+    CGFloat fac = 475; // 已知透明区域高度
+    UIImage *image = [UIImage imageNamed:@"fire_arrow"];
+
+    zhOverflyView *overflyView = [[zhOverflyView alloc]
+                                  initWithFlyImage:image
+                                  highlyRatio:(fac / image.size.height)
+                                  attributedTitle:attiTitle
+                                  attributedMessage:attiMessage
+                                  constantWidth:280];
+    overflyView.layer.cornerRadius = 7;
+    overflyView.messageEdgeInsets = UIEdgeInsetsMake(10, 22, 10, 22);
+    [overflyView reloadAllComponents];
+    return overflyView;
 }
 
 - (zhCurtainView *)curtainView {
@@ -66,20 +107,20 @@
     return fullView;
 }
 
-- (zhSheetView *)sheetViewWithConfig:(id<zhSheetViewConfigDelegate>)config {
-    
+- (zhWallView *)wallView {
     CGRect rect = CGRectMake(100, 100, [UIScreen width], 300);
-    zhSheetView *sheet = [[zhSheetView alloc] initWithFrame:rect configDelegate:config];
-    sheet.headerLabel.text = @"此网页由 mp.weixin.qq.com 提供";
-    sheet.models = [self sheetModels];
-    [sheet autoresizingFlexibleHeight];
-    return sheet;
+    zhWallView *wallView = [[zhWallView alloc] initWithFrame:rect];
+    wallView.wallHeaderLabel.text = @"此网页由 mp.weixin.qq.com 提供";
+    wallView.wallFooterLabel.text = @"取消";
+    wallView.models = [self wallModels];
+    [wallView autoAdjustFitHeight];
+    return wallView;
 }
 
 #define titleKey @"title"
 #define imgNameKey @"imageName"
 
-- (NSArray *)sheetModels {
+- (NSArray *)wallModels {
     
     NSArray *arr1 = @[@{titleKey   : @"发送给朋友",
                         imgNameKey : @"sheet_Share"},
@@ -121,16 +162,14 @@
     for (NSDictionary *dict in arr1) {
         NSString *text = [dict objectForKey:titleKey];
         NSString *imgName = [dict objectForKey:imgNameKey];
-        [array1 addObject:[zhSheetItemModel modelWithText:text
-                                                    image:[UIImage imageNamed:imgName]]];
+        [array1 addObject:[zhWallItemModel modelWithImage:[UIImage imageNamed:imgName] text:text]];
     }
     
     NSMutableArray *array2 = [NSMutableArray array];
     for (NSDictionary *dict in arr2) {
         NSString *text = [dict objectForKey:titleKey];
         NSString *imgName = [dict objectForKey:imgNameKey];
-        [array2 addObject:[zhSheetItemModel modelWithText:text
-                                                    image:[UIImage imageNamed:imgName]]];
+        [array2 addObject:[zhWallItemModel modelWithImage:[UIImage imageNamed:imgName] text:text]];
     }
     
     return [NSMutableArray arrayWithObjects:array1, array2, nil];

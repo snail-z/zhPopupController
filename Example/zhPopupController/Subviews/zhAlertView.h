@@ -13,30 +13,31 @@ NS_ASSUME_NONNULL_BEGIN
 @interface zhAlertButton : UIButton
 
 + (instancetype)buttonWithType:(UIButtonType)buttonType NS_UNAVAILABLE;
-
 + (instancetype)buttonWithTitle:(nullable NSString *)title handler:(void (^ __nullable)(zhAlertButton *button))handler;
 
-@property (nonatomic, assign) UIEdgeInsets edgeInset; // top -> 间距 / bottom -> 最底部留白
+@property (nonatomic, assign) UIColor *lineColor;   // 线条颜色
+@property (nonatomic, assign) CGFloat lineWidth;    // 线宽
+@property (nonatomic, assign) UIEdgeInsets edgeInsets; //边缘留白 top -> 间距 / bottom -> 最底部留白(根据不同情况调整不同间距)
 
 @end
 
 @interface zhAlertView : UIView
 
-- (instancetype)init NS_UNAVAILABLE;
-- (instancetype)initWithCoder:(NSCoder *)aDecoder NS_UNAVAILABLE;
-- (instancetype)initWithFrame:(CGRect)frame NS_UNAVAILABLE;
-
-- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message;
-- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message width:(CGFloat)width;
-
 @property (nonatomic, strong, readonly) UILabel *titleLabel;
 @property (nonatomic, strong, readonly) UILabel *messageLabel;
-@property (nonatomic, strong, nullable) UIColor *linesColor; // All the line color.
-@property (nonatomic, assign) BOOL linesHidden;
 
+- (instancetype)initWithTitle:(nullable NSString *)title
+                      message:(nullable NSString *)message
+                constantWidth:(CGFloat)constantWidth;
+
+/// 子视图按钮(zhOverflyButton)的高度，默认49
+@property (nonatomic, assign) CGFloat subOverflyButtonHeight;
+
+/// 纵向依次向下添加
 - (void)addAction:(nonnull zhAlertButton *)action;
-// Horizontal two views
-- (void)addAdjoinWithCancelAction:(nonnull zhAlertButton *)cancelAction okAction:(nonnull zhAlertButton *)okAction;
+
+/// 水平方向两个button
+- (void)adjoinWithLeftAction:(zhAlertButton *)leftAction rightAction:(zhAlertButton *)rightAction;
 
 @end
 

@@ -16,7 +16,7 @@ typedef NS_ENUM(NSUInteger, zhPopupMaskType) {
     zhPopupMaskTypeWhiteBlur,
     zhPopupMaskTypeWhite,
     zhPopupMaskTypeClear,
-    zhPopupMaskTypeBlackTranslucent
+    zhPopupMaskTypeBlackTranslucent // default
 };
 
 // Control content View shows of layout type, when end of the animation.
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, zhPopupLayoutType) {
     zhPopupLayoutTypeBottom,
     zhPopupLayoutTypeLeft,
     zhPopupLayoutTypeRight,
-    zhPopupLayoutTypeCenter
+    zhPopupLayoutTypeCenter // default
 };
 
 // Control content view from a direction sliding out of style.
@@ -35,7 +35,7 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
     zhPopupSlideStyleFromLeft,
     zhPopupSlideStyleFromRight,
     zhPopupSlideStyleShrinkInOut,
-    zhPopupSlideStyleFade
+    zhPopupSlideStyleFade // default
 };
 
 @protocol zhPopupControllerDelegate;
@@ -44,11 +44,11 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
 
 @property (nonatomic, weak) id <zhPopupControllerDelegate> _Nullable delegate;
 
+/// Convenient to initialize and set maske type. (Through the `- init` initialization, maskType is zhPopupMaskTypeBlackTranslucent)
++ (instancetype)popupControllerWithMaskType:(zhPopupMaskType)maskType;
+
 /// Whether contentView is presenting.
 @property (nonatomic, assign, readonly) BOOL isPresenting;
-
-/// Set mask view type. default is zhPopupMaskTypeBlackTranslucent
-@property (nonatomic, assign) zhPopupMaskType maskType;
 
 /// Set popup view display position. default is zhPopupLayoutTypeCenter
 @property (nonatomic, assign) zhPopupLayoutType layoutType;

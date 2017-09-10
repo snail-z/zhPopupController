@@ -7,11 +7,16 @@
 //
 
 #import "zhAlertView.h"
+#import  <objc/runtime.h>
 
-#define ACTION_HEIGHT 49.0  // zhAlertButton height
+#define zhAlertViewLineColor [UIColor colorWithHexString:@"bfbfbf"]
 
 @interface zhAlertButton ()
+
+@property (nonatomic, strong) CALayer *horizontalLine;
+@property (nonatomic, strong) CALayer *verticalLine;
 @property (nonatomic, copy) void (^buttonClickedBlock)(zhAlertButton *alertButton);
+
 @end
 
 @implementation zhAlertButton
@@ -22,21 +27,42 @@
 
 - (instancetype)initWithTitle:(NSString *)title handler:(void (^)(zhAlertButton * _Nonnull))handler {
     if (self = [super init]) {
+        self.buttonClickedBlock = handler;
+        
         self.titleLabel.font = [UIFont systemFontOfSize:18];
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
         [self setTitle:title forState:UIControlStateNormal];
         [self addTarget:self action:@selector(handlerClicked) forControlEvents:UIControlEventTouchUpInside];
-        self.buttonClickedBlock = handler;
+        
+        _horizontalLine = [CALayer layer];
+        _horizontalLine.backgroundColor = zhAlertViewLineColor.CGColor;
+        [self.layer addSublayer:_horizontalLine];
+        
+        _verticalLine = [CALayer layer];
+        _verticalLine.backgroundColor = zhAlertViewLineColor.CGColor;
+        _verticalLine.hidden = YES;
+        [self.layer addSublayer:_verticalLine];
     }
     return self;
 }
 
 - (void)handlerClicked {
-    if (nil != self && nil != self.buttonClickedBlock) {
-        self.buttonClickedBlock(self);
-    }
+    if (self && self.buttonClickedBlock) self.buttonClickedBlock(self);
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGFloat lineWidth = self.lineWidth > 0 ? self.lineWidth : 1 / [UIScreen mainScreen].scale;
+    _horizontalLine.frame = CGRectMake(0, 0, self.width, lineWidth);
+    _verticalLine.frame = CGRectMake(0, 0, lineWidth, self.height);
+}
+
+- (void)setLineColor:(UIColor *)lineColor {
+    _lineColor = lineColor;
+    _verticalLine.backgroundColor = lineColor.CGColor;
+    _horizontalLine.backgroundColor = lineColor.CGColor;
 }
 
 @end
@@ -55,31 +81,18 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
 
 @implementation zhAlertView
 
-- (NSMutableSet *)subActions {
-    if (!_subActions) {
-        _subActions = [NSMutableSet set];
-    }
-    return _subActions;
-}
-
-- (BOOL)isEmptyString:(NSString *)string {
-    if (!string) return YES;
-    if ([string isKindOfClass:[NSNull class]]) return YES;
-    if ([[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] length] == 0) return YES;
-    return NO;
-}
-
-- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message width:(CGFloat)width {
+- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message constantWidth:(CGFloat)constantWidth {
     if (self = [super init]) {
         self.backgroundColor = [UIColor whiteColor];
         self.layer.cornerRadius = 10;
         self.clipsToBounds = NO;
+        self.subOverflyButtonHeight = 49;
         
         _contentSize.width = 200; // default width = 200
-        if (width > 0) _contentSize.width = width;
+        if (constantWidth > 0) _contentSize.width = constantWidth;
         _paddingTop = 15, _paddingBottom = 15, _paddingLeft = 20, _spacing = 15;
 
-        if (![self isEmptyString:title]) {
+        if (title.length) {
             _titleLabel = [[UILabel alloc] init];
             _titleLabel.text = title;
             _titleLabel.numberOfLines = 0;
@@ -93,7 +106,7 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
             _contentSize.height = _titleLabel.bottom;
         }
 
-        if (![self isEmptyString:message]) {
+        if (message.length) {
             _messageLabel = [[UILabel alloc] init];
             _messageLabel.numberOfLines = 0;
             _messageLabel.font = [UIFont systemFontOfSize:16];
@@ -112,146 +125,59 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
         }
      
         self.size = CGSizeMake(_contentSize.width, _contentSize.height + _paddingBottom);
-        if ([self isEmptyString:title] && [self isEmptyString:message]) {
+        if (!title.length && !message.length) {
             self.size = CGSizeZero;
         }
     }
     return self;
 }
 
-- (instancetype)initWithTitle:(NSString *)title message:(NSString *)message {
-    return [self initWithTitle:title message:message width:0];
-}
-
-- (void)clearActions:(NSMutableSet *)actions {
-    NSEnumerator *enumerator = [actions objectEnumerator];
-    NSString *value;
-    while (value = [enumerator nextObject]) {
-        if ([value isKindOfClass:[CALayer class]]) {
-            [((CALayer *)value) removeFromSuperlayer];
-        }
-        if ([value isKindOfClass:[zhAlertButton class]]) {
-            [((zhAlertButton *)value) removeFromSuperview];
-        }
-    }
-    [actions removeAllObjects];
-}
-
-- (CALayer *)lineWithTop:(CGFloat)top horizontal:(BOOL)isHorizontalLine {
-    UIColor *color = _linesColor ? _linesColor : [UIColor grayColor];
-    CALayer *layer = [CALayer layer];
-    layer.backgroundColor = color.CGColor;
-    CGRect rect = (CGRect){.origin = CGPointMake(0, top), .size = CGSizeZero};;
-    if (isHorizontalLine) { // horizontal line
-        rect.size = CGSizeMake(_contentSize.width, 1 / [UIScreen mainScreen].scale);
-    } else {
-        rect.size = CGSizeMake(1 / [UIScreen mainScreen].scale, ACTION_HEIGHT);
-    }
-    layer.frame = rect;
-    return layer;
-}
-
-// Horizontal two views
-- (void)addAdjoinWithCancelAction:(zhAlertButton *)cancelAction okAction:(zhAlertButton *)okAction {
-    
-    NSAssert(cancelAction != nil, @"cancelAction cannot be nil.");
-    NSAssert(okAction != nil, @"okAction cannot be nil.");
-    
-    [self clearActions:self.subActions];
-    [self sl_setAssociatedValue:nil withKey:SnailAlertViewActionKey];
-    
-    // horizontal layout
-    cancelAction.size = CGSizeMake(_contentSize.width / 2, ACTION_HEIGHT);
-    cancelAction.y = _contentSize.height;
-    if (!CGSizeEqualToSize(self.size, CGSizeZero)) {
-        cancelAction.y += _spacing;
-    }
-    okAction.size = CGSizeMake(_contentSize.width / 2, ACTION_HEIGHT);
-    okAction.origin = CGPointMake(cancelAction.right, cancelAction.y);
-    CALayer *line1 = [self lineWithTop:okAction.y horizontal:YES];
-    CALayer *line2 = [self lineWithTop:okAction.y horizontal:NO];
-    line2.centerX = _contentSize.width / 2;
-    
-    [self addSubview:cancelAction];
-    [self addSubview:okAction];
-    [self.layer addSublayer:line1];
-    [self.layer addSublayer:line2];
-    self.adjoinActions = [NSMutableSet setWithObjects:cancelAction, okAction, line1, line2, nil];
-    self.size = CGSizeMake(_contentSize.width, okAction.bottom);
-}
+static void *zhAlertViewActionKey = &zhAlertViewActionKey;
 
 - (void)addAction:(zhAlertButton *)action {
+    [self clearActions:self.adjoinActions.allObjects];
+    [self.adjoinActions removeAllObjects];
     
-    NSAssert(action != nil, @"action cannot be nil.");
-    
-    [self clearActions:self.adjoinActions];
-    
-    id value = [self sl_getAssociatedValueForKey:SnailAlertViewActionKey];
-    if (nil != value && [value isKindOfClass:[zhAlertButton class]]) {
-        
-        zhAlertButton *lastAction = (zhAlertButton *)value; // last
-        if (![action isEqual:lastAction]) { // current
-            
-            CGFloat w = _contentSize.width - action.edgeInset.left - action.edgeInset.right;
-            action.size = CGSizeMake(w, ACTION_HEIGHT);
-            action.y = lastAction.bottom + action.edgeInset.top;
-            action.centerX = _contentSize.width / 2;
-            if (!_linesHidden) {
-                CALayer *line = [self lineWithTop:action.y horizontal:YES];
-                [self.layer addSublayer:line];
-                [self.subActions addObject:line];
-            }
-        }
-        
-    } else { // first
-        
-        CGFloat w = _contentSize.width - action.edgeInset.left - action.edgeInset.right;
-        action.size = CGSizeMake(w, ACTION_HEIGHT);
-        action.y = _contentSize.height + action.edgeInset.top;
+    void (^layout)(CGFloat) = ^(CGFloat top){
+        CGFloat width = _contentSize.width - action.edgeInsets.left - action.edgeInsets.right;
+        action.size = CGSizeMake(width, self.subOverflyButtonHeight);
+        action.y = top;
         action.centerX = _contentSize.width / 2;
-        if (!CGSizeEqualToSize(self.size, CGSizeZero)) {
-            action.y += _spacing;
-        }
-        if (!_linesHidden) {
-            CALayer *line = [self lineWithTop:action.y horizontal:YES];
-            [self.layer addSublayer:line];
-            [self.subActions addObject:line];
-        }
+    };
+    
+    zhAlertButton *lastAction = objc_getAssociatedObject(self, zhAlertViewActionKey);
+    if (lastAction) { // current
+        if (![action isEqual:lastAction]) layout(lastAction.bottom + action.edgeInsets.top);
+    } else { // first
+        layout(_contentSize.height + action.edgeInsets.top + 10); // 增加10间距
     }
+    
+    action.verticalLine.hidden = YES;
     [self insertSubview:action atIndex:0];
-    [self.subActions addObject:action];
-    self.size = CGSizeMake(_contentSize.width, action.bottom + action.edgeInset.bottom);
-    [self sl_setAssociatedValue:action withKey:SnailAlertViewActionKey];
+    self.size = CGSizeMake(_contentSize.width, action.bottom + action.edgeInsets.bottom);
+    objc_setAssociatedObject(self, zhAlertViewActionKey, action, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
-#pragma mark - Setter
-
-- (void)setLinesColor:(UIColor *)linesColor {
-    _linesColor = linesColor;
-    for (id value in self.adjoinActions) {
-        if ([value isKindOfClass:[CALayer class]]) {
-            ((CALayer *)value).backgroundColor = linesColor.CGColor;
-        }
-    }
-    for (id value in self.subActions) {
-        if ([value isKindOfClass:[CALayer class]]) {
-            ((CALayer *)value).backgroundColor = linesColor.CGColor;
-        }
-    }
+- (void)adjoinWithLeftAction:(zhAlertButton *)leftAction rightAction:(zhAlertButton *)rightAction {
+    [self clearActions:self.subviews];
+    objc_setAssociatedObject(self, zhAlertViewActionKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    
+    leftAction.size = CGSizeMake(_contentSize.width / 2, self.subOverflyButtonHeight);
+    leftAction.y = _contentSize.height + leftAction.edgeInsets.top; 
+    
+    rightAction.frame = leftAction.frame;
+    rightAction.x = leftAction.right;
+    rightAction.verticalLine.hidden = NO;
+    [self addSubview:leftAction];
+    [self addSubview:rightAction];
+    self.adjoinActions = [NSMutableSet setWithObjects:leftAction, rightAction, nil];
+    self.size = CGSizeMake(_contentSize.width, leftAction.bottom);
 }
 
-- (void)setLinesHidden:(BOOL)linesHidden {
-    _linesHidden = linesHidden;
-    if (_linesHidden) {
-        for (id value in self.adjoinActions) {
-            if ([value isKindOfClass:[CALayer class]]) {
-                [((CALayer *)value) removeFromSuperlayer];
-            }
-        }
-        for (id value in self.subActions) {
-            if ([value isKindOfClass:[CALayer class]]) {
-                [((CALayer *)value) removeFromSuperlayer];
-            }
+- (void)clearActions:(NSArray *)subviews {
+    for (UIView *subview in subviews) {
+        if ([subview isKindOfClass:[zhAlertButton class]]) {
+            [subview removeFromSuperview];
         }
     }
 }

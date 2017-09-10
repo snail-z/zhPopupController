@@ -24,14 +24,16 @@
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		911FA5F5A417BF91E8173FBE /* Pods_zhPopupController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01576D0E82A2055D8DE1D979 /* Pods_zhPopupController_Tests.framework */; };
+		F207350B1F65983200C1A6A5 /* zhWallView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20735081F65983200C1A6A5 /* zhWallView.m */; };
+		F207350C1F65983200C1A6A5 /* zhWallViewConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F207350A1F65983200C1A6A5 /* zhWallViewConfig.m */; };
+		F207350F1F659AE500C1A6A5 /* zhOverflyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F207350E1F659AE500C1A6A5 /* zhOverflyView.m */; };
+		F20735121F659C6400C1A6A5 /* fire_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F20735111F659C6400C1A6A5 /* fire_arrow.png */; };
+		F20735151F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = F20735141F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m */; };
 		F2AB15561F45B398003329E3 /* zh_ViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15551F45B398003329E3 /* zh_ViewController+Extension.m */; };
 		F2AB15681F45BEFA003329E3 /* zhAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15591F45BEFA003329E3 /* zhAlertView.m */; };
 		F2AB15691F45BEFA003329E3 /* zhCurtainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB155B1F45BEFA003329E3 /* zhCurtainView.m */; };
 		F2AB156A1F45BEFA003329E3 /* zhFullView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB155D1F45BEFA003329E3 /* zhFullView.m */; };
 		F2AB156B1F45BEFA003329E3 /* zhIconLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB155F1F45BEFA003329E3 /* zhIconLabel.m */; };
-		F2AB156C1F45BEFA003329E3 /* zhSheetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15611F45BEFA003329E3 /* zhSheetCell.m */; };
-		F2AB156D1F45BEFA003329E3 /* zhSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15631F45BEFA003329E3 /* zhSheetView.m */; };
-		F2AB156E1F45BEFA003329E3 /* zhSheetViewConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15651F45BEFA003329E3 /* zhSheetViewConfig.m */; };
 		F2AB156F1F45BEFA003329E3 /* zhSidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15671F45BEFA003329E3 /* zhSidebarView.m */; };
 		F2AB15871F45BF5A003329E3 /* CALayer+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15721F45BF5A003329E3 /* CALayer+Layout.m */; };
 		F2AB15881F45BF5A003329E3 /* NSDate+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15741F45BF5A003329E3 /* NSDate+Extend.m */; };
@@ -145,6 +147,15 @@
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		876B9BDC1EDFA6D5F48A9CC8 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		D49349F67F0835FAC46C00D1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		F20735071F65983200C1A6A5 /* zhWallView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhWallView.h; sourceTree = "<group>"; };
+		F20735081F65983200C1A6A5 /* zhWallView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhWallView.m; sourceTree = "<group>"; };
+		F20735091F65983200C1A6A5 /* zhWallViewConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhWallViewConfig.h; sourceTree = "<group>"; };
+		F207350A1F65983200C1A6A5 /* zhWallViewConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhWallViewConfig.m; sourceTree = "<group>"; };
+		F207350D1F659AE500C1A6A5 /* zhOverflyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhOverflyView.h; sourceTree = "<group>"; };
+		F207350E1F659AE500C1A6A5 /* zhOverflyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhOverflyView.m; sourceTree = "<group>"; };
+		F20735111F659C6400C1A6A5 /* fire_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire_arrow.png; sourceTree = "<group>"; };
+		F20735131F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+zhStatusBarStyle.h"; sourceTree = "<group>"; };
+		F20735141F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+zhStatusBarStyle.m"; sourceTree = "<group>"; };
 		F2AB15541F45B398003329E3 /* zh_ViewController+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "zh_ViewController+Extension.h"; sourceTree = "<group>"; };
 		F2AB15551F45B398003329E3 /* zh_ViewController+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "zh_ViewController+Extension.m"; sourceTree = "<group>"; };
 		F2AB15581F45BEFA003329E3 /* zhAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhAlertView.h; sourceTree = "<group>"; };
@@ -155,12 +166,6 @@
 		F2AB155D1F45BEFA003329E3 /* zhFullView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhFullView.m; sourceTree = "<group>"; };
 		F2AB155E1F45BEFA003329E3 /* zhIconLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhIconLabel.h; sourceTree = "<group>"; };
 		F2AB155F1F45BEFA003329E3 /* zhIconLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhIconLabel.m; sourceTree = "<group>"; };
-		F2AB15601F45BEFA003329E3 /* zhSheetCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhSheetCell.h; sourceTree = "<group>"; };
-		F2AB15611F45BEFA003329E3 /* zhSheetCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhSheetCell.m; sourceTree = "<group>"; };
-		F2AB15621F45BEFA003329E3 /* zhSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhSheetView.h; sourceTree = "<group>"; };
-		F2AB15631F45BEFA003329E3 /* zhSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhSheetView.m; sourceTree = "<group>"; };
-		F2AB15641F45BEFA003329E3 /* zhSheetViewConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhSheetViewConfig.h; sourceTree = "<group>"; };
-		F2AB15651F45BEFA003329E3 /* zhSheetViewConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhSheetViewConfig.m; sourceTree = "<group>"; };
 		F2AB15661F45BEFA003329E3 /* zhSidebarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhSidebarView.h; sourceTree = "<group>"; };
 		F2AB15671F45BEFA003329E3 /* zhSidebarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhSidebarView.m; sourceTree = "<group>"; };
 		F2AB15711F45BF5A003329E3 /* CALayer+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Layout.h"; sourceTree = "<group>"; };
@@ -377,23 +382,31 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		F20735101F659C6400C1A6A5 /* other */ = {
+			isa = PBXGroup;
+			children = (
+				F20735111F659C6400C1A6A5 /* fire_arrow.png */,
+			);
+			path = other;
+			sourceTree = "<group>";
+		};
 		F2AB15571F45BEFA003329E3 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				F20735071F65983200C1A6A5 /* zhWallView.h */,
+				F20735081F65983200C1A6A5 /* zhWallView.m */,
+				F20735091F65983200C1A6A5 /* zhWallViewConfig.h */,
+				F207350A1F65983200C1A6A5 /* zhWallViewConfig.m */,
 				F2AB15581F45BEFA003329E3 /* zhAlertView.h */,
 				F2AB15591F45BEFA003329E3 /* zhAlertView.m */,
+				F207350D1F659AE500C1A6A5 /* zhOverflyView.h */,
+				F207350E1F659AE500C1A6A5 /* zhOverflyView.m */,
 				F2AB155A1F45BEFA003329E3 /* zhCurtainView.h */,
 				F2AB155B1F45BEFA003329E3 /* zhCurtainView.m */,
 				F2AB155C1F45BEFA003329E3 /* zhFullView.h */,
 				F2AB155D1F45BEFA003329E3 /* zhFullView.m */,
 				F2AB155E1F45BEFA003329E3 /* zhIconLabel.h */,
 				F2AB155F1F45BEFA003329E3 /* zhIconLabel.m */,
-				F2AB15601F45BEFA003329E3 /* zhSheetCell.h */,
-				F2AB15611F45BEFA003329E3 /* zhSheetCell.m */,
-				F2AB15621F45BEFA003329E3 /* zhSheetView.h */,
-				F2AB15631F45BEFA003329E3 /* zhSheetView.m */,
-				F2AB15641F45BEFA003329E3 /* zhSheetViewConfig.h */,
-				F2AB15651F45BEFA003329E3 /* zhSheetViewConfig.m */,
 				F2AB15661F45BEFA003329E3 /* zhSidebarView.h */,
 				F2AB15671F45BEFA003329E3 /* zhSidebarView.m */,
 			);
@@ -403,6 +416,8 @@
 		F2AB15701F45BF5A003329E3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F20735131F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.h */,
+				F20735141F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m */,
 				F2AB15711F45BF5A003329E3 /* CALayer+Layout.h */,
 				F2AB15721F45BF5A003329E3 /* CALayer+Layout.m */,
 				F2AB15731F45BF5A003329E3 /* NSDate+Extend.h */,
@@ -433,6 +448,7 @@
 		F2AB15921F45C9DA003329E3 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				F20735101F659C6400C1A6A5 /* other */,
 				F2AB15931F45C9DA003329E3 /* qzone_icon */,
 				F2AB159A1F45C9DA003329E3 /* shared_icon */,
 				F2AB15A01F45C9DA003329E3 /* sheet_icon */,
@@ -629,6 +645,7 @@
 				F2AB15FE1F45C9DA003329E3 /* sina_关闭.png in Resources */,
 				F2AB15E61F45C9DA003329E3 /* sheet_Facebook@3x.png in Resources */,
 				F2AB15D51F45C9DA003329E3 /* qzone_签到.png in Resources */,
+				F20735121F659C6400C1A6A5 /* fire_arrow.png in Resources */,
 				F2AB15F31F45C9DA003329E3 /* sheet_Share@2x.png in Resources */,
 				F2AB15DC1F45C9DA003329E3 /* shared_跳转.png in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
@@ -803,6 +820,7 @@
 			files = (
 				F2AB15891F45BF5A003329E3 /* NSObject+AssociatedObject.m in Sources */,
 				F2AB158E1F45BF5A003329E3 /* UIScreen+Extend.m in Sources */,
+				F20735151F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m in Sources */,
 				F2AB15561F45B398003329E3 /* zh_ViewController+Extension.m in Sources */,
 				F2AB158A1F45BF5A003329E3 /* UIAlertController+Extend.m in Sources */,
 				F2AB158F1F45BF5A003329E3 /* UIView+AddConstraints.m in Sources */,
@@ -811,18 +829,18 @@
 				6003F59E195388D20070C39A /* zh_AppDelegate.m in Sources */,
 				F2AB15911F45BF5A003329E3 /* UIView+Layout.m in Sources */,
 				F2AB156B1F45BEFA003329E3 /* zhIconLabel.m in Sources */,
-				F2AB156C1F45BEFA003329E3 /* zhSheetCell.m in Sources */,
 				F2AB158D1F45BF5A003329E3 /* UINavigationBar+BackgroundColor.m in Sources */,
 				F2AB156F1F45BEFA003329E3 /* zhSidebarView.m in Sources */,
 				F2AB15691F45BEFA003329E3 /* zhCurtainView.m in Sources */,
-				F2AB156D1F45BEFA003329E3 /* zhSheetView.m in Sources */,
-				F2AB156E1F45BEFA003329E3 /* zhSheetViewConfig.m in Sources */,
 				6003F5A7195388D20070C39A /* zh_ViewController.m in Sources */,
+				F207350C1F65983200C1A6A5 /* zhWallViewConfig.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				F2AB158B1F45BF5A003329E3 /* UIColor+Extend.m in Sources */,
 				F2AB158C1F45BF5A003329E3 /* UIImage+Color.m in Sources */,
 				F2AB156A1F45BEFA003329E3 /* zhFullView.m in Sources */,
 				F2AB15871F45BF5A003329E3 /* CALayer+Layout.m in Sources */,
+				F207350F1F659AE500C1A6A5 /* zhOverflyView.m in Sources */,
+				F207350B1F65983200C1A6A5 /* zhWallView.m in Sources */,
 				F2AB15901F45BF5A003329E3 /* UIView+Dealloc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

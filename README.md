@@ -1,7 +1,7 @@
 # zhPopupController
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
-[![Version](https://img.shields.io/badge/pod-v0.1.4-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
+[![Version](https://img.shields.io/badge/pod-v0.1.5-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
 [![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
@@ -29,14 +29,14 @@ use_frameworks!
 
 target 'You Project' do
     
-	pod 'zhPopupController', '~> 0.1.4'
+	pod 'zhPopupController', '~> 0.1.5'
     
 end
 ```
 
 ## Preview   
 
-<img src="https://github.com/snail-z/zhPopupController/blob/master/preview/zhPopupController_gif.gif?raw=true" width="204px" height="365px">
+<img src="http://oqebi7u13.bkt.clouddn.com/zhPopupController.gif?raw=true" width="204px" height="365px">
 
 
 
@@ -48,7 +48,7 @@ end
 ```
 * Customize.
 ```objc
-    self.zh_popupController = [[zhPopupController alloc] init];
+    self.zh_popupController = [zhPopupController popupControllerWithMaskType:zhPopupMaskTypeWhiteBlur];
     self.zh_popupController.layoutType = zhPopupLayoutTypeLeft;
     self.zh_popupController.allowPan = YES;
     // ...
