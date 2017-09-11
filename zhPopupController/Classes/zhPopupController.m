@@ -21,6 +21,7 @@
 @end
 
 static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
+static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
 
 @implementation zhPopupController
 
@@ -120,7 +121,15 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
                   duration:(NSTimeInterval)duration
             springAnimated:(BOOL)isSpringAnimated
                     inView:(UIView *)sView {
-    
+    [self presentContentView:contentView duration:duration springAnimated:isSpringAnimated inView:sView displayTime:0];
+}
+
+- (void)presentContentView:(UIView *)contentView
+                  duration:(NSTimeInterval)duration
+            springAnimated:(BOOL)isSpringAnimated
+                    inView:(UIView *)sView
+               displayTime:(NSTimeInterval)displayTime {
+ 
     if (self.isPresenting) return;
     NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithCapacity:2];
     [parameters setValue:@(duration) forKey:@"zh_duration"];
@@ -159,6 +168,12 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
                 [self.delegate popupControllerDidPresent:self];
             }
         }
+        
+        if (displayTime) {
+            NSTimer *timer = [NSTimer timerWithTimeInterval:displayTime target:self selector:@selector(dismiss) userInfo:nil repeats:NO];
+            [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];
+            objc_setAssociatedObject(self, zhPopupControllerNSTimerKey, timer, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        }
     };
     
     if (isSpringAnimated) {
@@ -169,13 +184,13 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
             _popupView.center = [self finishedCenter];
             
         } completion:^(BOOL finished) {
-         
+            
             if (finished) presentCompletion();
             
         }];
     } else {
         [UIView animateWithDuration:duration delay:0.f options:UIViewAnimationOptionCurveLinear animations:^{
-          
+            
             [self finishedDropAnimated];
             [self finishedBackground];
             _popupView.center = [self finishedCenter];
@@ -204,6 +219,8 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
 }
 
 - (void)dismissWithDuration:(NSTimeInterval)duration springAnimated:(BOOL)isSpringAnimated {
+    [self destroyTimer];
+    
     if (!self.isPresenting) return;
     
     if (nil != self.willDismiss) {
@@ -265,6 +282,16 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
         } completion:^(BOOL finished) {
             if (finished) dismissCompletion();
         }];
+    }
+}
+
+#pragma mark - Destroy timer
+
+- (void)destroyTimer {
+    id value = objc_getAssociatedObject(self, zhPopupControllerNSTimerKey);
+    if (value) {
+        [(NSTimer *)value invalidate];
+        objc_setAssociatedObject(self, zhPopupControllerNSTimerKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
 }
 

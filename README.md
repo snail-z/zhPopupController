@@ -1,7 +1,7 @@
 # zhPopupController
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
-[![Version](https://img.shields.io/badge/pod-v0.1.5-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
+[![Version](https://img.shields.io/badge/pod-v0.1.6-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
 [![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
@@ -29,7 +29,7 @@ use_frameworks!
 
 target 'You Project' do
     
-	pod 'zhPopupController', '~> 0.1.5'
+	pod 'zhPopupController', '~> 0.1.6'
     
 end
 ```
@@ -54,6 +54,24 @@ end
     // ...
     [self.zh_popupController presentContentView:customView];
 ```
+- **New methods ** (12/09/2017)
+
+```objc
+/**
+ present your content view.
+ @param contentView This is the view that you want to appear in popup. / 弹出自定义的contentView
+ @param duration Popup animation time. / 弹出动画时长
+ @param isSpringAnimated if YES, Will use a spring animation. / 是否使用弹性动画
+ @param sView  Displayed on the sView. if nil, Displayed on the window. / 显示在sView上
+ @param displayTime The view will disappear after `displayTime` seconds. / 视图将在displayTime后消失
+ */
+- (void)presentContentView:(nullable UIView *)contentView
+                  duration:(NSTimeInterval)duration
+            springAnimated:(BOOL)isSpringAnimated
+                    inView:(nullable UIView *)sView
+               displayTime:(NSTimeInterval)displayTime;
+```
+
 ## Author
 
 snail-z, haozhang0770@163.com

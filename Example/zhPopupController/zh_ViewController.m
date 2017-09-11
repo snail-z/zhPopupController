@@ -110,7 +110,7 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     [alert adjoinWithLeftAction:cancelButton rightAction:okButton];
     
     self.zh_popupController = [[zhPopupController alloc] init];
-//    [self.zh_popupController dropAnimatedWithRotateAngle:30];
+    [self.zh_popupController dropAnimatedWithRotateAngle:30];
     [self.zh_popupController presentContentView:alert duration:0.75 springAnimated:YES];
 }
 
@@ -128,7 +128,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     self.zh_popupController = [zhPopupController popupControllerWithMaskType:zhPopupMaskTypeBlackBlur];
     self.zh_popupController.slideStyle = zhPopupSlideStyleShrinkInOut;
     self.zh_popupController.allowPan = YES;
-    [self.zh_popupController presentContentView:alert duration:0.75 springAnimated:YES];
+    // 弹出2秒后消失
+    [self.zh_popupController presentContentView:alert duration:0.75 springAnimated:YES inView:nil displayTime:2];
 }
 
 - (void)example3 {

@@ -89,11 +89,18 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
 
 /**
  present your content view.
- @param contentView This is the view that you want to appear in popup.
- @param duration Popup animation time.
- @param isSpringAnimated if YES, Will use a spring animation.
- @param sView  Displayed on the sView. if nil, Displayed on the window.
+ @param contentView This is the view that you want to appear in popup. / 弹出自定义的contentView
+ @param duration Popup animation time. / 弹出动画时长
+ @param isSpringAnimated if YES, Will use a spring animation. / 是否使用弹性动画
+ @param sView  Displayed on the sView. if nil, Displayed on the window. / 显示在sView上
+ @param displayTime The view will disappear after `displayTime` seconds. / 视图将在displayTime后消失
  */
+- (void)presentContentView:(nullable UIView *)contentView
+                  duration:(NSTimeInterval)duration
+            springAnimated:(BOOL)isSpringAnimated
+                    inView:(nullable UIView *)sView
+               displayTime:(NSTimeInterval)displayTime;
+
 - (void)presentContentView:(nullable UIView *)contentView
                   duration:(NSTimeInterval)duration
             springAnimated:(BOOL)isSpringAnimated
@@ -103,12 +110,7 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
                   duration:(NSTimeInterval)duration
             springAnimated:(BOOL)isSpringAnimated;
 
-/**
- - duration is 0.25.
- - springAnimated is NO
- - inView is nil, Displayed on the window.
- */
-- (void)presentContentView:(nullable UIView *)contentView;
+- (void)presentContentView:(nullable UIView *)contentView; // duration is 0.25 / springAnimated is NO / show in window
 
 /// dismiss your content view.
 - (void)dismissWithDuration:(NSTimeInterval)duration springAnimated:(BOOL)isSpringAnimated;
