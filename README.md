@@ -42,7 +42,7 @@ end
 
 ## Usage
 
- * Direct use of zh_popupController popup your  custom view.
+* Direct use of zh_popupController popup your  custom view.
 ``` objc
     [self.zh_popupController presentContentView:customView];
 ```
@@ -54,7 +54,7 @@ end
     // ...
     [self.zh_popupController presentContentView:customView];
 ```
-- **New methods ** (12/09/2017)
+* New methods (12/09/2017)
 
 ```objc
 /**
