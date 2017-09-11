@@ -36,7 +36,7 @@ end
 
 ## Preview   
 
-<img src="http://oqebi7u13.bkt.clouddn.com/zhPopupController.gif?raw=true" width="204px" height="365px">
+<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController.gif?raw=true" width="204px" height="365px">
 
 
 
