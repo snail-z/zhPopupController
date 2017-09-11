@@ -37,11 +37,13 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
         _isPresenting = NO;
         _maskType = maskType;
         _layoutType = zhPopupLayoutTypeCenter;
-        _slideStyle = zhPopupSlideStyleFade;
-        _maskAlpha = 0.5f;
         _dismissOnMaskTouched = YES;
-        _dismissOppositeDirection = NO;
-        _allowPan = NO;
+        
+        // setter
+        self.maskAlpha = 0.5f;
+        self.slideStyle = zhPopupSlideStyleFade;
+        self.dismissOppositeDirection = NO;
+        self.allowPan = NO;
     
         // superview
         UIWindow *applicationWindow = [UIApplication sharedApplication].keyWindow;
@@ -57,6 +59,7 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
         } else {
             _maskView = [[UIView alloc] initWithFrame:_superview.bounds];
         }
+        
         switch (maskType) {
             case zhPopupMaskTypeBlackBlur:
                 [(UIToolbar *)_maskView setBarStyle:UIBarStyleBlack];
@@ -75,7 +78,8 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
                 break;
         }
         
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(handleTap:)];
         tap.delegate = self;
         [_maskView addGestureRecognizer:tap];
         
@@ -93,6 +97,7 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
                                                  selector:@selector(willChangeStatusBarOrientation)
                                                      name:UIApplicationWillChangeStatusBarOrientationNotification
                                                    object:nil];
+        
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(didChangeStatusBarOrientation)
                                                      name:UIApplicationDidChangeStatusBarOrientationNotification
@@ -135,6 +140,9 @@ static void *zhPopupControllerParametersKey = &zhPopupControllerParametersKey;
         _maskView.frame = _superview.frame;
     }
     [self addContentView:contentView];
+    if (![_superview.subviews containsObject:_maskView]) {
+        [_superview addSubview:_maskView];
+    }
     
     [self prepareDropAnimated];
     [self prepareBackground];
@@ -777,9 +785,11 @@ static CGFloat zh_randomValue(int i, int j) {
 
 - (void)dealloc {
     [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+    
     [[NSNotificationCenter defaultCenter]removeObserver:self
                                                    name:UIApplicationWillChangeStatusBarOrientationNotification
                                                  object:nil];
+    
     [[NSNotificationCenter defaultCenter]removeObserver:self
                                                    name:UIApplicationDidChangeStatusBarOrientationNotification
                                                  object:nil];
