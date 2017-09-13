@@ -17,13 +17,11 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *styles;
 
-
 @end
 
 @implementation zh_ViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.zh_statusBarStyle = UIStatusBarStyleLightContent;
     [self.navigationController.navigationBar sl_setBackgroundColor:[UIColor colorWithHexString:@"569EED"]];
@@ -43,14 +41,15 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
         _tableView.delaysContentTouches = NO;
         _tableView.rowHeight = 90;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _tableView.contentInset = UIEdgeInsetsMake(25, 0, 35, 0);
     }
     [self.view addSubview:_tableView];
-    [_tableView sl_makeConstraints:^(SnailConstraintMaker *make) {
+    [_tableView zh_makeConstraints:^(SnailConstraintMaker *make) {
         [make.edges equalTo:self.view];
     }];
     
     if (!_styles) {
-        _styles = @[@"Alert style1", @"Alert style2", @"Overfly style", @"Qzone style", @"Sidebar style", @"Full style", @"Shared style"];
+        _styles = @[@"Alert style1", @"Alert style2", @"Overfly style", @"Qzone style", @"Sidebar style", @"Full style", @"Shared style", @"Keyboard style1", @"Keyboard style2"];
     }
 }
 
@@ -72,9 +71,9 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
         button.layer.cornerRadius = 5;
         [button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [cell.contentView addSubview:button];
-        [button sl_makeConstraints:^(SnailConstraintMaker *make) {
-            [make.width sl_equalTo:220];
-            [make.height sl_equalTo:45];
+        [button zh_makeConstraints:^(SnailConstraintMaker *make) {
+            [make.width zh_equalTo:220];
+            [make.height zh_equalTo:45];
             [make.center equalTo:cell.contentView];
         }];
         [cell sl_setAssociatedValue:button withKey:zh_CellButtonKey];
@@ -94,7 +93,7 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     }
 }
 
-#pragma mark - Example
+#pragma mark - Alert style1
 
 - (void)example1 {
     zhAlertView *alert = [self alertView1];
@@ -114,6 +113,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     [self.zh_popupController presentContentView:alert duration:0.75 springAnimated:YES];
 }
 
+#pragma mark - Alert style2
+
 - (void)example2 {
     zhAlertView *alert = [self alertView2];
     zhAlertButton *button = [zhAlertButton buttonWithTitle:@"OK" handler:^(zhAlertButton * _Nonnull button) {
@@ -132,6 +133,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     [self.zh_popupController presentContentView:alert duration:0.75 springAnimated:YES inView:nil displayTime:2];
 }
 
+#pragma mark - Overfly style
+
 - (void)example3 {
     zhOverflyView *overflyView = [self overflyView];
     
@@ -144,8 +147,6 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     [btn2 setTitleColor:[UIColor r:236 g:78 b:39] forState:UIControlStateNormal];
     
     [overflyView adjoinWithLeftAction:btn1 rightAction:btn2];
-//    [overflyView addAction:btn1];
-//    [overflyView addAction:btn2];
     
     self.zh_popupController = [zhPopupController new];
     self.zh_popupController.dismissOnMaskTouched = NO;
@@ -153,6 +154,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     self.zh_popupController.slideStyle = zhPopupSlideStyleFromBottom;
     [self.zh_popupController presentContentView:overflyView duration:0.75 springAnimated:YES];
 }
+
+#pragma mark - Qzone style
 
 - (void)example4 {
     zhCurtainView *curtainView = [self curtainView];
@@ -174,6 +177,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     [self.zh_popupController presentContentView:curtainView duration:0.75 springAnimated:YES];
 }
 
+#pragma mark - Sidebar style
+
 - (void)example5 {
     zhSidebarView *sidebar = [self sidebarView];
     sidebar.didClickItems = ^(zhSidebarView *sidebarView, NSInteger index) {
@@ -186,6 +191,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     self.zh_popupController.allowPan = YES;
     [self.zh_popupController presentContentView:sidebar];
 }
+
+#pragma mark - Full style
 
 - (void)example6 {
     zhFullView *full = [self fullView];
@@ -208,6 +215,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     [self.zh_popupController presentContentView:full];
 }
 
+#pragma mark - Shared style
+
 - (void)example7 {
     zhWallView *wallView = [self wallView];
     wallView.delegate = self;
@@ -220,8 +229,7 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     [self.zh_popupController presentContentView:wallView];
 }
 
-#pragma mark - zhWallViewDelegateConfig
-
+// zhWallViewDelegateConfig
 - (zhWallViewLayout *)layoutOfItemInWallView:(zhWallView *)wallView {
     zhWallViewLayout *layout = [zhWallViewLayout new];
     layout.itemSubviewsSpacing = 9;
@@ -234,8 +242,7 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     return appearance;
 }
 
-#pragma mark - zhWallViewDelegate
-
+// zhWallViewDelegate
 - (void)wallView:(zhWallView *)wallView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     zhWallItemModel *model = [self wallModels][indexPath.section][indexPath.row];
     __typeof(self) weakSelf = self;
@@ -246,5 +253,43 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     [self.zh_popupController dismiss];
 }
 
-@end
+#pragma mark - Keyboard style1
 
+- (void)example8 {
+    CGRect rect = CGRectMake(0, 0, 300, 236);
+    zh_KeyboardView *kbview1 = [[zh_KeyboardView alloc] initWithFrame:rect];
+    zh_KeyboardView2 *kbview2 = [[zh_KeyboardView2 alloc] initWithFrame:rect];
+    
+    kbview1.loginClickedBlock = ^(zh_KeyboardView *keyboardView) {
+        [self.zh_popupController dismiss];
+    };
+    
+    kbview1.nextClickedBlock = ^(zh_KeyboardView *keyboardView, UIButton *button) {
+        [self flipWithFromView:keyboardView toView:kbview2];
+    };
+    
+    kbview2.gobackClickedBlock = ^(zh_KeyboardView2 *keyboardView, UIButton *button) {
+        [self flipWithFromView:keyboardView toView:kbview1];
+    };
+    
+    self.zh_popupController = [zhPopupController popupControllerWithMaskType:zhPopupMaskTypeBlackBlur];
+    self.zh_popupController.layoutType = zhPopupLayoutTypeCenter;
+    [self.zh_popupController presentContentView:kbview1 duration:0.25 springAnimated:NO];
+}
+
+#pragma mark - Keyboard style2
+
+- (void)example9 {
+    CGRect rect = CGRectMake(0, 0, self.view.width, 60);
+    zh_KeyboardView3 *kbview = [[zh_KeyboardView3 alloc] initWithFrame:rect];
+    kbview.senderClickedBlock = ^(zh_KeyboardView3 *keyboardView, UIButton *button) {
+        [self.zh_popupController dismiss];
+    };
+    
+    self.zh_popupController = [zhPopupController new];
+    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
+//    self.zh_popupController.offsetSpacingOfKeyboard = 30; // 可以设置与键盘之间的间距
+    [self.zh_popupController presentContentView:kbview duration:0.25 springAnimated:NO];
+}
+
+@end

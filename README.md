@@ -1,7 +1,7 @@
 # zhPopupController
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
-[![Version](https://img.shields.io/badge/pod-v0.1.6-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
+[![Version](https://img.shields.io/badge/pod-v0.1.7-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
 [![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
@@ -29,7 +29,7 @@ use_frameworks!
 
 target 'You Project' do
     
-	pod 'zhPopupController', '~> 0.1.6'
+	pod 'zhPopupController', '~> 0.1.7'
     
 end
 ```
@@ -54,7 +54,10 @@ end
     // ...
     [self.zh_popupController presentContentView:customView];
 ```
-* New methods (12/09/2017)
+
+## Notes
+
+- New methods, Support dismiss automatically.  **(September 11, 2017 v0.1.6)**
 
 ```objc
 /**
@@ -71,6 +74,18 @@ end
                     inView:(nullable UIView *)sView
                displayTime:(NSTimeInterval)displayTime;
 ```
+
+- Update  **(September 13, 2017 v0.1.7)**
+
+  - Content layout fixes
+
+  - Observe to keyboard changes will change contentView layout
+
+  - New **`offsetSpacingOfKeyboard`** properties.   You can through it adjust the spacing relative to the keyboard when the keyboard appears. default is 0
+
+    >  The pan gesture will be invalid when the keyboard appears.
+
+<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_up.gif?raw=true" width="204px" height="365px">
 
 ## Author
 

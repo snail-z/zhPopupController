@@ -104,6 +104,21 @@
 		F2AB16091F45C9DA003329E3 /* sina_红包.png in Resources */ = {isa = PBXBuildFile; fileRef = F2AB15CF1F45C9DA003329E3 /* sina_红包.png */; };
 		F2AB160A1F45C9DA003329E3 /* sina_返回.png in Resources */ = {isa = PBXBuildFile; fileRef = F2AB15D01F45C9DA003329E3 /* sina_返回.png */; };
 		F2AB160B1F45C9DA003329E3 /* sina_音乐.png in Resources */ = {isa = PBXBuildFile; fileRef = F2AB15D11F45C9DA003329E3 /* sina_音乐.png */; };
+		F2BD42DE1F68D7BA005AED6E /* zh_KeyboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD42DD1F68D7BA005AED6E /* zh_KeyboardView.m */; };
+		F2BD42E71F68E79F005AED6E /* loginpswd@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42E31F68E79F005AED6E /* loginpswd@2x.png */; };
+		F2BD42E81F68E79F005AED6E /* loginpswd@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42E41F68E79F005AED6E /* loginpswd@3x.png */; };
+		F2BD42E91F68E79F005AED6E /* loginuser@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42E51F68E79F005AED6E /* loginuser@2x.png */; };
+		F2BD42EA1F68E79F005AED6E /* loginuser@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42E61F68E79F005AED6E /* loginuser@3x.png */; };
+		F2BD42F11F68ED41005AED6E /* loginfacebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42EB1F68ED41005AED6E /* loginfacebook@2x.png */; };
+		F2BD42F21F68ED41005AED6E /* loginfacebook@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42EC1F68ED41005AED6E /* loginfacebook@3x.png */; };
+		F2BD42F31F68ED41005AED6E /* loginqq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42ED1F68ED41005AED6E /* loginqq@2x.png */; };
+		F2BD42F41F68ED41005AED6E /* loginqq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42EE1F68ED41005AED6E /* loginqq@3x.png */; };
+		F2BD42F51F68ED41005AED6E /* loginsina@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42EF1F68ED41005AED6E /* loginsina@2x.png */; };
+		F2BD42F61F68ED41005AED6E /* loginsina@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42F01F68ED41005AED6E /* loginsina@3x.png */; };
+		F2BD42F91F68F045005AED6E /* loginback@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42F71F68F045005AED6E /* loginback@2x.png */; };
+		F2BD42FA1F68F045005AED6E /* loginback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42F81F68F045005AED6E /* loginback@3x.png */; };
+		F2BD42FF1F692BC0005AED6E /* sender@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42FD1F692BC0005AED6E /* sender@2x.png */; };
+		F2BD43001F692BC0005AED6E /* sender@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42FE1F692BC0005AED6E /* sender@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -248,6 +263,22 @@
 		F2AB15CF1F45C9DA003329E3 /* sina_红包.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sina_红包.png"; sourceTree = "<group>"; };
 		F2AB15D01F45C9DA003329E3 /* sina_返回.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sina_返回.png"; sourceTree = "<group>"; };
 		F2AB15D11F45C9DA003329E3 /* sina_音乐.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sina_音乐.png"; sourceTree = "<group>"; };
+		F2BD42DC1F68D7BA005AED6E /* zh_KeyboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zh_KeyboardView.h; sourceTree = "<group>"; };
+		F2BD42DD1F68D7BA005AED6E /* zh_KeyboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zh_KeyboardView.m; sourceTree = "<group>"; };
+		F2BD42E31F68E79F005AED6E /* loginpswd@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginpswd@2x.png"; sourceTree = "<group>"; };
+		F2BD42E41F68E79F005AED6E /* loginpswd@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginpswd@3x.png"; sourceTree = "<group>"; };
+		F2BD42E51F68E79F005AED6E /* loginuser@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginuser@2x.png"; sourceTree = "<group>"; };
+		F2BD42E61F68E79F005AED6E /* loginuser@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginuser@3x.png"; sourceTree = "<group>"; };
+		F2BD42EB1F68ED41005AED6E /* loginfacebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginfacebook@2x.png"; sourceTree = "<group>"; };
+		F2BD42EC1F68ED41005AED6E /* loginfacebook@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginfacebook@3x.png"; sourceTree = "<group>"; };
+		F2BD42ED1F68ED41005AED6E /* loginqq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginqq@2x.png"; sourceTree = "<group>"; };
+		F2BD42EE1F68ED41005AED6E /* loginqq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginqq@3x.png"; sourceTree = "<group>"; };
+		F2BD42EF1F68ED41005AED6E /* loginsina@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginsina@2x.png"; sourceTree = "<group>"; };
+		F2BD42F01F68ED41005AED6E /* loginsina@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginsina@3x.png"; sourceTree = "<group>"; };
+		F2BD42F71F68F045005AED6E /* loginback@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginback@2x.png"; sourceTree = "<group>"; };
+		F2BD42F81F68F045005AED6E /* loginback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginback@3x.png"; sourceTree = "<group>"; };
+		F2BD42FD1F692BC0005AED6E /* sender@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sender@2x.png"; sourceTree = "<group>"; };
+		F2BD42FE1F692BC0005AED6E /* sender@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sender@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,6 +416,20 @@
 		F20735101F659C6400C1A6A5 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				F2BD42FD1F692BC0005AED6E /* sender@2x.png */,
+				F2BD42FE1F692BC0005AED6E /* sender@3x.png */,
+				F2BD42F71F68F045005AED6E /* loginback@2x.png */,
+				F2BD42F81F68F045005AED6E /* loginback@3x.png */,
+				F2BD42EB1F68ED41005AED6E /* loginfacebook@2x.png */,
+				F2BD42EC1F68ED41005AED6E /* loginfacebook@3x.png */,
+				F2BD42ED1F68ED41005AED6E /* loginqq@2x.png */,
+				F2BD42EE1F68ED41005AED6E /* loginqq@3x.png */,
+				F2BD42EF1F68ED41005AED6E /* loginsina@2x.png */,
+				F2BD42F01F68ED41005AED6E /* loginsina@3x.png */,
+				F2BD42E31F68E79F005AED6E /* loginpswd@2x.png */,
+				F2BD42E41F68E79F005AED6E /* loginpswd@3x.png */,
+				F2BD42E51F68E79F005AED6E /* loginuser@2x.png */,
+				F2BD42E61F68E79F005AED6E /* loginuser@3x.png */,
 				F20735111F659C6400C1A6A5 /* fire_arrow.png */,
 			);
 			path = other;
@@ -409,6 +454,8 @@
 				F2AB155F1F45BEFA003329E3 /* zhIconLabel.m */,
 				F2AB15661F45BEFA003329E3 /* zhSidebarView.h */,
 				F2AB15671F45BEFA003329E3 /* zhSidebarView.m */,
+				F2BD42DC1F68D7BA005AED6E /* zh_KeyboardView.h */,
+				F2BD42DD1F68D7BA005AED6E /* zh_KeyboardView.m */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -606,6 +653,9 @@
 				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "snail-z";
 				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						DevelopmentTeam = 854W7RF9GY;
+					};
 					6003F5AD195388D20070C39A = {
 						TestTargetID = 6003F589195388D20070C39A;
 					};
@@ -635,27 +685,35 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F2BD42E91F68E79F005AED6E /* loginuser@2x.png in Resources */,
 				F2AB15F51F45C9DA003329E3 /* sheet_Verified@2x.png in Resources */,
 				F2AB15F11F45C9DA003329E3 /* sheet_Refresh@2x.png in Resources */,
 				F2AB15F61F45C9DA003329E3 /* sheet_Verified@3x.png in Resources */,
+				F2BD42F41F68ED41005AED6E /* loginqq@3x.png in Resources */,
 				F2AB160B1F45C9DA003329E3 /* sina_音乐.png in Resources */,
 				F2AB15E91F45C9DA003329E3 /* sheet_Moments@2x.png in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				F2AB15EB1F45C9DA003329E3 /* sheet_qq@2x.png in Resources */,
+				F2BD42F31F68ED41005AED6E /* loginqq@2x.png in Resources */,
 				F2AB15FE1F45C9DA003329E3 /* sina_关闭.png in Resources */,
 				F2AB15E61F45C9DA003329E3 /* sheet_Facebook@3x.png in Resources */,
 				F2AB15D51F45C9DA003329E3 /* qzone_签到.png in Resources */,
 				F20735121F659C6400C1A6A5 /* fire_arrow.png in Resources */,
 				F2AB15F31F45C9DA003329E3 /* sheet_Share@2x.png in Resources */,
+				F2BD42EA1F68E79F005AED6E /* loginuser@3x.png in Resources */,
 				F2AB15DC1F45C9DA003329E3 /* shared_跳转.png in Resources */,
 				71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */,
 				F2AB15E71F45C9DA003329E3 /* sheet_Font@2x.png in Resources */,
 				6003F5A9195388D20070C39A /* Images.xcassets in Resources */,
+				F2BD43001F692BC0005AED6E /* sender@3x.png in Resources */,
 				F2AB15E01F45C9DA003329E3 /* sheet_Complaint@3x.png in Resources */,
+				F2BD42FF1F692BC0005AED6E /* sender@2x.png in Resources */,
 				F2AB15D31F45C9DA003329E3 /* qzone_大头贴.png in Resources */,
 				F2AB15F81F45C9DA003329E3 /* sidebar_settings.png in Resources */,
 				F2AB15D71F45C9DA003329E3 /* qzone_说说.png in Resources */,
 				F2AB15FB1F45C9DA003329E3 /* sidebar_消息中心.png in Resources */,
+				F2BD42F51F68ED41005AED6E /* loginsina@2x.png in Resources */,
+				F2BD42E71F68E79F005AED6E /* loginpswd@2x.png in Resources */,
 				F2AB15F71F45C9DA003329E3 /* sidebar_NightMode.png in Resources */,
 				F2AB15F91F45C9DA003329E3 /* sidebar_我的收藏.png in Resources */,
 				F2AB16021F45C9DA003329E3 /* sina_文字.png in Resources */,
@@ -670,6 +728,7 @@
 				F2AB15E41F45C9DA003329E3 /* sheet_CopyText@3x.png in Resources */,
 				F2AB15EE1F45C9DA003329E3 /* sheet_qqbrowser@3x.png in Resources */,
 				F2AB16081F45C9DA003329E3 /* sina_签到.png in Resources */,
+				F2BD42FA1F68F045005AED6E /* loginback@3x.png in Resources */,
 				F2AB15ED1F45C9DA003329E3 /* sheet_qqbrowser@2x.png in Resources */,
 				F2AB16041F45C9DA003329E3 /* sina_点评.png in Resources */,
 				F2AB15F41F45C9DA003329E3 /* sheet_Share@3x.png in Resources */,
@@ -677,20 +736,25 @@
 				F2AB15DB1F45C9DA003329E3 /* shared_朋友圈.png in Resources */,
 				F2AB16071F45C9DA003329E3 /* sina_秒拍.png in Resources */,
 				F2AB15FC1F45C9DA003329E3 /* sidebar_离线阅读.png in Resources */,
+				F2BD42E81F68E79F005AED6E /* loginpswd@3x.png in Resources */,
+				F2BD42F91F68F045005AED6E /* loginback@2x.png in Resources */,
 				F2AB15FA1F45C9DA003329E3 /* sidebar_我的故事.png in Resources */,
 				F2AB15EF1F45C9DA003329E3 /* sheet_qzone@2x.png in Resources */,
 				F2AB15D81F45C9DA003329E3 /* shared_QQ好友.png in Resources */,
 				F2AB15D91F45C9DA003329E3 /* shared_微信好友.png in Resources */,
+				F2BD42F21F68ED41005AED6E /* loginfacebook@3x.png in Resources */,
 				F2AB16031F45C9DA003329E3 /* sina_更多.png in Resources */,
 				F2AB15D41F45C9DA003329E3 /* qzone_照片.png in Resources */,
 				F2AB15DE1F45C9DA003329E3 /* sheet_Collection@3x.png in Resources */,
 				F2AB15FF1F45C9DA003329E3 /* sina_商品.png in Resources */,
+				F2BD42F61F68ED41005AED6E /* loginsina@3x.png in Resources */,
 				F2AB160A1F45C9DA003329E3 /* sina_返回.png in Resources */,
 				F2AB15E11F45C9DA003329E3 /* sheet_CopyLink@2x.png in Resources */,
 				F2AB15DF1F45C9DA003329E3 /* sheet_Complaint@2x.png in Resources */,
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				F2AB16091F45C9DA003329E3 /* sina_红包.png in Resources */,
 				F2AB15E81F45C9DA003329E3 /* sheet_Font@3x.png in Resources */,
+				F2BD42F11F68ED41005AED6E /* loginfacebook@2x.png in Resources */,
 				F2AB15E31F45C9DA003329E3 /* sheet_CopyText@2x.png in Resources */,
 				F2AB16061F45C9DA003329E3 /* sina_直播.png in Resources */,
 				F2AB15E51F45C9DA003329E3 /* sheet_Facebook@2x.png in Resources */,
@@ -841,6 +905,7 @@
 				F2AB15871F45BF5A003329E3 /* CALayer+Layout.m in Sources */,
 				F207350F1F659AE500C1A6A5 /* zhOverflyView.m in Sources */,
 				F207350B1F65983200C1A6A5 /* zhWallView.m in Sources */,
+				F2BD42DE1F68D7BA005AED6E /* zh_KeyboardView.m in Sources */,
 				F2AB15901F45BF5A003329E3 /* UIView+Dealloc.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -979,9 +1044,11 @@
 			baseConfigurationReference = 1DCB59CCCBBAA5DEA62B6DA1 /* Pods-zhPopupController_Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 854W7RF9GY;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "zhPopupController/zhPopupController-Prefix.pch";
 				INFOPLIST_FILE = "zhPopupController/zhPopupController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -994,9 +1061,11 @@
 			baseConfigurationReference = 4800BB513ED7D2624C601ACC /* Pods-zhPopupController_Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 854W7RF9GY;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "zhPopupController/zhPopupController-Prefix.pch";
 				INFOPLIST_FILE = "zhPopupController/zhPopupController-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

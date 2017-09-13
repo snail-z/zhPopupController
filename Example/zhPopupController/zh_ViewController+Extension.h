@@ -13,6 +13,7 @@
 #import "zhSidebarView.h"
 #import "zhFullView.h"
 #import "zhWallView.h"
+#import "zh_KeyboardView.h"
 
 @interface zh_ViewController (Extension)
 
@@ -25,5 +26,7 @@
 - (zhWallView *)wallView;
 
 - (NSArray *)wallModels;
+
+- (void)flipWithFromView:(UIView *)fromView toView:(UIView *)toView;
 
 @end

@@ -12,7 +12,7 @@
 
 @interface UIView (AddConstraints)
 
-- (NSArray *)sl_makeConstraints:(void(^)(SnailConstraintMaker *make))block;
+- (NSArray *)zh_makeConstraints:(void(^)(SnailConstraintMaker *make))block;
 
 @end
 
@@ -44,6 +44,6 @@
 - (void)install;
 
 - (SnailConstraint *)equalTo:(UIView *)view;
-- (SnailConstraint *)sl_equalTo:(CGFloat)c;
+- (SnailConstraint *)zh_equalTo:(CGFloat)c;
 
 @end

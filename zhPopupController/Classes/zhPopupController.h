@@ -47,6 +47,9 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
 /// Convenient to initialize and set maske type. (Through the `- init` initialization, maskType is zhPopupMaskTypeBlackTranslucent)
 + (instancetype)popupControllerWithMaskType:(zhPopupMaskType)maskType;
 
+/// The `popupView` is the parent view of your custom contentView
+@property (nonatomic, strong, readonly) UIView *popupView;
+
 /// Whether contentView is presenting.
 @property (nonatomic, assign, readonly) BOOL isPresenting;
 
@@ -54,7 +57,7 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
 @property (nonatomic, assign) zhPopupLayoutType layoutType;
 
 /// Set popup view slide Style. default is zhPopupSlideStyleFade
-@property (nonatomic, assign) zhPopupSlideStyle slideStyle; // When set layoutType is PopupLayoutTypeCenter vaild.
+@property (nonatomic, assign) zhPopupSlideStyle slideStyle; // When `layoutType = zhPopupLayoutTypeCenter` is vaild.
 
 /// set mask view of transparency, default is 0.5
 @property (nonatomic, assign) CGFloat maskAlpha; // When set maskType is zhPopupMaskTypeBlackTranslucent vaild.
@@ -63,10 +66,13 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
 @property (nonatomic, assign) BOOL dismissOnMaskTouched; 
 
 /// default is NO. if YES, Popup view disappear from the opposite direction.
-@property (nonatomic, assign) BOOL dismissOppositeDirection;
+@property (nonatomic, assign) BOOL dismissOppositeDirection; // When `layoutType = zhPopupLayoutTypeCenter` is vaild.
 
 /// Content view whether to allow drag, default is NO
-@property (nonatomic, assign) BOOL allowPan; // The view will support dragging when popup view of position is at the center of the screen or at the edge of the screen.
+@property (nonatomic, assign) BOOL allowPan; // 1.The view will support dragging when popup view of position is at the center of the screen or at the edge of the screen. 2.The pan gesture will be invalid when the keyboard appears.
+
+/// You can adjust the spacing relative to the keyboard when the keyboard appears. default is 0
+@property (nonatomic, assign) CGFloat offsetSpacingOfKeyboard;
 
 /// Use drop animation and set the rotation Angle. if set, Will not support drag.
 - (void)dropAnimatedWithRotateAngle:(CGFloat)angle;
@@ -110,6 +116,8 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
                   duration:(NSTimeInterval)duration
             springAnimated:(BOOL)isSpringAnimated;
 
+- (void)presentContentView:(nullable UIView *)contentView displayTime:(NSTimeInterval)displayTime;;
+
 - (void)presentContentView:(nullable UIView *)contentView; // duration is 0.25 / springAnimated is NO / show in window
 
 /// dismiss your content view.
@@ -136,4 +144,3 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
 @end
 
 NS_ASSUME_NONNULL_END
-

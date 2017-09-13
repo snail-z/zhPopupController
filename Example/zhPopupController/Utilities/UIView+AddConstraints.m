@@ -10,7 +10,7 @@
 
 @implementation UIView (AddConstraints)
 
-- (NSArray *)sl_makeConstraints:(void (^)(SnailConstraintMaker *))block {
+- (NSArray *)zh_makeConstraints:(void (^)(SnailConstraintMaker *))block {
     self.translatesAutoresizingMaskIntoConstraints = NO;
     SnailConstraintMaker *constraintMaker = [[SnailConstraintMaker alloc] initWithView:self];
     block(constraintMaker);
@@ -165,7 +165,7 @@ typedef NS_ENUM(NSUInteger, SnailLayoutAttribute) {
     return self;
 }
 
-- (SnailConstraint *)sl_equalTo:(CGFloat)c {
+- (SnailConstraint *)zh_equalTo:(CGFloat)c {
     
     for (NSNumber *obj in self.layoutAttributes) {
         NSLayoutAttribute attr = (NSLayoutAttribute)obj.integerValue;
