@@ -86,8 +86,10 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
 @property (nonatomic, strong) zhWallViewLayout *wallLayout;
 @property (nonatomic, strong) zhWallViewAppearance *wallAppearance;
 
-@property (nonatomic, copy) void (^itemClicked)(NSInteger index);
 @property (nonatomic, strong) NSArray<zhWallItemModel *> *models;
+
+@property (nonatomic, weak) zhWallView *wallView;
+@property (nonatomic, assign) NSInteger rowIndex;
 
 @end
 
@@ -150,7 +152,11 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
 }
 
 - (void)itemClicked:(UIButton *)sender {
-    if (self.itemClicked) self.itemClicked(sender.tag);
+    zhWallView *wallView = self.wallView;
+    if ([wallView.delegate respondsToSelector:@selector(wallView:didSelectItemAtIndexPath:)]) {
+        NSIndexPath *_indexPath = [NSIndexPath indexPathForRow:sender.tag inSection:self.rowIndex];
+        [wallView.delegate wallView:wallView didSelectItemAtIndexPath:_indexPath];
+    }
 }
 
 #pragma mark - setter
@@ -241,16 +247,12 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
         cell = [[zhWallViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"zh_wallViewCell" layout:[self layout] appearance:[self appearance]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
+    cell.wallView = self;
+    cell.rowIndex = indexPath.row;
     id object = [_models objectAtIndex:indexPath.row];
     if ([object isKindOfClass:[NSArray class]]) {
         cell.models = (NSArray *)object;
     }
-    cell.itemClicked = ^(NSInteger index) {
-        if ([_delegate respondsToSelector:@selector(wallView:didSelectItemAtIndexPath:)]) {
-            NSIndexPath *_indexPath = [NSIndexPath indexPathForRow:index inSection:indexPath.row];
-            [_delegate wallView:self didSelectItemAtIndexPath:_indexPath];
-        }
-    };
     return cell;
 }
 

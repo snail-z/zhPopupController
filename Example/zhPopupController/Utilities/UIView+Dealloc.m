@@ -17,7 +17,7 @@
         Class class = [self class];
         
         SEL originalSelector = NSSelectorFromString(@"dealloc");
-        SEL swizzledSelector = @selector(sl_dealloc);
+        SEL swizzledSelector = @selector(zh_dealloc);
         
         Method originalMethod = class_getInstanceMethod(class, originalSelector);
         Method swizzledMethod = class_getInstanceMethod(class, swizzledSelector);
@@ -31,17 +31,11 @@
     });
 }
 
-- (void)sl_dealloc {
-
-//    NSLog(@"%@ - dealloc", self);
-    
-//    NSLog(@"%@ - dealloc", NSStringFromClass(self.class));
-    
-    if ([NSStringFromClass([self class]) rangeOfString:@"Snail"].location != NSNotFound) {
-        NSLog(@"%@ - dealloc", NSStringFromClass(self.class));
-    }
-    
-    [self sl_dealloc];
+- (void)zh_dealloc {
+//    if ([NSStringFromClass([self class]) rangeOfString:@"zh"].location != NSNotFound) {
+//        NSLog(@"%@ - dealloc", NSStringFromClass(self.class));
+//    }
+    [self zh_dealloc];
 }
 
 @end
