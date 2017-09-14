@@ -7,6 +7,7 @@
 //
 
 #import "zh_FirstViewController.h"
+#import "zh_ViewController.h"
 
 @interface zh_FirstViewController ()
 
@@ -16,22 +17,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    button.layer.cornerRadius = 7;
+    button.backgroundColor = [UIColor colorWithHexString:@"569EED"];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:22];
+    [button setTitle:@"Next" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(next) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
+    
+    [button zh_makeConstraints:^(SnailConstraintMaker *make) {
+        [make.width zh_equalTo:150];
+        [make.height zh_equalTo:55];
+        [make.center equalTo:self.view];
+    }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)next {
+    zh_ViewController *vc = [zh_ViewController new];
+    [self.navigationController pushViewController:vc animated:YES];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -27,5 +27,6 @@
     #import "CALayer+Layout.h"
     #import "UIAlertController+Extend.h"
     #import "UIViewController+zhStatusBarStyle.h"
+    #import "NSObject+zh_CycleDetector.h"
 
 #endif

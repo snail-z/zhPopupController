@@ -176,10 +176,10 @@
 }
 
 // Flip animation
-- (void)flipWithFromView:(UIView *)fromView toView:(UIView *)toView {
-    if (!fromView.superview) return;
-    [UIView transitionWithView:fromView.superview duration:0.65 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
-        [fromView.superview addSubview:toView];
+- (void)flipWithParentView:(UIView *)parentView toView:(UIView *)toView {
+    if (!parentView) return;
+    [UIView transitionWithView:parentView duration:0.65 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+        [parentView addSubview:toView];
         for (UIView *view in toView.subviews) {
             if ([view isKindOfClass:[UITextField class]]) {
                 [(UITextField *)view becomeFirstResponder];
@@ -187,7 +187,11 @@
             }
         }
     } completion:^(BOOL finished) {
-        [fromView removeFromSuperview];
+        for (UIView *view in parentView.subviews) {
+            if (![view isEqual:toView]) {
+                [view removeFromSuperview];
+            }
+        }
     }];
 }
 

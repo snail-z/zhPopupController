@@ -10,4 +10,6 @@
 
 @interface NSObject (zh_CycleDetector)
 
+- (void)zh_findRetainCycles;
+
 @end

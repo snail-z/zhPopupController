@@ -27,6 +27,6 @@
 
 - (NSArray *)wallModels;
 
-- (void)flipWithFromView:(UIView *)fromView toView:(UIView *)toView;
+- (void)flipWithParentView:(UIView *)parentView toView:(UIView *)toView;
 
 @end

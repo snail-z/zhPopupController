@@ -23,7 +23,6 @@
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
 		71719F9F1E33DC2100824A3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
-		911FA5F5A417BF91E8173FBE /* Pods_zhPopupController_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01576D0E82A2055D8DE1D979 /* Pods_zhPopupController_Tests.framework */; };
 		F207350B1F65983200C1A6A5 /* zhWallView.m in Sources */ = {isa = PBXBuildFile; fileRef = F20735081F65983200C1A6A5 /* zhWallView.m */; };
 		F207350C1F65983200C1A6A5 /* zhWallViewConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = F207350A1F65983200C1A6A5 /* zhWallViewConfig.m */; };
 		F207350F1F659AE500C1A6A5 /* zhOverflyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F207350E1F659AE500C1A6A5 /* zhOverflyView.m */; };
@@ -119,6 +118,8 @@
 		F2BD42FA1F68F045005AED6E /* loginback@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42F81F68F045005AED6E /* loginback@3x.png */; };
 		F2BD42FF1F692BC0005AED6E /* sender@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42FD1F692BC0005AED6E /* sender@2x.png */; };
 		F2BD43001F692BC0005AED6E /* sender@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42FE1F692BC0005AED6E /* sender@3x.png */; };
+		F2BD43D91F6A51D7005AED6E /* NSObject+zh_CycleDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD43D81F6A51D7005AED6E /* NSObject+zh_CycleDetector.m */; };
+		F2BD43DC1F6A51EB005AED6E /* zh_FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD43DB1F6A51EB005AED6E /* zh_FirstViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -134,8 +135,6 @@
 /* Begin PBXFileReference section */
 		01576D0E82A2055D8DE1D979 /* Pods_zhPopupController_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zhPopupController_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1DCB59CCCBBAA5DEA62B6DA1 /* Pods-zhPopupController_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhPopupController_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zhPopupController_Example/Pods-zhPopupController_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		21AEBE6ADED085D7183514FB /* Pods-zhPopupController_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhPopupController_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-zhPopupController_Tests/Pods-zhPopupController_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		24FEFE0E12408D0C7875A7E4 /* Pods-zhPopupController_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhPopupController_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-zhPopupController_Tests/Pods-zhPopupController_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		296818C661ECD8383050F14E /* Pods_zhPopupController_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_zhPopupController_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4800BB513ED7D2624C601ACC /* Pods-zhPopupController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhPopupController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-zhPopupController_Example/Pods-zhPopupController_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* zhPopupController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhPopupController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,6 +278,10 @@
 		F2BD42F81F68F045005AED6E /* loginback@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "loginback@3x.png"; sourceTree = "<group>"; };
 		F2BD42FD1F692BC0005AED6E /* sender@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sender@2x.png"; sourceTree = "<group>"; };
 		F2BD42FE1F692BC0005AED6E /* sender@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sender@3x.png"; sourceTree = "<group>"; };
+		F2BD43D71F6A51D7005AED6E /* NSObject+zh_CycleDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+zh_CycleDetector.h"; sourceTree = "<group>"; };
+		F2BD43D81F6A51D7005AED6E /* NSObject+zh_CycleDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+zh_CycleDetector.m"; sourceTree = "<group>"; };
+		F2BD43DA1F6A51EB005AED6E /* zh_FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zh_FirstViewController.h; sourceTree = "<group>"; };
+		F2BD43DB1F6A51EB005AED6E /* zh_FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zh_FirstViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -300,7 +303,6 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				911FA5F5A417BF91E8173FBE /* Pods_zhPopupController_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -349,6 +351,8 @@
 				F2AB15571F45BEFA003329E3 /* Subviews */,
 				6003F59C195388D20070C39A /* zh_AppDelegate.h */,
 				6003F59D195388D20070C39A /* zh_AppDelegate.m */,
+				F2BD43DA1F6A51EB005AED6E /* zh_FirstViewController.h */,
+				F2BD43DB1F6A51EB005AED6E /* zh_FirstViewController.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* zh_ViewController.h */,
 				6003F5A6195388D20070C39A /* zh_ViewController.m */,
@@ -407,8 +411,6 @@
 			children = (
 				1DCB59CCCBBAA5DEA62B6DA1 /* Pods-zhPopupController_Example.debug.xcconfig */,
 				4800BB513ED7D2624C601ACC /* Pods-zhPopupController_Example.release.xcconfig */,
-				21AEBE6ADED085D7183514FB /* Pods-zhPopupController_Tests.debug.xcconfig */,
-				24FEFE0E12408D0C7875A7E4 /* Pods-zhPopupController_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -463,6 +465,8 @@
 		F2AB15701F45BF5A003329E3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F2BD43D71F6A51D7005AED6E /* NSObject+zh_CycleDetector.h */,
+				F2BD43D81F6A51D7005AED6E /* NSObject+zh_CycleDetector.m */,
 				F20735131F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.h */,
 				F20735141F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m */,
 				F2AB15711F45BF5A003329E3 /* CALayer+Layout.h */,
@@ -626,12 +630,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "zhPopupController_Tests" */;
 			buildPhases = (
-				E069B7B7A1B2736C13EC6A30 /* [CP] Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
 				6003F5AB195388D20070C39A /* Frameworks */,
 				6003F5AC195388D20070C39A /* Resources */,
-				52C56F55F4B636FAF570D143 /* [CP] Embed Pods Frameworks */,
-				2E678F6DFF11909134D988D3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -776,21 +777,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2E678F6DFF11909134D988D3 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-zhPopupController_Tests/Pods-zhPopupController_Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3BAC513E3AC07122FFD299B0 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -809,21 +795,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		52C56F55F4B636FAF570D143 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-zhPopupController_Tests/Pods-zhPopupController_Tests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C2607F77219E18EBAB97D683 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -831,10 +802,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-zhPopupController_Example/Pods-zhPopupController_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FBRetainCycleDetector/FBRetainCycleDetector.framework",
+				"${BUILT_PRODUCTS_DIR}/MLeaksFinder/MLeaksFinder.framework",
 				"${BUILT_PRODUCTS_DIR}/zhPopupController/zhPopupController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBRetainCycleDetector.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MLeaksFinder.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/zhPopupController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -855,24 +830,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-zhPopupController_Example/Pods-zhPopupController_Example-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		E069B7B7A1B2736C13EC6A30 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-zhPopupController_Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -897,7 +854,9 @@
 				F2AB156F1F45BEFA003329E3 /* zhSidebarView.m in Sources */,
 				F2AB15691F45BEFA003329E3 /* zhCurtainView.m in Sources */,
 				6003F5A7195388D20070C39A /* zh_ViewController.m in Sources */,
+				F2BD43DC1F6A51EB005AED6E /* zh_FirstViewController.m in Sources */,
 				F207350C1F65983200C1A6A5 /* zhWallViewConfig.m in Sources */,
+				F2BD43D91F6A51D7005AED6E /* NSObject+zh_CycleDetector.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				F2AB158B1F45BF5A003329E3 /* UIColor+Extend.m in Sources */,
 				F2AB158C1F45BF5A003329E3 /* UIImage+Color.m in Sources */,
@@ -1075,7 +1034,6 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 21AEBE6ADED085D7183514FB /* Pods-zhPopupController_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1099,7 +1057,6 @@
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 24FEFE0E12408D0C7875A7E4 /* Pods-zhPopupController_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (

@@ -170,9 +170,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     self.zh_popupController.layoutType = zhPopupLayoutTypeTop;
     self.zh_popupController.allowPan = YES;
     
-    __typeof(self) weakSelf = self;
     self.zh_popupController.maskTouched = ^(zhPopupController * _Nonnull popupController) {
-        [weakSelf.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
+        [popupController dismissWithDuration:0.25 springAnimated:NO];
     };
     [self.zh_popupController presentContentView:curtainView duration:0.75 springAnimated:YES];
 }
@@ -224,6 +223,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
         [self.zh_popupController dismiss];
     };
     
+    [wallView zh_findRetainCycles];
+    
     self.zh_popupController = [zhPopupController new];
     self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
     [self.zh_popupController presentContentView:wallView];
@@ -245,10 +246,8 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
 // zhWallViewDelegate
 - (void)wallView:(zhWallView *)wallView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     zhWallItemModel *model = [self wallModels][indexPath.section][indexPath.row];
-    __typeof(self) weakSelf = self;
     self.zh_popupController.didDismiss = ^(zhPopupController * _Nonnull popupController) {
-        __typeof(weakSelf)strongSelf = weakSelf;
-        [UIAlertController showAlert:model.text inVC:strongSelf];
+        [UIAlertController showAlert:model.text];
     };
     [self.zh_popupController dismiss];
 }
@@ -265,11 +264,39 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     };
     
     kbview1.nextClickedBlock = ^(zh_KeyboardView *keyboardView, UIButton *button) {
-        [self flipWithFromView:keyboardView toView:kbview2];
+
+        [UIView transitionWithView:self.zh_popupController.popupView duration:0.65 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+            
+            [self.zh_popupController.popupView addSubview:kbview2];
+            [kbview2.numberField becomeFirstResponder];
+            
+        } completion:^(BOOL finished) {
+            if ([self.zh_popupController.popupView.subviews containsObject:keyboardView]) {
+                [keyboardView removeFromSuperview];
+            }
+        }];
+        
     };
     
+    __weak typeof(self) weak_self = self;
+    __weak typeof(kbview1) weak_kbview1 = kbview1;
+    
     kbview2.gobackClickedBlock = ^(zh_KeyboardView2 *keyboardView, UIButton *button) {
-        [self flipWithFromView:keyboardView toView:kbview1];
+        
+        __strong typeof(weak_self) strong_self = weak_self;
+        __strong typeof(weak_kbview1) strong_kbview = weak_kbview1;
+        
+        [UIView transitionWithView:strong_self.zh_popupController.popupView duration:0.65 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+            
+            [strong_self.zh_popupController.popupView addSubview:strong_kbview];
+            [strong_kbview.numberField becomeFirstResponder];
+            
+        } completion:^(BOOL finished) {
+            if ([strong_self.zh_popupController.popupView.subviews containsObject:keyboardView]) {
+                [keyboardView removeFromSuperview];
+            }
+        }];
+        
     };
     
     self.zh_popupController = [zhPopupController popupControllerWithMaskType:zhPopupMaskTypeBlackBlur];
@@ -290,6 +317,12 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
 //    self.zh_popupController.offsetSpacingOfKeyboard = 30; // 可以设置与键盘之间的间距
     [self.zh_popupController presentContentView:kbview duration:0.25 springAnimated:NO];
+}
+
+#pragma mark - Dealloc
+
+- (void)dealloc {
+    NSLog(@"%@ ======> dealloc ✈️", NSStringFromClass(self.class));
 }
 
 @end
