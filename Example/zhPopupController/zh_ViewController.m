@@ -223,8 +223,6 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
         [self.zh_popupController dismiss];
     };
     
-    [wallView zh_findRetainCycles];
-    
     self.zh_popupController = [zhPopupController new];
     self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
     [self.zh_popupController presentContentView:wallView];

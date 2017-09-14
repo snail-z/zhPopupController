@@ -175,24 +175,4 @@
     return [NSMutableArray arrayWithObjects:array1, array2, nil];
 }
 
-// Flip animation
-- (void)flipWithParentView:(UIView *)parentView toView:(UIView *)toView {
-    if (!parentView) return;
-    [UIView transitionWithView:parentView duration:0.65 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
-        [parentView addSubview:toView];
-        for (UIView *view in toView.subviews) {
-            if ([view isKindOfClass:[UITextField class]]) {
-                [(UITextField *)view becomeFirstResponder];
-                break;
-            }
-        }
-    } completion:^(BOOL finished) {
-        for (UIView *view in parentView.subviews) {
-            if (![view isEqual:toView]) {
-                [view removeFromSuperview];
-            }
-        }
-    }];
-}
-
 @end

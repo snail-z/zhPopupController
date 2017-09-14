@@ -18,10 +18,4 @@
 #pragma clang diagnostic pop
 }
 
-+ (void)showAlert:(NSString *)text inVC:(UIViewController *)vc {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil message:text preferredStyle:UIAlertControllerStyleAlert];
-    [alert addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:NULL]];
-    [vc presentViewController:alert animated:YES completion:NULL];
-}
-
 @end

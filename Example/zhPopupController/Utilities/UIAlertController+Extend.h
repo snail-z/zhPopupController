@@ -11,6 +11,5 @@
 @interface UIAlertController (Extend)
 
 + (void)showAlert:(NSString *)text;
-+ (void)showAlert:(NSString *)text inVC:(UIViewController *)vc;
 
 @end
