@@ -28,5 +28,7 @@
     #import "UIAlertController+Extend.h"
     #import "UIViewController+zhStatusBarStyle.h"
     #import "NSObject+zh_CycleDetector.h"
+    #import "NSString+zh_SafeAccess.h"
+    #import "NSArray+zh_SafeAccess.h"
 
 #endif

@@ -120,6 +120,13 @@
 		F2BD43001F692BC0005AED6E /* sender@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD42FE1F692BC0005AED6E /* sender@3x.png */; };
 		F2BD43D91F6A51D7005AED6E /* NSObject+zh_CycleDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD43D81F6A51D7005AED6E /* NSObject+zh_CycleDetector.m */; };
 		F2BD43DC1F6A51EB005AED6E /* zh_FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD43DB1F6A51EB005AED6E /* zh_FirstViewController.m */; };
+		F2BD43DF1F6A5B3F005AED6E /* zhPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD43DE1F6A5B3F005AED6E /* zhPickerView.m */; };
+		F2BD43E21F6BAC73005AED6E /* NSString+zh_SafeAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD43E11F6BAC73005AED6E /* NSString+zh_SafeAccess.m */; };
+		F2BD43E51F6BC3BD005AED6E /* NSArray+zh_SafeAccess.m in Sources */ = {isa = PBXBuildFile; fileRef = F2BD43E41F6BC3BD005AED6E /* NSArray+zh_SafeAccess.m */; };
+		F2BD43EC1F6BD278005AED6E /* icon_select1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD43E81F6BD278005AED6E /* icon_select1@2x.png */; };
+		F2BD43ED1F6BD278005AED6E /* icon_select1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD43E91F6BD278005AED6E /* icon_select1@3x.png */; };
+		F2BD43F01F6BE261005AED6E /* icon_revocation1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD43EE1F6BE261005AED6E /* icon_revocation1@2x.png */; };
+		F2BD43F11F6BE261005AED6E /* icon_revocation1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD43EF1F6BE261005AED6E /* icon_revocation1@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -282,6 +289,16 @@
 		F2BD43D81F6A51D7005AED6E /* NSObject+zh_CycleDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+zh_CycleDetector.m"; sourceTree = "<group>"; };
 		F2BD43DA1F6A51EB005AED6E /* zh_FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zh_FirstViewController.h; sourceTree = "<group>"; };
 		F2BD43DB1F6A51EB005AED6E /* zh_FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zh_FirstViewController.m; sourceTree = "<group>"; };
+		F2BD43DD1F6A5B3F005AED6E /* zhPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhPickerView.h; sourceTree = "<group>"; };
+		F2BD43DE1F6A5B3F005AED6E /* zhPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhPickerView.m; sourceTree = "<group>"; };
+		F2BD43E01F6BAC73005AED6E /* NSString+zh_SafeAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+zh_SafeAccess.h"; sourceTree = "<group>"; };
+		F2BD43E11F6BAC73005AED6E /* NSString+zh_SafeAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+zh_SafeAccess.m"; sourceTree = "<group>"; };
+		F2BD43E31F6BC3BD005AED6E /* NSArray+zh_SafeAccess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+zh_SafeAccess.h"; sourceTree = "<group>"; };
+		F2BD43E41F6BC3BD005AED6E /* NSArray+zh_SafeAccess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+zh_SafeAccess.m"; sourceTree = "<group>"; };
+		F2BD43E81F6BD278005AED6E /* icon_select1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select1@2x.png"; sourceTree = "<group>"; };
+		F2BD43E91F6BD278005AED6E /* icon_select1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select1@3x.png"; sourceTree = "<group>"; };
+		F2BD43EE1F6BE261005AED6E /* icon_revocation1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_revocation1@2x.png"; sourceTree = "<group>"; };
+		F2BD43EF1F6BE261005AED6E /* icon_revocation1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_revocation1@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -418,6 +435,10 @@
 		F20735101F659C6400C1A6A5 /* other */ = {
 			isa = PBXGroup;
 			children = (
+				F2BD43EE1F6BE261005AED6E /* icon_revocation1@2x.png */,
+				F2BD43EF1F6BE261005AED6E /* icon_revocation1@3x.png */,
+				F2BD43E81F6BD278005AED6E /* icon_select1@2x.png */,
+				F2BD43E91F6BD278005AED6E /* icon_select1@3x.png */,
 				F2BD42FD1F692BC0005AED6E /* sender@2x.png */,
 				F2BD42FE1F692BC0005AED6E /* sender@3x.png */,
 				F2BD42F71F68F045005AED6E /* loginback@2x.png */,
@@ -458,6 +479,8 @@
 				F2AB15671F45BEFA003329E3 /* zhSidebarView.m */,
 				F2BD42DC1F68D7BA005AED6E /* zh_KeyboardView.h */,
 				F2BD42DD1F68D7BA005AED6E /* zh_KeyboardView.m */,
+				F2BD43DD1F6A5B3F005AED6E /* zhPickerView.h */,
+				F2BD43DE1F6A5B3F005AED6E /* zhPickerView.m */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -475,6 +498,10 @@
 				F2AB15741F45BF5A003329E3 /* NSDate+Extend.m */,
 				F2AB15751F45BF5A003329E3 /* NSObject+AssociatedObject.h */,
 				F2AB15761F45BF5A003329E3 /* NSObject+AssociatedObject.m */,
+				F2BD43E01F6BAC73005AED6E /* NSString+zh_SafeAccess.h */,
+				F2BD43E11F6BAC73005AED6E /* NSString+zh_SafeAccess.m */,
+				F2BD43E31F6BC3BD005AED6E /* NSArray+zh_SafeAccess.h */,
+				F2BD43E41F6BC3BD005AED6E /* NSArray+zh_SafeAccess.m */,
 				F2AB15771F45BF5A003329E3 /* UIAlertController+Extend.h */,
 				F2AB15781F45BF5A003329E3 /* UIAlertController+Extend.m */,
 				F2AB15791F45BF5A003329E3 /* UIColor+Extend.h */,
@@ -695,6 +722,7 @@
 				F2AB15E91F45C9DA003329E3 /* sheet_Moments@2x.png in Resources */,
 				873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */,
 				F2AB15EB1F45C9DA003329E3 /* sheet_qq@2x.png in Resources */,
+				F2BD43F01F6BE261005AED6E /* icon_revocation1@2x.png in Resources */,
 				F2BD42F31F68ED41005AED6E /* loginqq@2x.png in Resources */,
 				F2AB15FE1F45C9DA003329E3 /* sina_关闭.png in Resources */,
 				F2AB15E61F45C9DA003329E3 /* sheet_Facebook@3x.png in Resources */,
@@ -727,6 +755,7 @@
 				F2AB15F21F45C9DA003329E3 /* sheet_Refresh@3x.png in Resources */,
 				F2AB15EA1F45C9DA003329E3 /* sheet_Moments@3x.png in Resources */,
 				F2AB15E41F45C9DA003329E3 /* sheet_CopyText@3x.png in Resources */,
+				F2BD43ED1F6BD278005AED6E /* icon_select1@3x.png in Resources */,
 				F2AB15EE1F45C9DA003329E3 /* sheet_qqbrowser@3x.png in Resources */,
 				F2AB16081F45C9DA003329E3 /* sina_签到.png in Resources */,
 				F2BD42FA1F68F045005AED6E /* loginback@3x.png in Resources */,
@@ -741,6 +770,8 @@
 				F2BD42F91F68F045005AED6E /* loginback@2x.png in Resources */,
 				F2AB15FA1F45C9DA003329E3 /* sidebar_我的故事.png in Resources */,
 				F2AB15EF1F45C9DA003329E3 /* sheet_qzone@2x.png in Resources */,
+				F2BD43EC1F6BD278005AED6E /* icon_select1@2x.png in Resources */,
+				F2BD43F11F6BE261005AED6E /* icon_revocation1@3x.png in Resources */,
 				F2AB15D81F45C9DA003329E3 /* shared_QQ好友.png in Resources */,
 				F2AB15D91F45C9DA003329E3 /* shared_微信好友.png in Resources */,
 				F2BD42F21F68ED41005AED6E /* loginfacebook@3x.png in Resources */,
@@ -841,16 +872,19 @@
 			files = (
 				F2AB15891F45BF5A003329E3 /* NSObject+AssociatedObject.m in Sources */,
 				F2AB158E1F45BF5A003329E3 /* UIScreen+Extend.m in Sources */,
+				F2BD43E21F6BAC73005AED6E /* NSString+zh_SafeAccess.m in Sources */,
 				F20735151F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m in Sources */,
 				F2AB15561F45B398003329E3 /* zh_ViewController+Extension.m in Sources */,
 				F2AB158A1F45BF5A003329E3 /* UIAlertController+Extend.m in Sources */,
 				F2AB158F1F45BF5A003329E3 /* UIView+AddConstraints.m in Sources */,
 				F2AB15681F45BEFA003329E3 /* zhAlertView.m in Sources */,
 				F2AB15881F45BF5A003329E3 /* NSDate+Extend.m in Sources */,
+				F2BD43E51F6BC3BD005AED6E /* NSArray+zh_SafeAccess.m in Sources */,
 				6003F59E195388D20070C39A /* zh_AppDelegate.m in Sources */,
 				F2AB15911F45BF5A003329E3 /* UIView+Layout.m in Sources */,
 				F2AB156B1F45BEFA003329E3 /* zhIconLabel.m in Sources */,
 				F2AB158D1F45BF5A003329E3 /* UINavigationBar+BackgroundColor.m in Sources */,
+				F2BD43DF1F6A5B3F005AED6E /* zhPickerView.m in Sources */,
 				F2AB156F1F45BEFA003329E3 /* zhSidebarView.m in Sources */,
 				F2AB15691F45BEFA003329E3 /* zhCurtainView.m in Sources */,
 				6003F5A7195388D20070C39A /* zh_ViewController.m in Sources */,

@@ -49,7 +49,7 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     }];
     
     if (!_styles) {
-        _styles = @[@"Alert style1", @"Alert style2", @"Overfly style", @"Qzone style", @"Sidebar style", @"Full style", @"Shared style", @"Keyboard style1", @"Keyboard style2"];
+        _styles = @[@"Alert style1", @"Alert style2", @"Overfly style", @"Qzone style", @"Sidebar style", @"Full style", @"Shared style", @"Keyboard style1", @"Keyboard style2", @"Picker style"];
     }
 }
 
@@ -315,6 +315,30 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
 //    self.zh_popupController.offsetSpacingOfKeyboard = 30; // 可以设置与键盘之间的间距
     [self.zh_popupController presentContentView:kbview duration:0.25 springAnimated:NO];
+}
+
+#pragma mark - Picker style
+
+- (void)example10 {
+    CGRect rect = CGRectMake(0, 0, self.view.width, 275);
+    zhPickerView *pView = [[zhPickerView alloc] initWithFrame:rect];
+
+    pView.saveClickedBlock = ^(zhPickerView *pickerView) {
+        NSString *message = [NSString stringWithFormat:@"%@\n%lu", pickerView.selectedTimeString, pickerView.selectedTimestamp];
+        self.zh_popupController.didDismiss = ^(zhPopupController * _Nonnull popupController) {
+            [UIAlertController showAlert:message];
+        };
+        [self.zh_popupController dismiss];
+    };
+    
+    pView.cancelClickedBlock = ^(zhPickerView *pickerView) {
+        [self.zh_popupController dismiss];
+    };
+    
+    self.zh_popupController = [zhPopupController new];
+    self.zh_popupController.layoutType = zhPopupLayoutTypeBottom;
+    self.zh_popupController.dismissOnMaskTouched = NO;
+    [self.zh_popupController presentContentView:pView];
 }
 
 #pragma mark - Dealloc

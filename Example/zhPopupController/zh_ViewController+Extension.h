@@ -14,6 +14,7 @@
 #import "zhFullView.h"
 #import "zhWallView.h"
 #import "zh_KeyboardView.h"
+#import "zhPickerView.h"
 
 @interface zh_ViewController (Extension)
 

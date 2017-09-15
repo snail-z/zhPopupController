@@ -67,7 +67,7 @@
     _dateLabel.size = [_dateLabel sizeThatFits:CGSizeMake(40, 40)];
     _dateLabel.origin = CGPointMake(15, 65);
     
-    NSString *text = [NSString stringWithFormat:@"%@\n%@", date.dayFromWeekday, [date stringWithFormat:[NSDate myFormat]]];
+    NSString *text = [NSString stringWithFormat:@"%@\n%@", date.dayFromWeekday, [NSDate stringWithFormat:[NSDate myFormat]]];
     NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
     NSMutableParagraphStyle *paragraphStyle = [NSMutableParagraphStyle new];
     [string addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, text.length)];
