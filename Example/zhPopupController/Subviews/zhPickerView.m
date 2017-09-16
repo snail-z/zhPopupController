@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString *currentHours;
 @property (nonatomic, strong) NSString *currentMinutes;
 @property (nonatomic, strong) NSString *currentWeek;
+@property (nonatomic, assign) NSInteger currentDayIdx;
 
 @end
 
@@ -101,6 +102,7 @@ typedef NS_ENUM(NSInteger, zhDateType) { // 应该与allDataArray数组顺序一
     model.currentHours = [array[3] stringByAppendingString:@"时"];
     NSInteger correctIdx = [self correctIdx:array[4].integerValue];
     model.currentMinutes = self.minutesArray[correctIdx];
+    model.currentDayIdx = [self.dayArray zh_indexOfObject:model.currentDay];
 
     [_pickerView selectRow:[self.yearArray zh_indexOfObject:model.currentYear] inComponent:0 animated:YES];
     [_pickerView selectRow:[self.monthArray zh_indexOfObject:model.currentMonth] inComponent:1 animated:YES];
@@ -202,6 +204,7 @@ typedef NS_ENUM(NSInteger, zhDateType) { // 应该与allDataArray数组顺序一
             
         case zhDateTypeDay: {
             self.currentDateModel.currentDay = stringValue;
+            self.currentDateModel.currentDayIdx = row;
         } break;
             
         case zhDateTypeHours: {
@@ -354,6 +357,11 @@ typedef NS_ENUM(NSInteger, zhDateType) { // 应该与allDataArray数组顺序一
     self.dayArray = array.copy;
     [self.allDataArray replaceObjectAtIndex:idx withObject:self.dayArray];
     [self.pickerView reloadComponent:idx];
+    // 判断dayArray下标是否超出数组个数
+    NSInteger dataCount = self.allDataArray[idx].count;
+    if (self.currentDateModel.currentDayIdx >= dataCount) {
+        self.currentDateModel.currentDay = self.allDataArray[idx].lastObject;
+    }
 }
 
 // 返回正确的分钟下标 (分钟取整，小于10分取整分)
