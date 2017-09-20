@@ -24,7 +24,11 @@ static char UINavigationBarOverlayKey;
 - (void)sl_setBackgroundColor:(UIColor *)backgroundColor {
     if (!self.overlay) {
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, -20, UIScreen.mainScreen.bounds.size.width, CGRectGetHeight(self.bounds) + 20)];
+        CGFloat stausbarH = 20;
+        if ([UIDevice currentDevice].systemVersion.doubleValue >= 11.0) {
+            stausbarH = 44; // iOS11系统版本
+        }
+        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, -stausbarH, UIScreen.mainScreen.bounds.size.width, CGRectGetHeight(self.bounds) + stausbarH)];
         self.overlay.userInteractionEnabled = NO;
         self.overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         [self insertSubview:self.overlay atIndex:0];

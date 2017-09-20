@@ -1,7 +1,7 @@
 # zhPopupController
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
-[![Version](https://img.shields.io/badge/pod-v0.1.7-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
+[![Version](https://img.shields.io/badge/pod-v0.1.8-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
 [![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
@@ -29,7 +29,7 @@ use_frameworks!
 
 target 'You Project' do
     
-	pod 'zhPopupController', '~> 0.1.7'
+	pod 'zhPopupController', '~> 0.1.8'
     
 end
 ```
@@ -86,6 +86,10 @@ end
     >  The pan gesture will be invalid when the keyboard appears.
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_up.gif?raw=true" width="204px" height="365px">
+
+- Update  **(September 21, 2017 v0.1.8)**
+ - Support ios11 system version
+
 
 ## Author
 
