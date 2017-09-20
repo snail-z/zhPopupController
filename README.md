@@ -87,8 +87,11 @@ end
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_up.gif?raw=true" width="204px" height="365px">
 
+
+
 - Update  **(September 21, 2017 v0.1.8)**
- - Support ios11 system version
+  - Support ios11 system version
+
 
 
 ## Author

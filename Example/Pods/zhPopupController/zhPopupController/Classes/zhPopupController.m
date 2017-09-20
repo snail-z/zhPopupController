@@ -51,18 +51,37 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
         
         // maskView
         if (maskType == zhPopupMaskTypeBlackBlur || maskType == zhPopupMaskTypeWhiteBlur) {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
+            _maskView = [[UIView alloc] initWithFrame:_superview.bounds];
+            UIVisualEffectView *visualEffectView;
+            visualEffectView = [[UIVisualEffectView alloc] init];
+            visualEffectView.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+            visualEffectView.frame = _superview.bounds;
+            [_maskView insertSubview:visualEffectView atIndex:0];
+#else
             _maskView = [[UIToolbar alloc] initWithFrame:_superview.bounds];
+#endif
         } else {
             _maskView = [[UIView alloc] initWithFrame:_superview.bounds];
         }
-        
+
         switch (maskType) {
-            case zhPopupMaskTypeBlackBlur:
-                [(UIToolbar *)_maskView setBarStyle:UIBarStyleBlack];
-                break;
-            case zhPopupMaskTypeWhiteBlur:
-                [(UIToolbar *)_maskView setBarStyle:UIBarStyleDefault];
-                break;
+            case zhPopupMaskTypeBlackBlur: {
+                if ([_maskView isKindOfClass:[UIToolbar class]]) {
+                     [(UIToolbar *)_maskView setBarStyle:UIBarStyleBlack];
+                } else {
+                    UIVisualEffectView *effectView = (UIVisualEffectView *)_maskView.subviews.firstObject;
+                    effectView.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+                }
+            } break;
+            case zhPopupMaskTypeWhiteBlur: {
+                if ([_maskView isKindOfClass:[UIToolbar class]]) {
+                    [(UIToolbar *)_maskView setBarStyle:UIBarStyleDefault];
+                } else {
+                    UIVisualEffectView *effectView = (UIVisualEffectView *)_maskView.subviews.firstObject;
+                    effectView.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+                }
+            } break;
             case zhPopupMaskTypeWhite:
                 _maskView.backgroundColor = [UIColor whiteColor];
                 break;
