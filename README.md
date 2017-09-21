@@ -34,11 +34,13 @@ target 'You Project' do
 end
 ```
 
-## Preview   
+## Preview 
+
+<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/ios11_zhPopupController.gif?raw=true?raw=true" width="204px" height="365px">
+
+----
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController.gif?raw=true" width="204px" height="365px">
-
-
 
 ## Usage
 
