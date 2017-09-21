@@ -137,7 +137,7 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
 
 @end
 
-@interface NSObject (zhPopupController)
+@interface UIViewController (zhPopupController)
 
 @property (nonatomic, strong) zhPopupController *zh_popupController; // Suggested that direct use of zh_popupController.
 
