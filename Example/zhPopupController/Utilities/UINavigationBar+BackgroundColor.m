@@ -11,35 +11,31 @@
 
 @implementation UINavigationBar (BackgroundColor)
 
-static char UINavigationBarOverlayKey;
-
-- (UIView *)overlay {
-    return objc_getAssociatedObject(self, &UINavigationBarOverlayKey);
-}
-
-- (void)setOverlay:(UIView *)overlay {
-    objc_setAssociatedObject(self, &UINavigationBarOverlayKey, overlay, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-- (void)sl_setBackgroundColor:(UIColor *)backgroundColor {
-    if (!self.overlay) {
+- (UIView *)zh_backgroundView {
+    UIView *backgroundView = objc_getAssociatedObject(self, _cmd);
+    if (!backgroundView) {
         [self setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-        CGFloat stausbarH = 20;
-        if ([UIDevice currentDevice].systemVersion.doubleValue >= 11.0) {
-            stausbarH = 44; // iOS11系统版本
+        backgroundView = [[UIView alloc] init];
+        CGFloat statusBarHeight = 20;
+        if ([NSStringFromCGSize([UIScreen mainScreen].bounds.size) isEqualToString:@"{375, 812}"]) {
+            statusBarHeight = 44; // iphone X
         }
-        self.overlay = [[UIView alloc] initWithFrame:CGRectMake(0, -stausbarH, UIScreen.mainScreen.bounds.size.width, CGRectGetHeight(self.bounds) + stausbarH)];
-        self.overlay.userInteractionEnabled = NO;
-        self.overlay.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [self insertSubview:self.overlay atIndex:0];
+        backgroundView.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), CGRectGetHeight(self.bounds) + statusBarHeight);
+        backgroundView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        objc_setAssociatedObject(self, _cmd, backgroundView, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        // _UIBarBackground is first subView for navigationBar
+        [self.subviews.firstObject insertSubview:backgroundView atIndex:0];
     }
-    self.overlay.backgroundColor = backgroundColor;
+    return backgroundView;
 }
 
-- (void)sl_reset {
+- (void)zh_setBackgroundColor:(UIColor *)backgroundColor {
+    self.zh_backgroundView.backgroundColor = backgroundColor;
+}
+
+- (void)zh_reset {
     [self setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-    [self.overlay removeFromSuperview];
-    self.overlay = nil;
+    [self.zh_backgroundView removeFromSuperview];
 }
 
 @end

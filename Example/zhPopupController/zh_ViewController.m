@@ -9,6 +9,7 @@
 #import "zh_ViewController.h"
 #import <zhPopupController/zhPopupController.h>
 #import "zh_ViewController+Extension.h"
+#import "zh_TestViewController.h"
 
 static void *zh_CellButtonKey = &zh_CellButtonKey;
 
@@ -24,12 +25,13 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.zh_statusBarStyle = UIStatusBarStyleLightContent;
-    [self.navigationController.navigationBar sl_setBackgroundColor:[UIColor colorWithHexString:@"569EED"]];
+    [self.navigationController.navigationBar zh_setBackgroundColor:[UIColor colorWithHexString:@"569EED"]];
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
     textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
     self.navigationController.navigationBar.titleTextAttributes = textAttrs;
-    self.navigationItem.title = @"zhPopupController";
+    self.title = @"zhPopupController";
+    
     [self commonInitialization];
 }
 
@@ -200,8 +202,12 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     };
     
     full.didClickItems = ^(zhFullView *fullView, NSInteger index) {
+        
+        __weak typeof(self) weak_self = self;
         self.zh_popupController.didDismiss = ^(zhPopupController * _Nonnull popupController) {
-            [UIAlertController showAlert:fullView.items[index].textLabel.text];
+            zh_TestViewController *vc = [zh_TestViewController new];
+            vc.title = fullView.items[index].textLabel.text;
+            [weak_self.navigationController pushViewController:vc animated:YES];
         };
         
         [fullView endAnimationsCompletion:^(zhFullView *fullView) {

@@ -127,6 +127,8 @@
 		F2BD43ED1F6BD278005AED6E /* icon_select1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD43E91F6BD278005AED6E /* icon_select1@3x.png */; };
 		F2BD43F01F6BE261005AED6E /* icon_revocation1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD43EE1F6BE261005AED6E /* icon_revocation1@2x.png */; };
 		F2BD43F11F6BE261005AED6E /* icon_revocation1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD43EF1F6BE261005AED6E /* icon_revocation1@3x.png */; };
+		F2EDB17B1F73741500D5ECA8 /* zh_TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EDB17A1F73741500D5ECA8 /* zh_TestViewController.m */; };
+		F2EDB17E1F73745400D5ECA8 /* UIDevice+zhDeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EDB17D1F73745400D5ECA8 /* UIDevice+zhDeviceType.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,6 +301,10 @@
 		F2BD43E91F6BD278005AED6E /* icon_select1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_select1@3x.png"; sourceTree = "<group>"; };
 		F2BD43EE1F6BE261005AED6E /* icon_revocation1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_revocation1@2x.png"; sourceTree = "<group>"; };
 		F2BD43EF1F6BE261005AED6E /* icon_revocation1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_revocation1@3x.png"; sourceTree = "<group>"; };
+		F2EDB1791F73741500D5ECA8 /* zh_TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zh_TestViewController.h; sourceTree = "<group>"; };
+		F2EDB17A1F73741500D5ECA8 /* zh_TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zh_TestViewController.m; sourceTree = "<group>"; };
+		F2EDB17C1F73745400D5ECA8 /* UIDevice+zhDeviceType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+zhDeviceType.h"; sourceTree = "<group>"; };
+		F2EDB17D1F73745400D5ECA8 /* UIDevice+zhDeviceType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+zhDeviceType.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -373,6 +379,8 @@
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
 				6003F5A5195388D20070C39A /* zh_ViewController.h */,
 				6003F5A6195388D20070C39A /* zh_ViewController.m */,
+				F2EDB1791F73741500D5ECA8 /* zh_TestViewController.h */,
+				F2EDB17A1F73741500D5ECA8 /* zh_TestViewController.m */,
 				F2AB15541F45B398003329E3 /* zh_ViewController+Extension.h */,
 				F2AB15551F45B398003329E3 /* zh_ViewController+Extension.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
@@ -488,6 +496,8 @@
 		F2AB15701F45BF5A003329E3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				F2EDB17C1F73745400D5ECA8 /* UIDevice+zhDeviceType.h */,
+				F2EDB17D1F73745400D5ECA8 /* UIDevice+zhDeviceType.m */,
 				F2BD43D71F6A51D7005AED6E /* NSObject+zh_CycleDetector.h */,
 				F2BD43D81F6A51D7005AED6E /* NSObject+zh_CycleDetector.m */,
 				F20735131F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.h */,
@@ -888,6 +898,7 @@
 				F2AB156F1F45BEFA003329E3 /* zhSidebarView.m in Sources */,
 				F2AB15691F45BEFA003329E3 /* zhCurtainView.m in Sources */,
 				6003F5A7195388D20070C39A /* zh_ViewController.m in Sources */,
+				F2EDB17B1F73741500D5ECA8 /* zh_TestViewController.m in Sources */,
 				F2BD43DC1F6A51EB005AED6E /* zh_FirstViewController.m in Sources */,
 				F207350C1F65983200C1A6A5 /* zhWallViewConfig.m in Sources */,
 				F2BD43D91F6A51D7005AED6E /* NSObject+zh_CycleDetector.m in Sources */,
@@ -900,6 +911,7 @@
 				F207350B1F65983200C1A6A5 /* zhWallView.m in Sources */,
 				F2BD42DE1F68D7BA005AED6E /* zh_KeyboardView.m in Sources */,
 				F2AB15901F45BF5A003329E3 /* UIView+Dealloc.m in Sources */,
+				F2EDB17E1F73745400D5ECA8 /* UIDevice+zhDeviceType.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

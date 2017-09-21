@@ -10,7 +10,7 @@
 
 @interface UINavigationBar (BackgroundColor)
 
-- (void)sl_setBackgroundColor:(UIColor *)backgroundColor;
-- (void)sl_reset;
+- (void)zh_setBackgroundColor:(UIColor *)backgroundColor;
+- (void)zh_reset;
 
 @end
