@@ -1,4 +1,4 @@
-<img src="http://oo8l3jrvb.bkt.clouddn.com/0921_zhPopupController.png" alt="zhPopupController" title="zhPopupController">
+<img src="http://oo8l3jrvb.bkt.clouddn.com/left_zhPopupController.png" alt="zhPopupController" title="zhPopupController">
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
 [![Version](https://img.shields.io/badge/pod-v0.1.8-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
