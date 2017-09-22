@@ -44,6 +44,7 @@ end
 ``` objc
     [self.zh_popupController presentContentView:customView];
 ```
+
 * Customize.
 ```objc
     self.zh_popupController = [zhPopupController popupControllerWithMaskType:zhPopupMaskTypeWhiteBlur];
@@ -94,7 +95,8 @@ end
 -----
 
 - Update  **(September 21, 2017 v0.1.8)**
-  - Support ios11 system version
+ 
+ - Support ios11 system version
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/ios11_zhPopupController.gif?raw=true?raw=true" width="216px" height="427px">
 
