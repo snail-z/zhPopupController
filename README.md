@@ -97,6 +97,8 @@ end
 - Update  **(September 21, 2017 v0.1.8)**
  
    - Support ios11 system version
+   
+   - When system is larger than iOS 8 will use of UIVisualEffectView to do mask blur effect.
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/ios11_zhPopupController.gif?raw=true?raw=true" width="216px" height="427px">
 
