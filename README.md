@@ -75,6 +75,8 @@ end
                displayTime:(NSTimeInterval)displayTime;
 ```
 
+-----
+
 - Update  **(September 13, 2017 v0.1.7)**
 
   - Content layout fixes
@@ -89,11 +91,13 @@ end
 
 
 
+-----
 
 - Update  **(September 21, 2017 v0.1.8)**
   - Support ios11 system version
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/ios11_zhPopupController.gif?raw=true?raw=true" width="216px" height="427px">
+
 
 
 ## Author
