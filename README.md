@@ -55,7 +55,9 @@ end
 
 ## Notes
 
-- New methods, Support dismiss automatically.  **(September 11, 2017 v0.1.6)**
+- Update  **(September 11, 2017 v0.1.6)**
+
+  - Support dismiss automatically.
 
 ```objc
 /**
