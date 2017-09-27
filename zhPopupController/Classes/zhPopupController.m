@@ -51,16 +51,16 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
         
         // maskView
         if (maskType == zhPopupMaskTypeBlackBlur || maskType == zhPopupMaskTypeWhiteBlur) {
-#if __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_8_0
-            _maskView = [[UIView alloc] initWithFrame:_superview.bounds];
-            UIVisualEffectView *visualEffectView;
-            visualEffectView = [[UIVisualEffectView alloc] init];
-            visualEffectView.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
-            visualEffectView.frame = _superview.bounds;
-            [_maskView insertSubview:visualEffectView atIndex:0];
-#else
-            _maskView = [[UIToolbar alloc] initWithFrame:_superview.bounds];
-#endif
+            if ([[UIDevice currentDevice].systemVersion compare:@"8.0" options:NSNumericSearch] == NSOrderedAscending) {
+                _maskView = [[UIToolbar alloc] initWithFrame:_superview.bounds];
+            } else {
+                _maskView = [[UIView alloc] initWithFrame:_superview.bounds];
+                UIVisualEffectView *visualEffectView;
+                visualEffectView = [[UIVisualEffectView alloc] init];
+                visualEffectView.effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleLight];
+                visualEffectView.frame = _superview.bounds;
+                [_maskView insertSubview:visualEffectView atIndex:0];
+            }
         } else {
             _maskView = [[UIView alloc] initWithFrame:_superview.bounds];
         }
