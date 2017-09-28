@@ -184,11 +184,10 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
         _superview = sView;
         _maskView.frame = _superview.frame;
     }
-    [self addContentView:contentView];
     if (![_superview.subviews containsObject:_maskView]) {
         [_superview addSubview:_maskView];
     }
-    
+    [self addContentView:contentView];
     [self prepareDropAnimated];
     [self prepareBackground];
     _popupView.userInteractionEnabled = NO;
