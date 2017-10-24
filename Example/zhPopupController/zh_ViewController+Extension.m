@@ -29,7 +29,7 @@
 
 - (zhOverflyView *)overflyView {
     
-    NSString *title1 = @"通知提醒", *title2 = @"重要消息不再错过";
+    NSString *title1 = @"通知", *title2 = @"一大波福利即将到来~";
     NSString *text = [NSString stringWithFormat:@"%@\n%@", title1, title2];
     NSMutableAttributedString *attiTitle = [[NSMutableAttributedString alloc] initWithString:text];
     
@@ -41,17 +41,21 @@
     
     [attiTitle addAttribute:NSKernAttributeName value:@1.2 range:[text rangeOfString:title2]];//字距调整
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:5];
+    [paragraphStyle setLineSpacing:7];
     [attiTitle addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [text length])];//行距调整
     
-    NSString *msg = @"    两国元首重点就当前朝鲜半岛局势交换了看法。习近平强调，中方坚定不移致力于实现朝鲜半岛无核化，维护国际核不扩散体系。同时要坚持和平解决的大方向，解决朝鲜半岛核问题，积极探寻长久解决之道。";
+    NSString *msg = @"     两国元首重点就当前朝鲜半岛局势交换了看法。习近平强调，中方坚定不移致力于实现朝鲜半岛无核化，维护国际核不扩散体系";
+    for (int i = 0; i < 3; i++) {
+        msg = [msg stringByAppendingString:msg];
+    }
+    
     NSMutableAttributedString *attiMessage = [[NSMutableAttributedString alloc] initWithString:msg];
-    [attiMessage addAttribute:NSKernAttributeName value:@1.2 range:NSMakeRange(0, [msg length])];
+    [attiMessage addAttribute:NSKernAttributeName value:@1.1 range:NSMakeRange(0, [msg length])];
     NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle2 setLineSpacing:5];
+    [paragraphStyle2 setLineSpacing:7];
     [attiMessage addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [msg length])];
-    [attiMessage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17] range:NSMakeRange(0, [msg length])];
-    [attiMessage addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:NSMakeRange(0, [msg length])];
+    [attiMessage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:NSMakeRange(0, [msg length])];
+    [attiMessage addAttribute:NSForegroundColorAttributeName value:[UIColor r:49 g:49 b:39      ] range:NSMakeRange(0, [msg length])];
     
     CGFloat fac = 475; // 已知透明区域高度
     UIImage *image = [UIImage imageNamed:@"fire_arrow"];
@@ -61,9 +65,12 @@
                                   highlyRatio:(fac / image.size.height)
                                   attributedTitle:attiTitle
                                   attributedMessage:attiMessage
-                                  constantWidth:280];
-    overflyView.layer.cornerRadius = 7;
+                                  constantWidth:290];
+    overflyView.layer.cornerRadius = 4;
     overflyView.messageEdgeInsets = UIEdgeInsetsMake(10, 22, 10, 22);
+    overflyView.titleLabel.backgroundColor = [UIColor whiteColor];
+    overflyView.titleLabel.textAlignment = NSTextAlignmentCenter;
+    overflyView.splitLine.hidden = YES;
     [overflyView reloadAllComponents];
     return overflyView;
 }

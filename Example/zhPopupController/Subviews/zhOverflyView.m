@@ -127,7 +127,7 @@
         
         _flyImageView.image = flyImage;
         _titleLabel.attributedText = attributedTitle;
-         _messageLabel.attributedText = attributedMessage;
+        _messageLabel.attributedText = attributedMessage;
         
         [self reloadAllComponents];
     }
@@ -151,14 +151,14 @@
         _titleLabel.size = [_titleLabel sizeThatFits:CGSizeMake(constantWidth, MAXFLOAT)];
         _titleLabel.width = constantWidth;
         _titleLabel.y = _flyImageView.bottom + 5; // 间距扩大5
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.textAlignment = self.titleLabel.textAlignment;
     }
     
     _scrollView.bottom = _titleLabel.bottom;
     if (_messageLabel.attributedText.length) {
         _messageLabel.size = [_messageLabel sizeThatFits:CGSizeMake(constantWidth, MAXFLOAT)];
         _messageLabel.width = constantWidth;
-        _messageLabel.textAlignment = NSTextAlignmentCenter;
+        _messageLabel.textAlignment = self.messageLabel.textAlignment;
         
         UIEdgeInsets insets = self.messageEdgeInsets;
         CGFloat paddingh = insets.left+ insets.right;
@@ -167,6 +167,7 @@
         _messageLabel.height += paddingh;
         _messageLabel.x = insets.left;
         _messageLabel.height += paddingv;
+        _messageLabel.y = 0;
         
         _scrollView.y = _titleLabel.bottom + 10; // 间距扩大10
         _scrollView.contentSize = CGSizeMake(constantWidth, _messageLabel.size.height); // 滚动范围
