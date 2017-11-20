@@ -34,8 +34,11 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
     zhPopupSlideStyleFromBottom,
     zhPopupSlideStyleFromLeft,
     zhPopupSlideStyleFromRight,
-    zhPopupSlideStyleShrinkInOut,
-    zhPopupSlideStyleFade // default
+    zhPopupSlideStyleShrinkInOut1 = 4,
+    zhPopupSlideStyleShrinkInOut2,
+    zhPopupSlideStyleFade, // default
+    
+    zhPopupSlideStyleShrinkInOut __attribute__((deprecated("Use zhPopupSlideStyleShrinkInOut1"))) = 4
 };
 
 @protocol zhPopupControllerDelegate;
@@ -124,6 +127,9 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
 - (void)dismissWithDuration:(NSTimeInterval)duration springAnimated:(BOOL)isSpringAnimated;
 
 - (void)dismiss; // Will use the present parameter values.
+
+/// fade out of your content view.
+- (void)fadeDismiss;
 
 @end
 

@@ -241,6 +241,12 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
 
 #pragma mark - Dismiss
 
+- (void)fadeDismiss {
+    objc_setAssociatedObject(self, _cmd, @(_slideStyle), OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    _slideStyle = zhPopupSlideStyleFade;
+    [self dismiss];
+}
+
 - (void)dismiss {
     id object = objc_getAssociatedObject(self, zhPopupControllerParametersKey);
     if (object && [object isKindOfClass:[NSDictionary class]]) {
@@ -268,6 +274,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
     }
     
     void (^dismissCompletion)() = ^() {
+        _slideStyle = [objc_getAssociatedObject(self, @selector(fadeDismiss)) integerValue];
         [self removeSubviews];
         _isPresenting = NO;
         _popupView.transform = CGAffineTransformIdentity;
@@ -281,7 +288,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
     };
     
     UIViewAnimationOptions (^animOpts)(zhPopupSlideStyle) = ^(zhPopupSlideStyle slide){
-        if (slide != zhPopupSlideStyleShrinkInOut) {
+        if (slide != zhPopupSlideStyleShrinkInOut1) {
             return UIViewAnimationOptionCurveLinear;
         }
         return UIViewAnimationOptionCurveEaseInOut;
@@ -471,8 +478,10 @@ static CGFloat zh_randomValue(int i, int j) {
 - (CGPoint)prepareCenter {
     if (_layoutType == zhPopupLayoutTypeCenter) {
         CGPoint point = _maskView.center;
-        if (_slideStyle == zhPopupSlideStyleShrinkInOut) {
-            _popupView.transform = CGAffineTransformMakeScale(0.1, 0.1);
+        if (_slideStyle == zhPopupSlideStyleShrinkInOut1) {
+            _popupView.transform = CGAffineTransformMakeScale(0.15, 0.15);
+        } else if (_slideStyle == zhPopupSlideStyleShrinkInOut2) {
+            _popupView.transform = CGAffineTransformMakeScale(0.8, 0.8);
         } else if (_slideStyle == zhPopupSlideStyleFade) {
             _maskView.alpha = 0;
         } else {
@@ -500,7 +509,8 @@ static CGFloat zh_randomValue(int i, int j) {
                                point.y);
         default: // zhPopupLayoutTypeCenter
         {
-            if (_slideStyle == zhPopupSlideStyleShrinkInOut) {
+            if (_slideStyle == zhPopupSlideStyleShrinkInOut1 ||
+                _slideStyle == zhPopupSlideStyleShrinkInOut2) {
                 _popupView.transform = CGAffineTransformIdentity;
             } else if (_slideStyle == zhPopupSlideStyleFade) {
                 _maskView.alpha = 1;
@@ -543,11 +553,16 @@ static CGFloat zh_randomValue(int i, int j) {
             CGPointMake(_maskView.bounds.size.width + _popupView.bounds.size.width / 2,
                         _popupView.center.y);
             
-        case zhPopupSlideStyleShrinkInOut:
+        case zhPopupSlideStyleShrinkInOut1:
             _popupView.transform = _dismissOppositeDirection ?
-            CGAffineTransformMakeScale(1.95, 1.95) :
-            CGAffineTransformMakeScale(0.05, 0.05);
+            CGAffineTransformMakeScale(1.75, 1.75) :
+            CGAffineTransformMakeScale(0.25, 0.25);
             break;
+            
+        case zhPopupSlideStyleShrinkInOut2:
+            _popupView.transform = _dismissOppositeDirection ?
+            CGAffineTransformMakeScale(1.2, 1.2) :
+            CGAffineTransformMakeScale(0.75, 0.75);
             
         case zhPopupSlideStyleFade:
             _maskView.alpha = 0;
@@ -587,7 +602,8 @@ static CGFloat zh_randomValue(int i, int j) {
                 case zhPopupSlideStyleFromRight:
                     point.x += _dismissOppositeDirection ? move : -move;
                     break;
-                case zhPopupSlideStyleShrinkInOut:
+                case zhPopupSlideStyleShrinkInOut1:
+                case zhPopupSlideStyleShrinkInOut2:
                     _popupView.transform = _dismissOppositeDirection ?
                     CGAffineTransformMakeScale(0.95, 0.95) :
                     CGAffineTransformMakeScale(1.05, 1.05);
@@ -862,7 +878,8 @@ static CGFloat zh_randomValue(int i, int j) {
             if (isWillDismiss) {
                 if (isStyleCentered) {
                     switch (_slideStyle) {
-                        case zhPopupSlideStyleShrinkInOut:
+                        case zhPopupSlideStyleShrinkInOut1:
+                        case zhPopupSlideStyleShrinkInOut2:
                         case zhPopupSlideStyleFade: {
                             if (g.view.center.y < _maskView.bounds.size.height * 0.25) {
                                 _slideStyle = zhPopupSlideStyleFromTop;
