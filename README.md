@@ -100,7 +100,7 @@ end
 
    - When system is larger than iOS 8 will use of UIVisualEffectView to do mask blur effect.
 
-<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/ios11_zhPopupController.gif?raw=true?raw=true" width="216px" height="427px">
+<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_ios11.gif?raw=true?raw=true" width="216px" height="427px">
 
 -----
 
