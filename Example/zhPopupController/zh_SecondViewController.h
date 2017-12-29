@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface zh_ViewController : UIViewController
+@interface zh_SecondViewController : UIViewController
 
 @end

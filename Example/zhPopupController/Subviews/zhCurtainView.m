@@ -34,7 +34,7 @@
     _itemSize = itemSize;
 }
 
-- (void)setModels:(NSArray<zhIconLabelModel *> *)models {
+- (void)setModels:(NSArray<zhImageButtonModel *> *)models {
   
     if (CGSizeEqualToSize(CGSizeZero, _itemSize)) {
         _itemSize = CGSizeMake(60, 90);
@@ -43,22 +43,24 @@
     CGFloat _space = (self.width - ROW_COUNT * _itemSize.width) / (ROW_COUNT + 1);
     
     _items = [NSMutableArray arrayWithCapacity:models.count];
-    [models enumerateObjectsUsingBlock:^(zhIconLabelModel * _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
+    [models enumerateObjectsUsingBlock:^(zhImageButtonModel * _Nonnull model, NSUInteger idx, BOOL * _Nonnull stop) {
         NSInteger l = idx % ROW_COUNT;
         NSInteger v = idx / ROW_COUNT;
         
-        zhIconLabel *item = [zhIconLabel new];
+        zhImageButton *item = [zhImageButton buttonWithType:UIButtonTypeCustom];
+        item.userInteractionEnabled = YES;
         [self addSubview:item];
         [_items addObject:item];
-        item.model = model;
-        item.iconView.tag = idx;
-        [item.iconView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(iconClicked:)]];
-        [item updateLayoutBySize:CGSizeMake(_itemSize.width , _itemSize.height + 20)
-                        finished:^(zhIconLabel *item) {
-                            item.x = _space + (_itemSize.width  + _space) * l;
-                            item.y = _gap + (_itemSize.height + _gap) * v + 45;
-        }];
-        
+        item.titleLabel.font = [UIFont systemFontOfSize:15];
+        [item setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        [item setTitle:model.text forState:UIControlStateNormal];
+        [item setImage:model.icon forState:UIControlStateNormal];
+        [item imagePosition:zhImageButtonPositionTop spacing:10 imageViewResize:CGSizeMake(50, 50)];
+        item.tag = idx;
+        [item addTarget:self action:@selector(itemClicked:) forControlEvents:UIControlEventTouchUpInside];
+        item.size = CGSizeMake(_itemSize.width, _itemSize.height + 20);
+        item.x = _space + (_itemSize.width  + _space) * l;
+        item.y = _gap + (_itemSize.height + _gap) * v + 45;
         if (idx == models.count - 1) {
             self.height = item.bottom + 20;
         }
@@ -71,9 +73,9 @@
     }
 }
 
-- (void)iconClicked:(UITapGestureRecognizer *)g {
+- (void)itemClicked:(zhImageButton *)button {
     if (nil != self.didClickItems) {
-        self.didClickItems(self, g.view.tag);
+        self.didClickItems(self, button.tag);
     }
 }
 

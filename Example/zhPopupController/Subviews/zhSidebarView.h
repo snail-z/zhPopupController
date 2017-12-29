@@ -11,7 +11,7 @@
 @interface zhSidebarView : UIView
 
 @property (nonatomic, strong) NSArray<NSString *> *models;
-@property (nonatomic, strong, readonly) NSMutableArray<zhIconLabel *> *items;
+@property (nonatomic, strong, readonly) NSMutableArray<zhImageButton *> *items;
 @property (nonatomic, copy) void (^didClickItems)(zhSidebarView *sidebarView, NSInteger index);
 
 @end

@@ -6,9 +6,9 @@
 //  Copyright © 2017年 snail-z. All rights reserved.
 //
 
-#import "zh_ViewController+Extension.h"
+#import "zh_SecondViewController+Extension.h"
 
-@implementation zh_ViewController (Extension)
+@implementation zh_SecondViewController (Extension)
 
 - (zhAlertView *)alertView1 {
     zhAlertView *alertView = [[zhAlertView alloc] initWithTitle:@"提示"
@@ -84,7 +84,7 @@
     NSMutableArray *models = [NSMutableArray arrayWithCapacity:imageNames.count];
     for (NSString *imageName in imageNames) {
         UIImage *image = [UIImage imageNamed:[@"qzone_" stringByAppendingString:imageName]];
-        [models addObject:[zhIconLabelModel modelWithTitle:imageName image:image]];
+        [models addObject:[zhImageButtonModel modelWithTitle:imageName image:image]];
     }
     curtainView.models = models;
     return curtainView;
@@ -105,7 +105,7 @@
     NSArray *array = @[@"文字", @"照片视频", @"头条文章", @"红包", @"直播", @"点评", @"好友圈", @"更多", @"音乐", @"商品", @"签到", @"秒拍", @"头条文章", @"红包", @"直播", @"点评"];
     NSMutableArray *models = [NSMutableArray arrayWithCapacity:array.count];
     for (NSString *string in array) {
-        zhIconLabelModel *item = [zhIconLabelModel new];
+        zhImageButtonModel *item = [zhImageButtonModel new];
         item.icon = [UIImage imageNamed:[NSString stringWithFormat:@"sina_%@", string]];
         item.text = string;
         [models addObject:item];

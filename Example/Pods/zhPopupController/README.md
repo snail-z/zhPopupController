@@ -1,7 +1,7 @@
-# zhPopupController
+<img src="http://oo8l3jrvb.bkt.clouddn.com/0921_left_zhPopupController.png" alt="zhPopupController" title="zhPopupController">
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
-[![Version](https://img.shields.io/badge/pod-v0.1.8-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
+[![Version](https://img.shields.io/badge/pod-v1.0.2-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
 [![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
@@ -29,16 +29,14 @@ use_frameworks!
 
 target 'You Project' do
     
-	pod 'zhPopupController', '~> 0.1.8'
+	pod 'zhPopupController', '~> 1.0.2'
     
 end
 ```
 
-## Preview   
+## Preview 
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController.gif?raw=true" width="204px" height="365px">
-
-
 
 ## Usage
 
@@ -46,6 +44,7 @@ end
 ``` objc
     [self.zh_popupController presentContentView:customView];
 ```
+
 * Customize.
 ```objc
     self.zh_popupController = [zhPopupController popupControllerWithMaskType:zhPopupMaskTypeWhiteBlur];
@@ -57,7 +56,9 @@ end
 
 ## Notes
 
-- New methods, Support dismiss automatically.  **(September 11, 2017 v0.1.6)**
+- Update  **(September 11, 2017 v0.1.6)**
+
+  - Support dismiss automatically.
 
 ```objc
 /**
@@ -75,6 +76,8 @@ end
                displayTime:(NSTimeInterval)displayTime;
 ```
 
+-----
+
 - Update  **(September 13, 2017 v0.1.7)**
 
   - Content layout fixes
@@ -87,8 +90,24 @@ end
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_up.gif?raw=true" width="204px" height="365px">
 
+
+
+-----
+
 - Update  **(September 21, 2017 v0.1.8)**
- - Support ios11 system version
+
+   - Support ios11 system version
+
+   - When system is larger than iOS 8 will use of UIVisualEffectView to do mask blur effect.
+
+<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/ios11_zhPopupController.gif?raw=true?raw=true" width="216px" height="427px">
+
+-----
+
+- Update  **(November 20, 2017 v1.0.2)**
+    - New method `- (void)fadeDismiss` for fade out of your content view.
+
+    - In 1.0.2 `zhPopupSlideStyleShrinkInOut` will be deprecated, You should use `zhPopupSlideStyleShrinkInOut1` or `zhPopupSlideStyleShrinkInOut2`
 
 
 ## Author

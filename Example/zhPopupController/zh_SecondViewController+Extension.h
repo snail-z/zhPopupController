@@ -6,7 +6,7 @@
 //  Copyright © 2017年 snail-z. All rights reserved.
 //
 
-#import "zh_ViewController.h"
+#import "zh_SecondViewController.h"
 #import "zhAlertView.h"
 #import "zhOverflyView.h"
 #import "zhCurtainView.h"
@@ -16,7 +16,7 @@
 #import "zh_KeyboardView.h"
 #import "zhPickerView.h"
 
-@interface zh_ViewController (Extension)
+@interface zh_SecondViewController (Extension)
 
 - (zhAlertView *)alertView1;
 - (zhAlertView *)alertView2;

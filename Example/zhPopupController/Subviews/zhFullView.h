@@ -15,8 +15,8 @@
 @interface zhFullView : UIView
 
 @property (nonatomic, assign) CGSize itemSize;
-@property (nonatomic, strong) NSArray<zhIconLabelModel *> *models;
-@property (nonatomic, strong, readonly) NSMutableArray<zhIconLabel *> *items;
+@property (nonatomic, strong) NSArray<zhImageButtonModel *> *models;
+@property (nonatomic, strong, readonly) NSMutableArray<zhImageButton *> *items;
 
 @property (nonatomic, copy) void (^didClickFullView)(zhFullView *fullView);
 @property (nonatomic, copy) void (^didClickItems)(zhFullView *fullView, NSInteger index);

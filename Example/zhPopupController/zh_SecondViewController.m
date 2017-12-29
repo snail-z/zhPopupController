@@ -6,32 +6,25 @@
 //  Copyright (c) 2017 snail-z. All rights reserved.
 //
 
-#import "zh_ViewController.h"
+#import "zh_SecondViewController.h"
 #import <zhPopupController/zhPopupController.h>
-#import "zh_ViewController+Extension.h"
+#import "zh_SecondViewController+Extension.h"
 #import "zh_TestViewController.h"
 
 static void *zh_CellButtonKey = &zh_CellButtonKey;
 
-@interface zh_ViewController () <UITableViewDelegate, UITableViewDataSource, zhWallViewDelegateConfig>
+@interface zh_SecondViewController () <UITableViewDelegate, UITableViewDataSource, zhWallViewDelegateConfig>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *styles;
 
 @end
 
-@implementation zh_ViewController
+@implementation zh_SecondViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.zh_statusBarStyle = UIStatusBarStyleLightContent;
-    [self.navigationController.navigationBar zh_setBackgroundColor:[UIColor colorWithHexString:@"569EED"]];
-    NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
-    textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
-    textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
-    self.navigationController.navigationBar.titleTextAttributes = textAttrs;
-    self.title = @"zhPopupController";
-    
     [self commonInitialization];
 }
 
@@ -165,7 +158,7 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
         [self.zh_popupController dismissWithDuration:0.25 springAnimated:NO];
     };
     curtainView.didClickItems = ^(zhCurtainView *curtainView, NSInteger index) {
-        [UIAlertController showAlert:curtainView.items[index].textLabel.text];
+        [UIAlertController showAlert:curtainView.items[index].titleLabel.text];
     };
     
     self.zh_popupController = [zhPopupController new];
@@ -175,6 +168,12 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     self.zh_popupController.maskTouched = ^(zhPopupController * _Nonnull popupController) {
         [popupController dismissWithDuration:0.25 springAnimated:NO];
     };
+    
+    __weak typeof(self) weak_self = self;
+    self.zh_popupController.willDismiss = ^(zhPopupController * _Nonnull popupController) {
+        weak_self.zh_statusBarStyle = UIStatusBarStyleLightContent;
+    };
+    self.zh_statusBarStyle = UIStatusBarStyleDefault;
     [self.zh_popupController presentContentView:curtainView duration:0.75 springAnimated:YES];
 }
 
@@ -184,7 +183,7 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     zhSidebarView *sidebar = [self sidebarView];
     sidebar.didClickItems = ^(zhSidebarView *sidebarView, NSInteger index) {
         [self.zh_popupController dismiss];
-        [UIAlertController showAlert:sidebarView.items[index].textLabel.text];
+        [UIAlertController showAlert:sidebarView.items[index].titleLabel.text];
     };
     
     self.zh_popupController = [zhPopupController new];
@@ -204,9 +203,9 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     full.didClickItems = ^(zhFullView *fullView, NSInteger index) {
         
         __weak typeof(self) weak_self = self;
-        self.zh_popupController.didDismiss = ^(zhPopupController * _Nonnull popupController) {
+        self.zh_popupController.willDismiss = ^(zhPopupController * _Nonnull popupController) {
             zh_TestViewController *vc = [zh_TestViewController new];
-            vc.title = fullView.items[index].textLabel.text;
+            vc.title = fullView.items[index].titleLabel.text;
             [weak_self.navigationController pushViewController:vc animated:YES];
         };
         

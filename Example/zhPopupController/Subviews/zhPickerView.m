@@ -145,8 +145,10 @@ typedef NS_ENUM(NSInteger, zhDateType) { // 应该与allDataArray数组顺序一
     _titleLabel.centerX = self.width / 2;
     _titleLabel.y = paddingTop;
     
-    _pickerView.size = CGSizeMake(self.width, 216);
-    _pickerView.y = _titleLabel.bottom + 10;
+    CGFloat vSpacing = 10;
+    CGFloat height = self.height - _titleLabel.bottom - vSpacing - zh_safeAreaHeight();
+    _pickerView.size = CGSizeMake(self.width, height);
+    _pickerView.y = _titleLabel.bottom + vSpacing;
 }
 
 #pragma mark - UIPickerViewDataSource

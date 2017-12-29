@@ -55,13 +55,12 @@
         [_closeIcon setImage:[UIImage imageNamed:@"sina_关闭"] forState:UIControlStateNormal];
         [self addSubview:_closeIcon];
         
-        [self setContent];
         [self commonInitialization];
     }
     return self;
 }
 
-- (void)setContent {
+- (void)commonInitialization {
     NSDate *date = [NSDate date];
     _dateLabel.text = [NSString stringWithFormat:@"%.2ld", (long)date.day];
     _dateLabel.size = [_dateLabel sizeThatFits:CGSizeMake(40, 40)];
@@ -76,14 +75,12 @@
     _weekLabel.size = [_weekLabel sizeThatFits:CGSizeMake(100, 40)];
     _weekLabel.x = _dateLabel.right + 10;
     _weekLabel.centerY = _dateLabel.centerY;
-
+    
     _closeButton.size = CGSizeMake([UIScreen width], 44);
-    _closeButton.bottom = [UIScreen height];
+    _closeButton.bottom = [UIScreen height] - zh_safeAreaHeight();
     _closeIcon.size = CGSizeMake(30, 30);
     _closeIcon.center = _closeButton.center;
-}
-
-- (void)commonInitialization {
+    
     _scrollContainer = [UIScrollView new];
     _scrollContainer.bounces = NO;
     _scrollContainer.pagingEnabled = YES;
@@ -97,7 +94,7 @@
     _space = ([UIScreen width] - ROW_COUNT * _itemSize.width) / (ROW_COUNT + 1);
     
     _scrollContainer.size = CGSizeMake([UIScreen width], _itemSize.height * ROWS + _gap  + 150);
-    _scrollContainer.bottom = [UIScreen height] - _closeButton.height;
+    _scrollContainer.bottom = _closeButton.y;
     _scrollContainer.contentSize = CGSizeMake(PAGES * [UIScreen width], _scrollContainer.height);
     
     _pageViews = @[].mutableCopy;
@@ -111,7 +108,7 @@
     }
 }
 
-- (void)setModels:(NSArray<zhIconLabelModel *> *)models {
+- (void)setModels:(NSArray<zhImageButtonModel *> *)models {
     
     _items = @[].mutableCopy;
     [_pageViews enumerateObjectsUsingBlock:^(UIImageView * _Nonnull imageView, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -119,20 +116,22 @@
             NSInteger l = i % ROW_COUNT;
             NSInteger v = i / ROW_COUNT;
             
-            zhIconLabel *item = [zhIconLabel new];
+            zhImageButton *item = [zhImageButton buttonWithType:UIButtonTypeCustom];
             [imageView addSubview:item];
             [_items addObject:item];
             item.tag = i + idx * (ROWS *ROW_COUNT);
             if (item.tag < models.count) {
-                [item addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(itemClicked:)]];
-                item.model = [models objectAtIndex:item.tag];
-                item.iconView.userInteractionEnabled = NO;
-                item.textLabel.font = [UIFont systemFontOfSize:14];
-                item.textLabel.textColor = [UIColor r:82 g:82 b:82];
-                [item updateLayoutBySize:_itemSize finished:^(zhIconLabel *item) {
-                    item.x = _space + (_itemSize.width  + _space) * l;
-                    item.y = (_itemSize.height + _gap) * v + _gap + 100;
-                }];
+                zhImageButtonModel *model = [models objectAtIndex:item.tag];
+                item.userInteractionEnabled =  YES;
+                item.titleLabel.font = [UIFont systemFontOfSize:14];
+                [item setTitleColor:[UIColor r:82 g:82 b:82] forState:UIControlStateNormal];
+                [item setTitle:model.text forState:UIControlStateNormal];
+                [item setImage:model.icon forState:UIControlStateNormal];
+                [item imagePosition:zhImageButtonPositionTop spacing:10 imageViewResize:CGSizeMake(45, 45)];
+                item.size = _itemSize;
+                item.x = _space + (_itemSize.width  + _space) * l;
+                item.y = (_itemSize.height + _gap) * v + _gap + 100;
+                [item addTarget:self action:@selector(itemClicked:) forControlEvents:UIControlEventTouchUpInside];
             }
         }
     }];
@@ -149,12 +148,12 @@
     }];
 }
 
-- (void)itemClicked:(UITapGestureRecognizer *)recognizer  {
-    if (ROWS * ROW_COUNT - 1 == recognizer.view.tag) {
+- (void)itemClicked:(UIButton *)sender  {
+    if (ROWS * ROW_COUNT - 1 == sender.tag) {
         [_scrollContainer setContentOffset:CGPointMake([UIScreen width], 0) animated:YES];
     } else {
         if (nil != self.didClickItems) {
-            self.didClickItems(self, recognizer.view.tag);
+            self.didClickItems(self, sender.tag);
         }
     }
 }
@@ -175,7 +174,7 @@
         _closeIcon.transform = CGAffineTransformMakeRotation(M_PI_4);
     } completion:NULL];
     
-    [_items enumerateObjectsUsingBlock:^(zhIconLabel *item, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_items enumerateObjectsUsingBlock:^(zhImageButton *item, NSUInteger idx, BOOL * _Nonnull stop) {
         item.alpha = 0;
         item.transform = CGAffineTransformMakeTranslation(0, ROWS * _itemSize.height);
         [UIView animateWithDuration:0.85
@@ -197,7 +196,7 @@
         } completion:NULL];
     }
     
-    [_items enumerateObjectsUsingBlock:^(zhIconLabel * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
+    [_items enumerateObjectsUsingBlock:^(zhImageButton * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
         [UIView animateWithDuration:0.25
                               delay:0.02f * (_items.count - idx)
                             options:UIViewAnimationOptionCurveLinear

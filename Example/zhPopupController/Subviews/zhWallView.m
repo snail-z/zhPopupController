@@ -311,6 +311,7 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
     if (!CGRectEqualToRect(CGRectZero, _wallFooterLabel.frame)) {
         totalHeight += self.layout.wallFooterHeight;
     }
+    totalHeight += zh_safeAreaHeight();
     self.height = _tableView.height = totalHeight;
 }
 

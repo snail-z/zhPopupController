@@ -14,17 +14,29 @@
     @import UIKit;
     @import Foundation;
 
+static inline bool isIPhoneX () {
+    UIUserInterfaceIdiom idiom = [UIDevice currentDevice].userInterfaceIdiom;
+    if (idiom == UIUserInterfaceIdiomPhone) {
+        return [NSStringFromCGSize([UIScreen mainScreen].bounds.size) isEqualToString:@"{375, 812}"];
+    }
+    return NO;
+}
+
 /**
  iOS11之前导航栏默认高度为64pt(这里高度指statusBar + NavigationBar)
  iOS11之后如果设置了prefersLargeTitles = YES则为96pt，默认情况下还是64pt，但在iPhoneX上由于刘海的出现statusBar由以前的20pt变成了44pt，所以iPhoneX上高度变为88pt.
  */
-static inline CGFloat zh_statusBarHeight () { // 默认情况下状态栏高度
-    return [NSStringFromCGSize([UIScreen mainScreen].bounds.size) isEqualToString:@"{375, 812}"] ? 44 : 20;
+static inline CGFloat zh_statusBarHeight () {
+    return isIPhoneX() ? 44 : 20;
+}
+
+static inline CGFloat zh_safeAreaHeight () {
+    return isIPhoneX() ? 34 : 0;
 }
 
 #define __StatusBarHeight zh_statusBarHeight ()
 
-    #import "zhIconLabel.h"
+    #import "zhImageButton.h"
     // Categories
     #import "NSDate+Extend.h"
     #import "NSObject+AssociatedObject.h"

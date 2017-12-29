@@ -14,7 +14,7 @@
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* zh_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* zh_AppDelegate.m */; };
-		6003F5A7195388D20070C39A /* zh_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* zh_ViewController.m */; };
+		6003F5A7195388D20070C39A /* zh_SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5A6195388D20070C39A /* zh_SecondViewController.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F5AF195388D20070C39A /* XCTest.framework */; };
 		6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
@@ -28,11 +28,10 @@
 		F207350F1F659AE500C1A6A5 /* zhOverflyView.m in Sources */ = {isa = PBXBuildFile; fileRef = F207350E1F659AE500C1A6A5 /* zhOverflyView.m */; };
 		F20735121F659C6400C1A6A5 /* fire_arrow.png in Resources */ = {isa = PBXBuildFile; fileRef = F20735111F659C6400C1A6A5 /* fire_arrow.png */; };
 		F20735151F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = F20735141F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m */; };
-		F2AB15561F45B398003329E3 /* zh_ViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15551F45B398003329E3 /* zh_ViewController+Extension.m */; };
+		F2AB15561F45B398003329E3 /* zh_SecondViewController+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15551F45B398003329E3 /* zh_SecondViewController+Extension.m */; };
 		F2AB15681F45BEFA003329E3 /* zhAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15591F45BEFA003329E3 /* zhAlertView.m */; };
 		F2AB15691F45BEFA003329E3 /* zhCurtainView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB155B1F45BEFA003329E3 /* zhCurtainView.m */; };
 		F2AB156A1F45BEFA003329E3 /* zhFullView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB155D1F45BEFA003329E3 /* zhFullView.m */; };
-		F2AB156B1F45BEFA003329E3 /* zhIconLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB155F1F45BEFA003329E3 /* zhIconLabel.m */; };
 		F2AB156F1F45BEFA003329E3 /* zhSidebarView.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15671F45BEFA003329E3 /* zhSidebarView.m */; };
 		F2AB15871F45BF5A003329E3 /* CALayer+Layout.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15721F45BF5A003329E3 /* CALayer+Layout.m */; };
 		F2AB15881F45BF5A003329E3 /* NSDate+Extend.m in Sources */ = {isa = PBXBuildFile; fileRef = F2AB15741F45BF5A003329E3 /* NSDate+Extend.m */; };
@@ -129,6 +128,7 @@
 		F2BD43F11F6BE261005AED6E /* icon_revocation1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = F2BD43EF1F6BE261005AED6E /* icon_revocation1@3x.png */; };
 		F2EDB17B1F73741500D5ECA8 /* zh_TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EDB17A1F73741500D5ECA8 /* zh_TestViewController.m */; };
 		F2EDB17E1F73745400D5ECA8 /* UIDevice+zhDeviceType.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EDB17D1F73745400D5ECA8 /* UIDevice+zhDeviceType.m */; };
+		F2EE8E121FF5DB92005ADE51 /* zhImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F2EE8E101FF5DB91005ADE51 /* zhImageButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -156,8 +156,8 @@
 		6003F59B195388D20070C39A /* zhPopupController-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "zhPopupController-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* zh_AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zh_AppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* zh_AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zh_AppDelegate.m; sourceTree = "<group>"; };
-		6003F5A5195388D20070C39A /* zh_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zh_ViewController.h; sourceTree = "<group>"; };
-		6003F5A6195388D20070C39A /* zh_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zh_ViewController.m; sourceTree = "<group>"; };
+		6003F5A5195388D20070C39A /* zh_SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zh_SecondViewController.h; sourceTree = "<group>"; };
+		6003F5A6195388D20070C39A /* zh_SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zh_SecondViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AE195388D20070C39A /* zhPopupController_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zhPopupController_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -179,16 +179,14 @@
 		F20735111F659C6400C1A6A5 /* fire_arrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = fire_arrow.png; sourceTree = "<group>"; };
 		F20735131F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+zhStatusBarStyle.h"; sourceTree = "<group>"; };
 		F20735141F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+zhStatusBarStyle.m"; sourceTree = "<group>"; };
-		F2AB15541F45B398003329E3 /* zh_ViewController+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "zh_ViewController+Extension.h"; sourceTree = "<group>"; };
-		F2AB15551F45B398003329E3 /* zh_ViewController+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "zh_ViewController+Extension.m"; sourceTree = "<group>"; };
+		F2AB15541F45B398003329E3 /* zh_SecondViewController+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "zh_SecondViewController+Extension.h"; sourceTree = "<group>"; };
+		F2AB15551F45B398003329E3 /* zh_SecondViewController+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "zh_SecondViewController+Extension.m"; sourceTree = "<group>"; };
 		F2AB15581F45BEFA003329E3 /* zhAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhAlertView.h; sourceTree = "<group>"; };
 		F2AB15591F45BEFA003329E3 /* zhAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhAlertView.m; sourceTree = "<group>"; };
 		F2AB155A1F45BEFA003329E3 /* zhCurtainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhCurtainView.h; sourceTree = "<group>"; };
 		F2AB155B1F45BEFA003329E3 /* zhCurtainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhCurtainView.m; sourceTree = "<group>"; };
 		F2AB155C1F45BEFA003329E3 /* zhFullView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhFullView.h; sourceTree = "<group>"; };
 		F2AB155D1F45BEFA003329E3 /* zhFullView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhFullView.m; sourceTree = "<group>"; };
-		F2AB155E1F45BEFA003329E3 /* zhIconLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhIconLabel.h; sourceTree = "<group>"; };
-		F2AB155F1F45BEFA003329E3 /* zhIconLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhIconLabel.m; sourceTree = "<group>"; };
 		F2AB15661F45BEFA003329E3 /* zhSidebarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhSidebarView.h; sourceTree = "<group>"; };
 		F2AB15671F45BEFA003329E3 /* zhSidebarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhSidebarView.m; sourceTree = "<group>"; };
 		F2AB15711F45BF5A003329E3 /* CALayer+Layout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CALayer+Layout.h"; sourceTree = "<group>"; };
@@ -305,6 +303,8 @@
 		F2EDB17A1F73741500D5ECA8 /* zh_TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zh_TestViewController.m; sourceTree = "<group>"; };
 		F2EDB17C1F73745400D5ECA8 /* UIDevice+zhDeviceType.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIDevice+zhDeviceType.h"; sourceTree = "<group>"; };
 		F2EDB17D1F73745400D5ECA8 /* UIDevice+zhDeviceType.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+zhDeviceType.m"; sourceTree = "<group>"; };
+		F2EE8E101FF5DB91005ADE51 /* zhImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = zhImageButton.m; sourceTree = "<group>"; };
+		F2EE8E111FF5DB92005ADE51 /* zhImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zhImageButton.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,13 +376,13 @@
 				6003F59D195388D20070C39A /* zh_AppDelegate.m */,
 				F2BD43DA1F6A51EB005AED6E /* zh_FirstViewController.h */,
 				F2BD43DB1F6A51EB005AED6E /* zh_FirstViewController.m */,
+				6003F5A5195388D20070C39A /* zh_SecondViewController.h */,
+				6003F5A6195388D20070C39A /* zh_SecondViewController.m */,
+				F2AB15541F45B398003329E3 /* zh_SecondViewController+Extension.h */,
+				F2AB15551F45B398003329E3 /* zh_SecondViewController+Extension.m */,
 				873B8AEA1B1F5CCA007FD442 /* Main.storyboard */,
-				6003F5A5195388D20070C39A /* zh_ViewController.h */,
-				6003F5A6195388D20070C39A /* zh_ViewController.m */,
 				F2EDB1791F73741500D5ECA8 /* zh_TestViewController.h */,
 				F2EDB17A1F73741500D5ECA8 /* zh_TestViewController.m */,
-				F2AB15541F45B398003329E3 /* zh_ViewController+Extension.h */,
-				F2AB15551F45B398003329E3 /* zh_ViewController+Extension.m */,
 				71719F9D1E33DC2100824A3D /* LaunchScreen.storyboard */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -481,14 +481,14 @@
 				F2AB155B1F45BEFA003329E3 /* zhCurtainView.m */,
 				F2AB155C1F45BEFA003329E3 /* zhFullView.h */,
 				F2AB155D1F45BEFA003329E3 /* zhFullView.m */,
-				F2AB155E1F45BEFA003329E3 /* zhIconLabel.h */,
-				F2AB155F1F45BEFA003329E3 /* zhIconLabel.m */,
 				F2AB15661F45BEFA003329E3 /* zhSidebarView.h */,
 				F2AB15671F45BEFA003329E3 /* zhSidebarView.m */,
 				F2BD42DC1F68D7BA005AED6E /* zh_KeyboardView.h */,
 				F2BD42DD1F68D7BA005AED6E /* zh_KeyboardView.m */,
 				F2BD43DD1F6A5B3F005AED6E /* zhPickerView.h */,
 				F2BD43DE1F6A5B3F005AED6E /* zhPickerView.m */,
+				F2EE8E111FF5DB92005ADE51 /* zhImageButton.h */,
+				F2EE8E101FF5DB91005ADE51 /* zhImageButton.m */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -884,7 +884,7 @@
 				F2AB158E1F45BF5A003329E3 /* UIScreen+Extend.m in Sources */,
 				F2BD43E21F6BAC73005AED6E /* NSString+zh_SafeAccess.m in Sources */,
 				F20735151F659FE200C1A6A5 /* UIViewController+zhStatusBarStyle.m in Sources */,
-				F2AB15561F45B398003329E3 /* zh_ViewController+Extension.m in Sources */,
+				F2AB15561F45B398003329E3 /* zh_SecondViewController+Extension.m in Sources */,
 				F2AB158A1F45BF5A003329E3 /* UIAlertController+Extend.m in Sources */,
 				F2AB158F1F45BF5A003329E3 /* UIView+AddConstraints.m in Sources */,
 				F2AB15681F45BEFA003329E3 /* zhAlertView.m in Sources */,
@@ -892,12 +892,11 @@
 				F2BD43E51F6BC3BD005AED6E /* NSArray+zh_SafeAccess.m in Sources */,
 				6003F59E195388D20070C39A /* zh_AppDelegate.m in Sources */,
 				F2AB15911F45BF5A003329E3 /* UIView+Layout.m in Sources */,
-				F2AB156B1F45BEFA003329E3 /* zhIconLabel.m in Sources */,
 				F2AB158D1F45BF5A003329E3 /* UINavigationBar+BackgroundColor.m in Sources */,
 				F2BD43DF1F6A5B3F005AED6E /* zhPickerView.m in Sources */,
 				F2AB156F1F45BEFA003329E3 /* zhSidebarView.m in Sources */,
 				F2AB15691F45BEFA003329E3 /* zhCurtainView.m in Sources */,
-				6003F5A7195388D20070C39A /* zh_ViewController.m in Sources */,
+				6003F5A7195388D20070C39A /* zh_SecondViewController.m in Sources */,
 				F2EDB17B1F73741500D5ECA8 /* zh_TestViewController.m in Sources */,
 				F2BD43DC1F6A51EB005AED6E /* zh_FirstViewController.m in Sources */,
 				F207350C1F65983200C1A6A5 /* zhWallViewConfig.m in Sources */,
@@ -909,6 +908,7 @@
 				F2AB15871F45BF5A003329E3 /* CALayer+Layout.m in Sources */,
 				F207350F1F659AE500C1A6A5 /* zhOverflyView.m in Sources */,
 				F207350B1F65983200C1A6A5 /* zhWallView.m in Sources */,
+				F2EE8E121FF5DB92005ADE51 /* zhImageButton.m in Sources */,
 				F2BD42DE1F68D7BA005AED6E /* zh_KeyboardView.m in Sources */,
 				F2AB15901F45BF5A003329E3 /* UIView+Dealloc.m in Sources */,
 				F2EDB17E1F73745400D5ECA8 /* UIDevice+zhDeviceType.m in Sources */,

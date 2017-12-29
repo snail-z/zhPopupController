@@ -11,7 +11,7 @@
 @interface zhWallViewLayout : NSObject
 
 /// Set item size. default is CGSizeMake(70, 100)
-@property (nonatomic, assign) CGSize itemSize; // 内部imageView和textLabel在父视图item上.
+@property (nonatomic, assign) CGSize itemSize;
 
 /// 设置内部image视图边长 (imageView.height = imageView.width). default is (itemSize.width - 10)
 @property (nonatomic, assign) CGFloat imageViewSideLength;
@@ -41,7 +41,6 @@
 /// default is [UIColor clearColor]
 @property (nonatomic, strong) UIColor *itemBackgroundColor;
 
-// 图标视图相关设置
 /// default is [UIColor whiteColor]
 @property (nonatomic, strong) UIColor *imageViewBackgroundColor;
 
@@ -54,7 +53,6 @@
 /// default is 15.0
 @property (nonatomic, assign) CGFloat imageViewCornerRadius;
 
-// 文字视图相关设置
 /// default is [UIColor clearColor]
 @property (nonatomic, strong) UIColor *textLabelBackgroundColor;
 
