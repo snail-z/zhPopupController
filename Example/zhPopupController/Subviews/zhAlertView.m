@@ -90,7 +90,7 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
         
         _contentSize.width = 200; // default width = 200
         if (constantWidth > 0) _contentSize.width = constantWidth;
-        _paddingTop = 15, _paddingBottom = 15, _paddingLeft = 20, _spacing = 15;
+        _paddingTop = 15; _paddingBottom = 15; _paddingLeft = 20; _spacing = 15;
 
         if (title.length) {
             _titleLabel = [[UILabel alloc] init];

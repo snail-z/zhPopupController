@@ -175,21 +175,26 @@
     } completion:NULL];
     
     [_items enumerateObjectsUsingBlock:^(zhImageButton *item, NSUInteger idx, BOOL * _Nonnull stop) {
-        item.alpha = 0;
-        item.transform = CGAffineTransformMakeTranslation(0, ROWS * _itemSize.height);
-        [UIView animateWithDuration:0.85
-                              delay:idx * 0.035
-             usingSpringWithDamping:0.6
-              initialSpringVelocity:0
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             item.alpha = 1;
-                             item.transform = CGAffineTransformIdentity;
-                         } completion:completion];
+        NSUInteger firstPageCount = ROW_COUNT * ROWS;
+        if (idx < firstPageCount) { // 只需首页的item做动画即可
+            item.alpha = 0;
+            item.transform = CGAffineTransformMakeTranslation(0, ROWS * _itemSize.height);
+            [UIView animateWithDuration:0.55
+                                  delay:idx * 0.035
+                 usingSpringWithDamping:0.6
+                  initialSpringVelocity:0
+                                options:UIViewAnimationOptionCurveLinear
+                             animations:^{
+                                 item.alpha = 1;
+                                 item.transform = CGAffineTransformIdentity;
+                             } completion:completion];
+        }
     }];
 }
 
 - (void)endAnimationsCompletion:(void (^)(zhFullView *))completion {
+    NSInteger flag = _scrollContainer.contentOffset.x /[UIScreen width] + 0.5;
+    
     if (!_closeButton.userInteractionEnabled) {
         [UIView animateWithDuration:0.35 animations:^{
             _closeIcon.transform = CGAffineTransformIdentity;
@@ -197,20 +202,31 @@
     }
     
     [_items enumerateObjectsUsingBlock:^(zhImageButton * _Nonnull item, NSUInteger idx, BOOL * _Nonnull stop) {
-        [UIView animateWithDuration:0.25
-                              delay:0.02f * (_items.count - idx)
-                            options:UIViewAnimationOptionCurveLinear
-                         animations:^{
-                             
-                             item.alpha = 0;
-                             item.transform = CGAffineTransformMakeTranslation(0, ROWS * _itemSize.height);
-                         } completion:^(BOOL finished) {
-                             if (finished) {
-                                 if (idx == _items.count - 1) {
-                                     completion(self);
+        NSInteger pageCount = ROW_COUNT *ROWS;
+        NSInteger startIdx = (pageCount * flag);
+        NSInteger endIdx = startIdx + pageCount;
+        
+        BOOL shouldAnimated = NO;
+        if (idx >= startIdx && idx < endIdx) {
+            shouldAnimated = YES;
+        }
+    
+        if (shouldAnimated) {
+            [UIView animateWithDuration:0.25
+                                  delay:0.02f * (_items.count - idx)
+                                options:UIViewAnimationOptionCurveEaseInOut
+                             animations:^{
+                                 item.transform = CGAffineTransformMakeTranslation(0, ROWS * _itemSize.height+50);
+                             } completion:^(BOOL finished) {
+                                 if (finished) {
+                                     if (idx == endIdx - 1) {
+                                         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.15 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                                             completion(self);
+                                         });
+                                     }
                                  }
-                             }
-                         }];
+                             }];
+        }
     }];
 }
 

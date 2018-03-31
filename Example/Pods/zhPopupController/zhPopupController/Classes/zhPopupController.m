@@ -194,7 +194,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
     _popupView.userInteractionEnabled = NO;
     _popupView.center = [self prepareCenter];
     
-    void (^presentCompletion)() = ^() {
+    void (^presentCompletion)(void) = ^(void) {
         _isPresenting = YES;
         _popupView.userInteractionEnabled = YES;
         if (nil != self.didPresent) {
@@ -273,7 +273,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
         }
     }
     
-    void (^dismissCompletion)() = ^() {
+    void (^dismissCompletion)(void) = ^(void) {
         _slideStyle = [objc_getAssociatedObject(self, @selector(fadeDismiss)) integerValue];
         [self removeSubviews];
         _isPresenting = NO;

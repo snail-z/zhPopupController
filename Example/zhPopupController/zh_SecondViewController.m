@@ -124,6 +124,7 @@ static void *zh_CellButtonKey = &zh_CellButtonKey;
     self.zh_popupController = [zhPopupController popupControllerWithMaskType:zhPopupMaskTypeBlackBlur];
     self.zh_popupController.slideStyle = zhPopupSlideStyleShrinkInOut1;
     self.zh_popupController.allowPan = YES;
+    self.zh_popupController.dismissOnMaskTouched = NO;
     // 弹出2秒后消失
     [self.zh_popupController presentContentView:alert duration:0.75 springAnimated:YES inView:nil displayTime:2];
 }
