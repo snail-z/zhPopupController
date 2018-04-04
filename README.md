@@ -36,7 +36,7 @@ end
 
 ## Preview 
 
-<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController.gif?raw=true" width="204px" height="365px">
+<img src="htt://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController.gif?raw=true" width="204px" height="365px">
 
 ## Usage
 
