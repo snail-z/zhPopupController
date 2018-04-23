@@ -1,7 +1,7 @@
 <img src="http://oo8l3jrvb.bkt.clouddn.com/0921_left_zhPopupController.png" alt="zhPopupController" title="zhPopupController">
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
-[![Version](https://img.shields.io/badge/pod-v1.0.4-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
+[![Version](https://img.shields.io/badge/pod-v1.0.3-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
 [![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
