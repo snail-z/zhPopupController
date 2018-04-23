@@ -194,7 +194,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
     _popupView.userInteractionEnabled = NO;
     _popupView.center = [self prepareCenter];
     
-    void (^presentCompletion)(void) = ^(void) {
+    void (^presentCallback)(void) = ^() {
         _isPresenting = YES;
         _popupView.userInteractionEnabled = YES;
         if (nil != self.didPresent) {
@@ -221,7 +221,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
             
         } completion:^(BOOL finished) {
             
-            if (finished) presentCompletion();
+            if (finished) presentCallback();
             
         }];
     } else {
@@ -233,7 +233,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
             
         } completion:^(BOOL finished) {
             
-            if (finished) presentCompletion();
+            if (finished) presentCallback();
             
         }];
     }
@@ -273,7 +273,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
         }
     }
     
-    void (^dismissCompletion)(void) = ^(void) {
+    void (^dismissCallback)(void) = ^() {
         _slideStyle = [objc_getAssociatedObject(self, @selector(fadeDismiss)) integerValue];
         [self removeSubviews];
         _isPresenting = NO;
@@ -311,7 +311,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
                 _popupView.center = [self dismissedCenter];
                 
             } completion:^(BOOL finished) {
-                if (finished) dismissCompletion();
+                if (finished) dismissCallback();
             }];
             
         }];
@@ -324,7 +324,7 @@ static void *zhPopupControllerNSTimerKey = &zhPopupControllerNSTimerKey;
             _popupView.center = [self dismissedCenter];
 
         } completion:^(BOOL finished) {
-            if (finished) dismissCompletion();
+            if (finished) dismissCallback();
         }];
     }
 }
