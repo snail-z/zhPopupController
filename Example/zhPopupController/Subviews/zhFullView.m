@@ -53,7 +53,15 @@
         _closeIcon.userInteractionEnabled = NO;
         _closeIcon.imageView.contentMode = UIViewContentModeScaleAspectFit;
         [_closeIcon setImage:[UIImage imageNamed:@"sina_关闭"] forState:UIControlStateNormal];
-        [self addSubview:_closeIcon];
+        [_closeButton addSubview:_closeIcon];
+        
+        _scrollContainer = [UIScrollView new];
+        _scrollContainer.bounces = NO;
+        _scrollContainer.pagingEnabled = YES;
+        _scrollContainer.showsHorizontalScrollIndicator = NO;
+        _scrollContainer.delaysContentTouches = YES;
+        _scrollContainer.delegate = self;
+        [self addSubview:_scrollContainer];
         
         [self commonInitialization];
     }
@@ -76,18 +84,11 @@
     _weekLabel.x = _dateLabel.right + 10;
     _weekLabel.centerY = _dateLabel.centerY;
     
-    _closeButton.size = CGSizeMake([UIScreen width], 44);
-    _closeButton.bottom = [UIScreen height] - zh_safeAreaHeight();
+    _closeButton.size = CGSizeMake([UIScreen width], 44 + UIScreen.safeInsets.bottom);
+    _closeButton.bottom = [UIScreen height];
     _closeIcon.size = CGSizeMake(30, 30);
-    _closeIcon.center = _closeButton.center;
-    
-    _scrollContainer = [UIScrollView new];
-    _scrollContainer.bounces = NO;
-    _scrollContainer.pagingEnabled = YES;
-    _scrollContainer.showsHorizontalScrollIndicator = NO;
-    _scrollContainer.delaysContentTouches = YES;
-    _scrollContainer.delegate = self;
-    [self addSubview:_scrollContainer];
+    _closeIcon.centerX = _closeButton.bounds.size.width / 2;
+    _closeIcon.y = 8;
     
     _itemSize = CGSizeMake(60, 95);
     _gap = 15;
@@ -135,8 +136,6 @@
             }
         }
     }];
-    
-    [self startAnimationsCompletion:NULL];
 }
 
 - (void)fullViewClicked:(UITapGestureRecognizer *)recognizer {
@@ -171,7 +170,7 @@
 - (void)startAnimationsCompletion:(void (^ __nullable)(BOOL finished))completion {
     
     [UIView animateWithDuration:0.5 animations:^{
-        _closeIcon.transform = CGAffineTransformMakeRotation(M_PI_4);
+        self->_closeIcon.transform = CGAffineTransformMakeRotation(M_PI_4);
     } completion:NULL];
     
     [_items enumerateObjectsUsingBlock:^(zhImageButton *item, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -197,7 +196,7 @@
     
     if (!_closeButton.userInteractionEnabled) {
         [UIView animateWithDuration:0.35 animations:^{
-            _closeIcon.transform = CGAffineTransformIdentity;
+            self->_closeIcon.transform = CGAffineTransformIdentity;
         } completion:NULL];
     }
     
@@ -216,7 +215,7 @@
                                   delay:0.02f * (_items.count - idx)
                                 options:UIViewAnimationOptionCurveEaseInOut
                              animations:^{
-                                 item.transform = CGAffineTransformMakeTranslation(0, ROWS * _itemSize.height+50);
+                item.transform = CGAffineTransformMakeTranslation(0, ROWS * self->_itemSize.height+50);
                              } completion:^(BOOL finished) {
                                  if (finished) {
                                      if (idx == endIdx - 1) {

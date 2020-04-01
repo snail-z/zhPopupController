@@ -30,4 +30,12 @@
     return [UIScreen mainScreen].scale;
 }
 
++ (UIEdgeInsets)safeInsets {
+    if (@available(iOS 11.0, *)) {
+        return UIApplication.sharedApplication.keyWindow.safeAreaInsets;
+    } else {
+        return UIEdgeInsetsMake(20, 0, 0, 0);
+    }
+}
+
 @end

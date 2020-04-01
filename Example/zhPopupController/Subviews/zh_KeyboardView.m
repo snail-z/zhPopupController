@@ -35,7 +35,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
-        self.layer.cornerRadius = 4;
+        self.layer.cornerRadius = 2;
         
         _numberField = [[zhUnderlineTextField alloc] init];
         _numberField.font = [UIFont systemFontOfSize:17];
@@ -46,8 +46,7 @@
         _numberField.leftView = imgView;
         _numberField.leftViewMode = UITextFieldViewModeAlways;
         _numberField.clearButtonMode=UITextFieldViewModeWhileEditing;
-        _numberField.keyboardType = UIKeyboardTypeDefault;
-        [_numberField becomeFirstResponder];
+//        _numberField.keyboardType = UIKeyboardTypeDefault;
         [self addSubview:_numberField];
         
         _passwordField = [[zhUnderlineTextField alloc] init];
@@ -60,14 +59,14 @@
         _passwordField.leftView = imgView2;
         _passwordField.leftViewMode = UITextFieldViewModeAlways;
         _passwordField.clearButtonMode = UITextFieldViewModeWhileEditing;
-        _numberField.keyboardType = UIKeyboardTypeDefault;
+//        _numberField.keyboardType = UIKeyboardTypeDefault;
         [self addSubview:_passwordField];
         
         _loginButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _loginButton.backgroundColor = [UIColor r:246 g:246 b:246];
         _loginButton.layer.borderColor = [UIColor grayColor].CGColor;
         _loginButton.layer.borderWidth = 0.5;
-        _loginButton.layer.cornerRadius = 4;
+        _loginButton.layer.cornerRadius = 2;
         _loginButton.layer.masksToBounds = YES;
         [_loginButton setTitle:@"登录" forState:UIControlStateNormal];
         [_loginButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
@@ -150,7 +149,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         self.backgroundColor = [UIColor whiteColor];
-        self.layer.cornerRadius = 4;
+        self.layer.cornerRadius = 2;
         
         _titleLabel = [UILabel new];
         _titleLabel.text = @"注册账号";
@@ -164,8 +163,7 @@
         _numberField.underlineColor = [UIColor grayColor];
         _numberField.placeholder = @" 输入手机号";
         _numberField.clearButtonMode=UITextFieldViewModeWhileEditing;
-        _numberField.keyboardType = UIKeyboardTypeNumberPad;
-        [_numberField becomeFirstResponder];
+//        _numberField.keyboardType = UIKeyboardTypePhonePad;
         [self addSubview:_numberField];
         
         _codeField = [[zhUnderlineTextField alloc] init];
@@ -173,7 +171,7 @@
         _codeField.underlineColor = [UIColor grayColor];
         _codeField.placeholder = @" 输入验证码";
         _codeField.clearButtonMode=UITextFieldViewModeWhileEditing;
-        _codeField.keyboardType = UIKeyboardTypeNumberPad;
+//        _codeField.keyboardType = UIKeyboardTypePhonePad;
         [self addSubview:_codeField];
         
         _codeButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -187,7 +185,7 @@
         _nextButton.backgroundColor = [UIColor r:246 g:246 b:246];
         _nextButton.layer.borderColor = [UIColor grayColor].CGColor;
         _nextButton.layer.borderWidth = 0.5;
-        _nextButton.layer.cornerRadius = 4;
+        _nextButton.layer.cornerRadius = 2;
         _nextButton.layer.masksToBounds = YES;
         [_nextButton setTitle:@"下一步" forState:UIControlStateNormal];
         [_nextButton setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
@@ -234,7 +232,9 @@
 }
 
 - (void)nextClicked:(UIButton *)sender {
-    [self endEditing:YES];
+    if (self.nextClickedBlock) {
+        self.nextClickedBlock(self, sender);
+    }
 }
 
 - (void)goBackClicked:(UIButton *)sender {
@@ -265,7 +265,6 @@
         _textField.layer.borderColor = [UIColor lightGrayColor].CGColor;
         _textField.backgroundColor = [UIColor lightTextColor];
         _textField.tintColor = [UIColor colorWithHexString:@"569EED"];
-        [_textField becomeFirstResponder];
         [self addSubview:_textField];
         
         _senderButton = [UIButton buttonWithType:UIButtonTypeCustom];

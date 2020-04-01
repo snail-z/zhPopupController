@@ -12,7 +12,7 @@
 
 - (CGSize)itemSize {
     if (CGSizeEqualToSize(_itemSize, CGSizeZero)) {
-        return CGSizeMake(70, 100);
+        return CGSizeMake(65, 100);
     }
     return _itemSize;
 }

@@ -15,5 +15,6 @@
 + (CGFloat)width;
 + (CGFloat)height;
 + (CGFloat)scale;
++ (UIEdgeInsets)safeInsets;
 
 @end

@@ -29,7 +29,7 @@
     if (self = [super init]) {
         self.buttonClickedBlock = handler;
         
-        self.titleLabel.font = [UIFont systemFontOfSize:18];
+        self.titleLabel.font = [UIFont systemFontOfSize:17];
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
@@ -37,11 +37,11 @@
         [self addTarget:self action:@selector(handlerClicked) forControlEvents:UIControlEventTouchUpInside];
         
         _horizontalLine = [CALayer layer];
-        _horizontalLine.backgroundColor = zhOverflyViewLineColor.CGColor;
+        _horizontalLine.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.2].CGColor;
         [self.layer addSublayer:_horizontalLine];
         
         _verticalLine = [CALayer layer];
-        _verticalLine.backgroundColor = zhOverflyViewLineColor.CGColor;
+        _verticalLine.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.2].CGColor;
         _verticalLine.hidden = YES;
         [self.layer addSublayer:_verticalLine];
     }
@@ -150,7 +150,7 @@
     if (_titleLabel.attributedText.length) {
         _titleLabel.size = [_titleLabel sizeThatFits:CGSizeMake(constantWidth, MAXFLOAT)];
         _titleLabel.width = constantWidth;
-        _titleLabel.y = _flyImageView.bottom + 5; // 间距扩大5
+        _titleLabel.y = _flyImageView.bottom + 2;
         _titleLabel.textAlignment = self.titleLabel.textAlignment;
     }
     
@@ -169,8 +169,8 @@
         _messageLabel.height += paddingv;
         _messageLabel.y = 0;
         
-        _scrollView.y = _titleLabel.bottom + 10; // 间距扩大10
-        _scrollView.contentSize = CGSizeMake(constantWidth, _messageLabel.size.height); // 滚动范围
+        _scrollView.y = _titleLabel.bottom + 7;
+        _scrollView.contentSize = CGSizeMake(constantWidth, _messageLabel.size.height + 10); // 滚动范围
         
         if ((self.visualScrollableHight > 0) && (_messageLabel.height > self.visualScrollableHight)) {
             _scrollView.size = CGSizeMake(constantWidth, self.visualScrollableHight);

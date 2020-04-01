@@ -29,7 +29,7 @@
     if (self = [super init]) {
         self.buttonClickedBlock = handler;
         
-        self.titleLabel.font = [UIFont systemFontOfSize:18];
+        self.titleLabel.font = [UIFont systemFontOfSize:17];
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
@@ -84,7 +84,7 @@ static void *SnailAlertViewActionKey = &SnailAlertViewActionKey;
 - (instancetype)initWithTitle:(NSString *)title message:(NSString *)message constantWidth:(CGFloat)constantWidth {
     if (self = [super init]) {
         self.backgroundColor = [UIColor whiteColor];
-        self.layer.cornerRadius = 10;
+        self.layer.cornerRadius = 5;
         self.clipsToBounds = NO;
         self.subOverflyButtonHeight = 49;
         
@@ -139,10 +139,10 @@ static void *zhAlertViewActionKey = &zhAlertViewActionKey;
     [self.adjoinActions removeAllObjects];
     
     void (^layout)(CGFloat) = ^(CGFloat top){
-        CGFloat width = _contentSize.width - action.edgeInsets.left - action.edgeInsets.right;
+        CGFloat width = self->_contentSize.width - action.edgeInsets.left - action.edgeInsets.right;
         action.size = CGSizeMake(width, self.subOverflyButtonHeight);
         action.y = top;
-        action.centerX = _contentSize.width / 2;
+        action.centerX = self->_contentSize.width / 2;
     };
     
     zhAlertButton *lastAction = objc_getAssociatedObject(self, zhAlertViewActionKey);

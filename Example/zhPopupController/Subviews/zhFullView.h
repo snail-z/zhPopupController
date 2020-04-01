@@ -21,6 +21,7 @@
 @property (nonatomic, copy) void (^didClickFullView)(zhFullView *fullView);
 @property (nonatomic, copy) void (^didClickItems)(zhFullView *fullView, NSInteger index);
 
-- (void)endAnimationsCompletion:(void (^)(zhFullView *fullView))completion; // 动画结束后执行block
+- (void)startAnimationsCompletion:(void (^)(BOOL finished))completion;
+- (void)endAnimationsCompletion:(void (^)(zhFullView *fullView))completion;
 
 @end

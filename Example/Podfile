@@ -3,6 +3,5 @@ use_frameworks!
 target 'zhPopupController_Example' do
   
   pod 'zhPopupController', :path => '../'
-  pod 'MLeaksFinder'
   
 end

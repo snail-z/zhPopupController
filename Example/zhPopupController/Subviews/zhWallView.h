@@ -31,8 +31,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) void (^didClickHeader)(zhWallView *wallView);
 @property (nonatomic, copy) void (^didClickFooter)(zhWallView *wallView);
 
-- (void)autoAdjustFitHeight;
-
 @end
 
 @protocol zhWallViewDelegate <NSObject>

@@ -187,6 +187,7 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
 
 @interface zhWallView () <UITableViewDataSource, UITableViewDelegate>
 
+@property (nonatomic, strong) UIVisualEffectView *blurView;
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
@@ -199,7 +200,9 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
-        self.backgroundColor = [UIColor colorWithRed:240 / 255. green:240 / 255. blue:240 / 255. alpha:0xff / 255.];
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+        _blurView = [[UIVisualEffectView alloc] initWithEffect:effect];
+        [self addSubview:_blurView];
         
         _tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
         _tableView.delegate = self;
@@ -208,6 +211,11 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
         _tableView.delaysContentTouches = NO;
         _tableView.showsVerticalScrollIndicator = NO;
         _tableView.backgroundColor = [UIColor clearColor];
+        if (@available(iOS 11.0, *)) {
+            _tableView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+        } else {
+            // Fallback on earlier versions
+        }
         [self addSubview:_tableView];
         
         _wallHeaderLabel = [self labelWithTextColor:[UIColor darkGrayColor] font:[UIFont systemFontOfSize:12] action:@selector(headerClicked)];
@@ -231,10 +239,16 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
     return label;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    _blurView.frame = self.bounds;
+    _tableView.frame = self.bounds;
+}
+
 #pragma mark - UITableViewDataSource, UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return [self wallSectionHeight];
+    return self.layout.itemEdgeInset.top + self.layout.itemEdgeInset.bottom + self.layout.itemSize.height;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -297,14 +311,9 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
     _tableView.tableFooterView.size = CGSizeMake(self.width, self.layout.wallFooterHeight);
 }
 
-#pragma mark - Wall section height
-
-- (CGFloat)wallSectionHeight {
-    return self.layout.itemEdgeInset.top + self.layout.itemEdgeInset.bottom + self.layout.itemSize.height;
-}
-
-- (void)autoAdjustFitHeight {
-    CGFloat totalHeight = [self wallSectionHeight] * _models.count;
+- (CGSize)sizeThatFits:(CGSize)size {
+    CGFloat sectionHeight = self.layout.itemEdgeInset.top + self.layout.itemEdgeInset.bottom + self.layout.itemSize.height;
+    CGFloat totalHeight = sectionHeight * _models.count;
     if (!CGRectEqualToRect(CGRectZero, _wallHeaderLabel.frame)) {
         totalHeight += self.layout.wallHeaderHeight;
     }
@@ -312,7 +321,11 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
         totalHeight += self.layout.wallFooterHeight;
     }
     totalHeight += zh_safeAreaHeight();
-    self.height = _tableView.height = totalHeight;
+    return CGSizeMake(size.width, totalHeight);
 }
 
+
+- (void)dealloc {
+    NSLog(@"dealloc--✈️✈️✈️---%@", NSStringFromClass(self.class));
+}
 @end

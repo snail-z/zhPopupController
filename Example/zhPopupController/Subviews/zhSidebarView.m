@@ -10,6 +10,7 @@
 
 @interface zhSidebarView ()
 
+@property (nonatomic, strong) UIVisualEffectView *blurView;
 @property (nonatomic, strong) zhImageButton *settingItem;
 @property (nonatomic, strong) zhImageButton *nightItem;
 
@@ -19,6 +20,10 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        UIBlurEffect *effect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];
+        _blurView = [[UIVisualEffectView alloc] initWithEffect:effect];
+        [self addSubview:_blurView];
+        
         _settingItem = [self itemWithText:@"设置" imageNamed:@"sidebar_settings"];
         [self addSubview:_settingItem];
         _nightItem = [self itemWithText:@"夜间模式" imageNamed:@"sidebar_NightMode"];
@@ -44,6 +49,7 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
+    _blurView.frame = self.bounds;
     _settingItem.x =  50;
     _nightItem.right = self.width - 50;
 }

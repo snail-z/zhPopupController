@@ -8,7 +8,7 @@
 
 #import "zhCurtainView.h"
 
-#define ROW_COUNT 3 // 每行显示3个
+#define ROW_COUNT 4 // 每行显示3个
 
 @implementation zhCurtainView
 
@@ -23,7 +23,7 @@
         _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _closeButton.size = CGSizeMake(35, 35);
         _closeButton.right = [UIScreen width] - 15;
-        _closeButton.y = 30;
+        _closeButton.y = 45 + UIScreen.safeInsets.top;
         [_closeButton addTarget:self action:@selector(close:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_closeButton];
     }
@@ -37,9 +37,9 @@
 - (void)setModels:(NSArray<zhImageButtonModel *> *)models {
   
     if (CGSizeEqualToSize(CGSizeZero, _itemSize)) {
-        _itemSize = CGSizeMake(60, 90);
+        _itemSize = CGSizeMake(50, 70);
     }
-    CGFloat _gap = 35;
+    CGFloat _gap = UIScreen.safeInsets.top + 30;
     CGFloat _space = (self.width - ROW_COUNT * _itemSize.width) / (ROW_COUNT + 1);
     
     _items = [NSMutableArray arrayWithCapacity:models.count];
@@ -51,19 +51,16 @@
         item.userInteractionEnabled = YES;
         [self addSubview:item];
         [_items addObject:item];
-        item.titleLabel.font = [UIFont systemFontOfSize:15];
-        [item setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
+        item.titleLabel.font = [UIFont fontWithName:@"pingFangSC-light" size:14];
+        [item setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [item setTitle:model.text forState:UIControlStateNormal];
         [item setImage:model.icon forState:UIControlStateNormal];
-        [item imagePosition:zhImageButtonPositionTop spacing:10 imageViewResize:CGSizeMake(50, 50)];
+        [item imagePosition:zhImageButtonPositionTop spacing:15 imageViewResize:CGSizeMake(32, 32)];
         item.tag = idx;
         [item addTarget:self action:@selector(itemClicked:) forControlEvents:UIControlEventTouchUpInside];
         item.size = CGSizeMake(_itemSize.width, _itemSize.height + 20);
         item.x = _space + (_itemSize.width  + _space) * l;
-        item.y = _gap + (_itemSize.height + _gap) * v + 45;
-        if (idx == models.count - 1) {
-            self.height = item.bottom + 20;
-        }
+        item.y = _gap + (_itemSize.height + 40) * v + 45;
     }];
 }
 

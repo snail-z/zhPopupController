@@ -10,16 +10,27 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// Control mask view of type.
+/// Control view mask style
 typedef NS_ENUM(NSUInteger, zhPopupMaskType) {
-    zhPopupMaskTypeBlackBlur = 0,
-    zhPopupMaskTypeWhiteBlur,
+    zhPopupMaskTypeDarkBlur = 0,
+    zhPopupMaskTypeLightBlur,
+    zhPopupMaskTypeExtraLightBlur,
     zhPopupMaskTypeWhite,
     zhPopupMaskTypeClear,
-    zhPopupMaskTypeBlackTranslucent // default
+    zhPopupMaskTypeBlackOpacity // default
 };
 
-// Control content View shows of layout type, when end of the animation.
+/// Control the style of view Presenting
+typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
+    zhPopupSlideStyleFromTop = 0,
+    zhPopupSlideStyleFromBottom,
+    zhPopupSlideStyleFromLeft,
+    zhPopupSlideStyleFromRight,
+    zhPopupSlideStyleFade, // default
+    zhPopupSlideStyleTransform
+};
+
+/// Control where the view finally position
 typedef NS_ENUM(NSUInteger, zhPopupLayoutType) {
     zhPopupLayoutTypeTop = 0,
     zhPopupLayoutTypeBottom,
@@ -28,17 +39,13 @@ typedef NS_ENUM(NSUInteger, zhPopupLayoutType) {
     zhPopupLayoutTypeCenter // default
 };
 
-// Control content view from a direction sliding out of style.
-typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
-    zhPopupSlideStyleFromTop = 0,
-    zhPopupSlideStyleFromBottom,
-    zhPopupSlideStyleFromLeft,
-    zhPopupSlideStyleFromRight,
-    zhPopupSlideStyleShrinkInOut1 = 4,
-    zhPopupSlideStyleShrinkInOut2,
-    zhPopupSlideStyleFade, // default
-    
-    zhPopupSlideStyleShrinkInOut __attribute__((deprecated("Use zhPopupSlideStyleShrinkInOut1"))) = 4
+/// Control the display level of the PopupController
+typedef NS_ENUM(NSUInteger, zhPopupWindowLevel) {
+    zhPopupWindowLevelVeryHigh = 0,
+    zhPopupWindowLevelHigh,
+    zhPopupWindowLevelNormal, // default
+    zhPopupWindowLevelLow,
+    zhPopupWindowLevelVeryLow
 };
 
 @protocol zhPopupControllerDelegate;
@@ -47,105 +54,125 @@ typedef NS_ENUM(NSInteger, zhPopupSlideStyle) {
 
 @property (nonatomic, weak) id <zhPopupControllerDelegate> _Nullable delegate;
 
-/// Convenient to initialize and set maske type. (Through the `- init` initialization, maskType is zhPopupMaskTypeBlackTranslucent)
-+ (instancetype)popupControllerWithMaskType:(zhPopupMaskType)maskType;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
 
-/// The `popupView` is the parent view of your custom contentView
-@property (nonatomic, strong, readonly) UIView *popupView;
+/// Designated initializer，Must set your content view and its size.
+/// Bind the view to a popup controller，one-to-one
+- (instancetype)initWithView:(UIView *)popupView size:(CGSize)size;
+
+/// The view is the initialized `popupView`
+@property (nonatomic, strong, readonly) UIView *view;
 
 /// Whether contentView is presenting.
 @property (nonatomic, assign, readonly) BOOL isPresenting;
 
+/// Set popup view mask style. default is zhPopupMaskTypeBlackOpacity (maskAlpha: 0.5)
+@property (nonatomic, assign) zhPopupMaskType maskType;
+
 /// Set popup view display position. default is zhPopupLayoutTypeCenter
 @property (nonatomic, assign) zhPopupLayoutType layoutType;
 
-/// Set popup view slide Style. default is zhPopupSlideStyleFade
-@property (nonatomic, assign) zhPopupSlideStyle slideStyle; // When `layoutType = zhPopupLayoutTypeCenter` is vaild.
+/// Set popup view present slide style. default is zhPopupSlideStyleFade
+@property (nonatomic, assign) zhPopupSlideStyle presentationStyle;
 
-/// set mask view of transparency, default is 0.5
-@property (nonatomic, assign) CGFloat maskAlpha; // When set maskType is zhPopupMaskTypeBlackTranslucent vaild.
+/// Set popup view dismiss slide style. default is `presentationStyle`
+@property (nonatomic, assign) zhPopupSlideStyle dismissonStyle;
+
+/// Set popup view priority. default is zhPopupWindowLevelNormal
+@property (nonatomic, assign) zhPopupWindowLevel windowLevel;
+
+/// default is 0.5, When maskType is zhPopupMaskTypeBlackOpacity vaild.
+@property (nonatomic, assign) CGFloat maskAlpha;
+
+/// default is 0.5, When slideStyle is zhPopupSlideStyleTransform vaild.
+@property (nonatomic, assign) CGFloat presentationTransformScale;
+
+/// default is `presentationTransformScale`, When slideStyle is zhPopupSlideStyleTransform vaild.
+@property (nonatomic, assign) CGFloat dismissonTransformScale;
 
 /// default is YES. if NO, Mask view will not respond to events.
-@property (nonatomic, assign) BOOL dismissOnMaskTouched; 
+@property (nonatomic, assign) BOOL dismissOnMaskTouched;
 
-/// default is NO. if YES, Popup view disappear from the opposite direction.
-@property (nonatomic, assign) BOOL dismissOppositeDirection; // When `layoutType = zhPopupLayoutTypeCenter` is vaild.
+/// The view will disappear after `dismissAfterDelay` seconds，default is 0 will not disappear
+@property (nonatomic, assign) NSTimeInterval dismissAfterDelay;
 
-/// Content view whether to allow drag, default is NO
-@property (nonatomic, assign) BOOL allowPan; // 1.The view will support dragging when popup view of position is at the center of the screen or at the edge of the screen. 2.The pan gesture will be invalid when the keyboard appears.
+/// default is NO. if YES, Popup view will allow to drag
+@property (nonatomic, assign) BOOL panGestureEnabled;
 
-/// You can adjust the spacing relative to the keyboard when the keyboard appears. default is 0
-@property (nonatomic, assign) CGFloat offsetSpacingOfKeyboard;
+/// When drag position meets the screen ratio the view will dismiss，default is 0.5
+@property (nonatomic, assign) CGFloat panDismissRatio;
 
-/// Use drop animation and set the rotation Angle. if set, Will not support drag.
-- (void)dropAnimatedWithRotateAngle:(CGFloat)angle;
+/// Adjust the layout position by `offsetSpacing`
+@property (nonatomic, assign) CGFloat offsetSpacing;
 
-/// Block gets called when mask touched.
-@property (nonatomic, copy) void (^maskTouched)(zhPopupController *popupController);
+/// Adjust the spacing between with the keyboard
+@property (nonatomic, assign) CGFloat keyboardOffsetSpacing;
 
-/// - Should implement this block before the presenting. 应在present前实现的block ☟
+/// default is NO. if YES, Will adjust view position when keyboard changes
+@property (nonatomic, assign) BOOL keyboardChangeFollowed;
+
+/// default is NO. if the view becomes first responder，you need set YES to keep the animation consistent
+/// If you want to make the animation consistent:
+/// You need to call the method "becomeFirstResponder()" in "willPresentBlock", don't call it before that.
+/// You need to call the method "resignFirstResponder()" in "willDismissBlock".
+@property (nonatomic, assign) BOOL becomeFirstResponded;
+
+/// Block gets called when internal trigger dismiss.
+@property (nonatomic, copy) void (^defaultDismissBlock)(zhPopupController *popupController);
+
 /// Block gets called when contentView will present.
-@property (nonatomic, copy) void (^willPresent)(zhPopupController *popupController);
+@property (nonatomic, copy) void (^willPresentBlock)(zhPopupController *popupController);
 
 /// Block gets called when contentView did present.
-@property (nonatomic, copy) void (^didPresent)(zhPopupController *popupController);
+@property (nonatomic, copy) void (^didPresentBlock)(zhPopupController *popupController);
 
 /// Block gets called when contentView will dismiss.
-@property (nonatomic, copy) void (^willDismiss)(zhPopupController *popupController);
+@property (nonatomic, copy) void (^willDismissBlock)(zhPopupController *popupController);
 
 /// Block gets called when contentView did dismiss.
-@property (nonatomic, copy) void (^didDismiss)(zhPopupController *popupController);
-
-/**
- present your content view.
- @param contentView This is the view that you want to appear in popup. / 弹出自定义的contentView
- @param duration Popup animation time. / 弹出动画时长
- @param isSpringAnimated if YES, Will use a spring animation. / 是否使用弹性动画
- @param sView  Displayed on the sView. if nil, Displayed on the window. / 显示在sView上
- @param displayTime The view will disappear after `displayTime` seconds. / 视图将在displayTime后消失
- */
-- (void)presentContentView:(nullable UIView *)contentView
-                  duration:(NSTimeInterval)duration
-            springAnimated:(BOOL)isSpringAnimated
-                    inView:(nullable UIView *)sView
-               displayTime:(NSTimeInterval)displayTime;
-
-- (void)presentContentView:(nullable UIView *)contentView
-                  duration:(NSTimeInterval)duration
-            springAnimated:(BOOL)isSpringAnimated
-                    inView:(nullable UIView *)sView;
-
-- (void)presentContentView:(nullable UIView *)contentView
-                  duration:(NSTimeInterval)duration
-            springAnimated:(BOOL)isSpringAnimated;
-
-- (void)presentContentView:(nullable UIView *)contentView displayTime:(NSTimeInterval)displayTime;;
-
-- (void)presentContentView:(nullable UIView *)contentView; // duration is 0.25 / springAnimated is NO / show in window
-
-/// dismiss your content view.
-- (void)dismissWithDuration:(NSTimeInterval)duration springAnimated:(BOOL)isSpringAnimated;
-
-- (void)dismiss; // Will use the present parameter values.
-
-/// fade out of your content view.
-- (void)fadeDismiss;
+@property (nonatomic, copy) void (^didDismissBlock)(zhPopupController *popupController);
 
 @end
+
+
+@interface zhPopupController (Convenient)
+
+/// shows popup view animated in window
+- (void)show;
+
+/// shows popup view animated.
+- (void)showInView:(UIView *)view completion:(void (^ __nullable)(void))completion;
+
+/// shows popup view animated using the specified duration.
+- (void)showInView:(UIView *)view duration:(NSTimeInterval)duration completion:(void (^ __nullable)(void))completion;
+
+/// shows popup view animated using the specified duration and bounced.
+- (void)showInView:(UIView *)view duration:(NSTimeInterval)duration bounced:(BOOL)bounced completion:(void (^ __nullable)(void))completion;
+
+/// shows popup view animated using the specified duration, delay, options, bounced, and completion handler.
+- (void)showInView:(UIView *)view duration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options bounced:(BOOL)bounced completion:(void (^ __nullable)(void))completion;
+
+/// hide popup view animated
+- (void)dismiss;
+
+/// hide popup view animated using the specified duration.
+- (void)dismissWithDuration:(NSTimeInterval)duration completion:(void (^ __nullable)(void))completion;
+
+/// hide popup view animated using the specified duration, delay, options, and completion handler.
+- (void)dismissWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options completion:(void (^ __nullable)(void))completion;
+
+@end
+
 
 @protocol zhPopupControllerDelegate <NSObject>
 @optional
+
 // - The Delegate method, block is preferred.
-- (void)popupControllerWillPresent:(nonnull zhPopupController *)popupController;
-- (void)popupControllerDidPresent:(nonnull zhPopupController *)popupController;
-- (void)popupControllerWillDismiss:(nonnull zhPopupController *)popupController;
-- (void)popupControllerDidDismiss:(nonnull zhPopupController *)popupController;
-
-@end
-
-@interface UIViewController (zhPopupController)
-
-@property (nonatomic, strong) zhPopupController *zh_popupController; // Suggested that direct use of zh_popupController.
+- (void)popupControllerWillPresent:(zhPopupController *)popupController;
+- (void)popupControllerDidPresent:(zhPopupController *)popupController;
+- (void)popupControllerWillDismiss:(zhPopupController *)popupController;
+- (void)popupControllerDidDismiss:(zhPopupController *)popupController;
 
 @end
 

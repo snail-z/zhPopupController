@@ -30,6 +30,7 @@
 @interface zh_KeyboardView2 : UIView
 
 @property (nonatomic, copy) void (^gobackClickedBlock)(zh_KeyboardView2 *keyboardView, UIButton *button);
+@property (nonatomic, copy) void (^nextClickedBlock)(zh_KeyboardView2 *keyboardView, UIButton *button);
 
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) zhUnderlineTextField *numberField;

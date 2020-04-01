@@ -18,12 +18,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.zh_statusBarStyle = UIStatusBarStyleLightContent;
-    [self.navigationController.navigationBar zh_setBackgroundColor:[UIColor colorWithHexString:@"569EED"]];
+    self.navigationController.navigationBar.translucent = NO;
+    UIImage *backImage = [UIImage imageWithColor:[UIColor colorWithHexString:@"0x70AFCE"]];
+    [self.navigationController.navigationBar setBackgroundImage:backImage forBarMetrics:UIBarMetricsDefault];
+    self.navigationController.navigationBar.shadowImage = [UIImage new];
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     NSMutableDictionary *textAttrs = [NSMutableDictionary dictionary];
     textAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
-    textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:25];
+    textAttrs[NSFontAttributeName] = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:22];
     self.navigationController.navigationBar.titleTextAttributes = textAttrs;
     self.title = @"zhPopupController";
     
@@ -36,18 +39,19 @@
     self.navigationItem.backBarButtonItem = backItem;
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    button.layer.cornerRadius = 7;
-    button.backgroundColor = [UIColor colorWithHexString:@"569EED"];
+    button.layer.cornerRadius = 2;
+    button.backgroundColor = [UIColor colorWithHexString:@"0x70AFCE"];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:22];
+    button.titleLabel.font = [UIFont fontWithName:@"GillSans-SemiBoldItalic" size:17];
     [button setTitle:@"Next" forState:UIControlStateNormal];
     [button addTarget:self action:@selector(next) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:button];
     
     [button zh_makeConstraints:^(SnailConstraintMaker *make) {
-        [make.width zh_equalTo:150];
-        [make.height zh_equalTo:55];
-        [make.center equalTo:self.view];
+        [make.width zh_equalTo:90];
+        [make.height zh_equalTo:40];
+        [make.top zh_equalTo:270];
+        [make.centerX equalTo:self.view];
     }];
 }
 

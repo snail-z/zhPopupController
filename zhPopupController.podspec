@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'zhPopupController'
-  s.version          = '1.0.3'
+  s.version          = '2.0.0'
   s.summary          = 'Simple Popup Controller For iOS，popup your custom view easy.'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/snail-z/zhPopupController.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '7.0'
+  s.ios.deployment_target = '8.0'
 
   s.source_files = 'zhPopupController/Classes/**/*'
   

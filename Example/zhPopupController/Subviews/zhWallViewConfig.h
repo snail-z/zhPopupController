@@ -10,7 +10,7 @@
 
 @interface zhWallViewLayout : NSObject
 
-/// Set item size. default is CGSizeMake(70, 100)
+/// Set item size. default is CGSizeMake(60, 90)
 @property (nonatomic, assign) CGSize itemSize;
 
 /// 设置内部image视图边长 (imageView.height = imageView.width). default is (itemSize.width - 10)

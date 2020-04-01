@@ -3,7 +3,7 @@
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
 [![Version](https://img.shields.io/badge/pod-v1.0.3-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
-[![Platform](https://img.shields.io/badge/platform-%20iOS7.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
+[![Platform](https://img.shields.io/badge/platform-%20iOS8.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
 Popup your custom view is easy, support custom mask style, transition effects and gesture to drag.
 
@@ -15,7 +15,7 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-- Requires iOS 7.0 or later
+- Requires iOS 8.0 or later
 - Requires Automatic Reference Counting (ARC)
 
 ## Installation
@@ -24,7 +24,7 @@ zhPopupController is available through [CocoaPods](http://cocoapods.org). To ins
 it, simply add the following line to your Podfile:
 
 ```ruby
-platform :ios, '7.0'
+platform :ios, '8.0'
 use_frameworks!
 
 target 'You Project' do
@@ -42,51 +42,64 @@ end
 
 * Direct use of zh_popupController popup your  custom view.
 ``` objc
-    [self.zh_popupController presentContentView:customView];
+    [self.popupController showInView:self.view.window completion:NULL];
 ```
 
 * Customize.
 ```objc
-    self.zh_popupController = [zhPopupController popupControllerWithMaskType:zhPopupMaskTypeWhiteBlur];
-    self.zh_popupController.layoutType = zhPopupLayoutTypeLeft;
-    self.zh_popupController.allowPan = YES;
-    // ...
-    [self.zh_popupController presentContentView:customView];
+_popupController = [[zhPopupController alloc] initWithView:customView size:alert.bounds.size];
+_popupController.presentationStyle = zhPopupSlideStyleTransform;
+_popupController.presentationTransformScale = 1.25;
+_popupController.dismissonTransformScale = 0.85;
+// ...
+[_popupController showInView:self.view.window completion:NULL];
 ```
 
-## Notes
-
-- Update  **(September 11, 2017 v0.1.6)**
-
-  - Support dismiss automatically.
+- Support dismiss automatically.
 
 ```objc
-/**
- present your content view.
- @param contentView This is the view that you want to appear in popup. / 弹出自定义的contentView
- @param duration Popup animation time. / 弹出动画时长
- @param isSpringAnimated if YES, Will use a spring animation. / 是否使用弹性动画
- @param sView  Displayed on the sView. if nil, Displayed on the window. / 显示在sView上
- @param displayTime The view will disappear after `displayTime` seconds. / 视图将在displayTime后消失
- */
-- (void)presentContentView:(nullable UIView *)contentView
-                  duration:(NSTimeInterval)duration
-            springAnimated:(BOOL)isSpringAnimated
-                    inView:(nullable UIView *)sView
-               displayTime:(NSTimeInterval)displayTime;
+/// The view will disappear after `dismissAfterDelay` seconds，default is 0 will not disappear
+@property (nonatomic, assign) NSTimeInterval dismissAfterDelay;
 ```
 
 -----
 
-- Update  **(September 13, 2017 v0.1.7)**
+- Update
 
-  - Content layout fixes
+  Observe to keyboard changes will change contentView layout
 
-  - Observe to keyboard changes will change contentView layout
+  New **`keyboardOffsetSpacing`** properties.   You can through it adjust the spacing relative to the keyboard when the keyboard appears. default is 0, The pan gesture will be invalid when the keyboard appears.
 
-  - New **`offsetSpacingOfKeyboard`** properties.   You can through it adjust the spacing relative to the keyboard when the keyboard appears. default is 0
+  
 
-    >  The pan gesture will be invalid when the keyboard appears.
+  If you want to make the animation consistent: 
+
+  You need to call the method "becomeFirstResponder()" in "willPresentBlock", don't call it before that.
+
+  You need to call the method "resignFirstResponder()" in "willDismissBlock".
+
+  ```objc
+  /// default is NO. if YES, Will adjust view position when keyboard changes
+  @property (nonatomic, assign) BOOL keyboardChangeFollowed;
+  
+  /// default is NO. if the view becomes first responder，you need set YES to keep the animation consistent
+  @property (nonatomic, assign) BOOL becomeFirstResponded;
+  ```
+
+  ```objc
+  _popupController.becomeFirstResponded = YES;
+  _popupController.keyboardChangeFollowed = YES;
+  _popupController.willPresentBlock = ^(zhPopupController * _Nonnull popupController) {
+  	[textField becomeFirstResponder];
+  };
+          
+  _popupController.willDismissBlock = ^(zhPopupController * _Nonnull popupController) {
+  	[textField resignFirstResponder];
+  };
+  
+  //...
+  [_popupController show];
+  ```
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_up.gif?raw=true" width="204px" height="365px">
 
@@ -94,9 +107,9 @@ end
 
 -----
 
-- Update  **(September 21, 2017 v0.1.8)**
+- Update
 
-   - Support ios11 system version
+   - Support present/dismiss slide style
 
    - When system is larger than iOS 8 will use of UIVisualEffectView to do mask blur effect.
 

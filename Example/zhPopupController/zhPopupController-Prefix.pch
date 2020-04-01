@@ -49,9 +49,9 @@ static inline CGFloat zh_safeAreaHeight () {
     #import "CALayer+Layout.h"
     #import "UIAlertController+Extend.h"
     #import "UIViewController+zhStatusBarStyle.h"
-    #import "NSObject+zh_CycleDetector.h"
     #import "NSString+zh_SafeAccess.h"
     #import "NSArray+zh_SafeAccess.h"
     #import "UIDevice+zhDeviceType.h"
+    #import "UIView+PKExtend.h"
 
 #endif

@@ -13,7 +13,7 @@
 - (zhAlertView *)alertView1 {
     zhAlertView *alertView = [[zhAlertView alloc] initWithTitle:@"提示"
                                                         message:@"切换城市失败，是否重试？"
-                                                  constantWidth:290];
+                                                  constantWidth:280];
     return alertView;
 }
 
@@ -34,10 +34,10 @@
     NSMutableAttributedString *attiTitle = [[NSMutableAttributedString alloc] initWithString:text];
     
     [attiTitle addAttribute:NSForegroundColorAttributeName value:[UIColor darkGrayColor] range:[text rangeOfString:title1]];
-    [attiTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[text rangeOfString:title1]];
+    [attiTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17] range:[text rangeOfString:title1]];
     
     [attiTitle addAttribute:NSForegroundColorAttributeName value:[UIColor r:236 g:78 b:39] range:[text rangeOfString:title2]];
-    [attiTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:20] range:[text rangeOfString:title2]];
+    [attiTitle addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:17] range:[text rangeOfString:title2]];
     
     [attiTitle addAttribute:NSKernAttributeName value:@1.2 range:[text rangeOfString:title2]];//字距调整
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
@@ -54,10 +54,10 @@
     NSMutableParagraphStyle *paragraphStyle2 = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle2 setLineSpacing:7];
     [attiMessage addAttribute:NSParagraphStyleAttributeName value:paragraphStyle2 range:NSMakeRange(0, [msg length])];
-    [attiMessage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:16] range:NSMakeRange(0, [msg length])];
+    [attiMessage addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:15] range:NSMakeRange(0, [msg length])];
     [attiMessage addAttribute:NSForegroundColorAttributeName value:[UIColor r:49 g:49 b:39      ] range:NSMakeRange(0, [msg length])];
     
-    CGFloat fac = 475; // 已知透明区域高度
+    CGFloat fac = 450; // 已知透明区域高度
     UIImage *image = [UIImage imageNamed:@"fire_arrow"];
 
     zhOverflyView *overflyView = [[zhOverflyView alloc]
@@ -65,9 +65,9 @@
                                   highlyRatio:(fac / image.size.height)
                                   attributedTitle:attiTitle
                                   attributedMessage:attiMessage
-                                  constantWidth:290];
+                                  constantWidth:270];
     overflyView.layer.cornerRadius = 4;
-    overflyView.messageEdgeInsets = UIEdgeInsetsMake(10, 22, 10, 22);
+    overflyView.messageEdgeInsets = UIEdgeInsetsMake(5, 22, 10, 22);
     overflyView.titleLabel.backgroundColor = [UIColor whiteColor];
     overflyView.titleLabel.textAlignment = NSTextAlignmentCenter;
     overflyView.splitLine.hidden = YES;
@@ -76,14 +76,14 @@
 }
 
 - (zhCurtainView *)curtainView {
-    
     zhCurtainView *curtainView = [[zhCurtainView alloc] init];
     curtainView.width = [UIScreen width];
+    curtainView.height = 300 + UIScreen.safeInsets.top;
     [curtainView.closeButton setImage:[UIImage imageNamed:@"qzone_close"] forState:UIControlStateNormal];
-    NSArray *imageNames = @[@"说说", @"照片", @"视频", @"签到", @"大头贴"];
+    NSArray *imageNames = @[@"github", @"paypal", @"pinterest", @"spotify", @"tumblr", @"twitter", @"whatsapp", @"yelp"];
     NSMutableArray *models = [NSMutableArray arrayWithCapacity:imageNames.count];
     for (NSString *imageName in imageNames) {
-        UIImage *image = [UIImage imageNamed:[@"qzone_" stringByAppendingString:imageName]];
+        UIImage *image = [UIImage imageNamed:[@"social-" stringByAppendingString:imageName]];
         [models addObject:[zhImageButtonModel modelWithTitle:imageName image:image]];
     }
     curtainView.models = models;
@@ -101,7 +101,7 @@
 
 - (zhFullView *)fullView {
     
-    zhFullView *fullView = [[zhFullView alloc] initWithFrame:self.view.frame];
+    zhFullView *fullView = [[zhFullView alloc] initWithFrame:self.view.window.bounds];
     NSArray *array = @[@"文字", @"照片视频", @"头条文章", @"红包", @"直播", @"点评", @"好友圈", @"更多", @"音乐", @"商品", @"签到", @"秒拍", @"头条文章", @"红包", @"直播", @"点评"];
     NSMutableArray *models = [NSMutableArray arrayWithCapacity:array.count];
     for (NSString *string in array) {
@@ -120,7 +120,8 @@
     wallView.wallHeaderLabel.text = @"此网页由 mp.weixin.qq.com 提供";
     wallView.wallFooterLabel.text = @"取消";
     wallView.models = [self wallModels];
-    [wallView autoAdjustFitHeight];
+    wallView.size = [wallView sizeThatFits:CGSizeMake([UIScreen width], CGFLOAT_MAX)];
+    [wallView pk_addCornerRadius:10 byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight];
     return wallView;
 }
 
@@ -148,22 +149,19 @@
                         imgNameKey : @"sheet_qqbrowser"}];
     
     NSArray *arr2 = @[@{titleKey   : @"查看公众号",
-                        imgNameKey : @"sheet_Verified"},
+                        imgNameKey : @"sheet_qqbrowser"},
                       
                       @{titleKey   : @"复制链接",
-                        imgNameKey : @"sheet_CopyLink"},
+                        imgNameKey : @"sheet_qzone"},
                       
-                      @{titleKey   : @"复制文本",
-                        imgNameKey : @"sheet_CopyText"},
-                      
-                      @{titleKey   : @"刷新",
-                        imgNameKey : @"sheet_Refresh"},
+                      @{titleKey   : @"在QQ浏览器\n中打开",
+                        imgNameKey : @"sheet_Collection"},
                       
                       @{titleKey   : @"调整字体",
-                        imgNameKey : @"sheet_Font"},
+                        imgNameKey : @"sheet_Moments"},
                       
                       @{titleKey   : @"投诉",
-                        imgNameKey : @"sheet_Complaint"}];
+                        imgNameKey : @"sheet_Share"}];
     
     NSMutableArray *array1 = [NSMutableArray array];
     for (NSDictionary *dict in arr1) {
