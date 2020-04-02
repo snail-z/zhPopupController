@@ -10,9 +10,9 @@ Popup your custom view is easy, support custom mask style, transition effects an
 ### Version 2.0
 
 zhPopupController version 2.0 has been optimized and refactored. Some methods and properties in version 1.0 are no longer compatible. Please upgrade with caution.
-The swiftba version is more lightweight and concise. If you want to know more, please see [here](http://cocoapods.org).
+The swiftba version is more lightweight and concise. If you want to know more, please see [here](https://github.com/snail-z/OverlayController).
 
-**Swift - [OverlayController](http://cocoapods.org)**
+**Swift - [OverlayController](https://github.com/snail-z/OverlayController)**
 
 ## Example
 
@@ -94,7 +94,7 @@ end
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/full2.gif?raw=true" width="188px">
 
-* Support adjust the spacing between with the keyboard.by `keyboardOffsetSpacing`
+- Support adjust the spacing between with the keyboard.by `keyboardOffsetSpacing`
 
   ```objc
   /// Adjust the spacing between with the keyboard
@@ -103,14 +103,13 @@ end
 
 -----
 
-- Other
-   - Support present/dismiss slide style. by`presentationStyle` `dismissonStyle`
+- Support present/dismiss slide style. by`presentationStyle` `dismissonStyle`
 - Support Set popup view display position. by `layoutType`
-   - Support Set popup view mask style. by `maskType`
-   - Support set popup view priority. default is zhPopupWindowLevelNormal `windowLevel`
-   -  Support adjust the layout position by `offsetSpacing`
-   - Support gesture dragging,default is NO. if YES, Popup view will allow to drag `panGestureEnabled`
-   - Support dismiss automatically. the view will disappear after `dismissAfterDelay` seconds，default is 0 will not disappear
+- Support Set popup view mask style. by `maskType`
+- Support set popup view priority. default is zhPopupWindowLevelNormal `windowLevel`
+- Support adjust the layout position by `offsetSpacing`
+- Support gesture dragging,default is NO. if YES, Popup view will allow to drag `panGestureEnabled`
+- Support dismiss automatically. the view will disappear after `dismissAfterDelay` seconds，default is 0 will not disappear
    ```objc
    /// Set popup view mask style. default is zhPopupMaskTypeBlackOpacity (maskAlpha: 0.5)
    @property (nonatomic, assign) zhPopupMaskType maskType;
