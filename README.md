@@ -1,4 +1,4 @@
-<img src="http://oo8l3jrvb.bkt.clouddn.com/0921_left_zhPopupController.png" alt="zhPopupController" title="zhPopupController">
+<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/logo.jpg?raw=true" width="700px" height="128px">
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
 [![Version](https://img.shields.io/badge/pod-v2.0.0-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
@@ -41,12 +41,11 @@ end
 
 ## Preview 
 
-<img src="htt://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController.gif?raw=true" width="204px" height="365px">
+<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/full1.gif?raw=true" width="188px">
 
 ## Usage
 
 * Designated initializer，Must set your content view and its size. Bind the view to a popup controller，one-to-one
-
   ```objc
   _popupController = [[zhPopupController alloc] initWithView:customView size:alert.bounds.size];
   _popupController.presentationStyle = zhPopupSlideStyleTransform;
@@ -71,7 +70,7 @@ end
   You need to call the method "resignFirstResponder()" in "willDismissBlock".
 
   ```objc
-/// default is NO. if YES, Will adjust view position when keyboard changes
+  /// default is NO. if YES, Will adjust view position when keyboard changes
   @property (nonatomic, assign) BOOL keyboardChangeFollowed;
   
   /// default is NO. if the view becomes first responder，you need set YES to keep the animation consistent
@@ -79,7 +78,7 @@ end
   ```
   
   ```objc
-_popupController.becomeFirstResponded = YES;
+  _popupController.becomeFirstResponded = YES;
   _popupController.keyboardChangeFollowed = YES;
   _popupController.willPresentBlock = ^(zhPopupController * _Nonnull popupController) {
   	[textField becomeFirstResponder];
@@ -93,9 +92,7 @@ _popupController.becomeFirstResponded = YES;
   [_popupController show];
   ```
 
-<img src="http://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_up.gif?raw=true" width="204px" height="365px">
-
-
+<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/full2.gif?raw=true" width="188px">
 
 * Support adjust the spacing between with the keyboard.by `keyboardOffsetSpacing`
 
@@ -107,7 +104,6 @@ _popupController.becomeFirstResponded = YES;
 -----
 
 - Other
-
    - Support present/dismiss slide style. by`presentationStyle` `dismissonStyle`
 - Support Set popup view display position. by `layoutType`
    - Support Set popup view mask style. by `maskType`
@@ -115,7 +111,6 @@ _popupController.becomeFirstResponded = YES;
    -  Support adjust the layout position by `offsetSpacing`
    - Support gesture dragging,default is NO. if YES, Popup view will allow to drag `panGestureEnabled`
    - Support dismiss automatically. the view will disappear after `dismissAfterDelay` seconds，default is 0 will not disappear
-   
    ```objc
    /// Set popup view mask style. default is zhPopupMaskTypeBlackOpacity (maskAlpha: 0.5)
    @property (nonatomic, assign) zhPopupMaskType maskType;
