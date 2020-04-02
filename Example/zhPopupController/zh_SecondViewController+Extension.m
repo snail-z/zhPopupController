@@ -65,7 +65,7 @@
                                   highlyRatio:(fac / image.size.height)
                                   attributedTitle:attiTitle
                                   attributedMessage:attiMessage
-                                  constantWidth:270];
+                                  constantWidth:260];
     overflyView.layer.cornerRadius = 4;
     overflyView.messageEdgeInsets = UIEdgeInsetsMake(5, 22, 10, 22);
     overflyView.titleLabel.backgroundColor = [UIColor whiteColor];

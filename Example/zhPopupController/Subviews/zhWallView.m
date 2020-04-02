@@ -7,6 +7,7 @@
 //
 
 #import "zhWallView.h"
+#import "UILabel+PKExtend.h"
 
 ///////////////////////////////////////
 // MARK - zhWallViewCollectionCell - //
@@ -308,19 +309,15 @@ static NSString *zh_CellIdentifier = @"zh_wallViewCollectionCell";
 
 - (void)reloadTableViewHeaderAndFooterHeight {
     _tableView.tableHeaderView.size = CGSizeMake(self.width, self.layout.wallHeaderHeight);
-    _tableView.tableFooterView.size = CGSizeMake(self.width, self.layout.wallFooterHeight);
+    _wallFooterLabel.pk_textEdgeInsets = UIEdgeInsetsMake(0, 0, (zh_safeAreaHeight() > 0 ? 18 : 0), 0);
+    _tableView.tableFooterView.size = CGSizeMake(self.width, self.layout.wallFooterHeight + zh_safeAreaHeight());
 }
 
 - (CGSize)sizeThatFits:(CGSize)size {
     CGFloat sectionHeight = self.layout.itemEdgeInset.top + self.layout.itemEdgeInset.bottom + self.layout.itemSize.height;
     CGFloat totalHeight = sectionHeight * _models.count;
-    if (!CGRectEqualToRect(CGRectZero, _wallHeaderLabel.frame)) {
-        totalHeight += self.layout.wallHeaderHeight;
-    }
-    if (!CGRectEqualToRect(CGRectZero, _wallFooterLabel.frame)) {
-        totalHeight += self.layout.wallFooterHeight;
-    }
-    totalHeight += zh_safeAreaHeight();
+    totalHeight +=_tableView.tableHeaderView.size.height;
+    totalHeight += _tableView.tableFooterView.size.height;
     return CGSizeMake(size.width, totalHeight);
 }
 

@@ -1,13 +1,18 @@
 <img src="http://oo8l3jrvb.bkt.clouddn.com/0921_left_zhPopupController.png" alt="zhPopupController" title="zhPopupController">
 
 [![Language](https://img.shields.io/badge/Language-%20Objective--C%20-orange.svg)](https://travis-ci.org/snail-z/zhPopupController)
-[![Version](https://img.shields.io/badge/pod-v1.0.3-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
+[![Version](https://img.shields.io/badge/pod-v2.0.0-brightgreen.svg)](http://cocoapods.org/pods/zhPopupController)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
 [![Platform](https://img.shields.io/badge/platform-%20iOS8.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
 Popup your custom view is easy, support custom mask style, transition effects and gesture to drag.
 
+### Version 2.0
 
+zhPopupController version 2.0 has been optimized and refactored. Some methods and properties in version 1.0 are no longer compatible. Please upgrade with caution.
+The swiftba version is more lightweight and concise. If you want to know more, please see [here](http://cocoapods.org).
+
+**Swift - [OverlayController](http://cocoapods.org)**
 
 ## Example
 
@@ -29,7 +34,7 @@ use_frameworks!
 
 target 'You Project' do
     
-	pod 'zhPopupController', '~> 1.0'
+	pod 'zhPopupController', '~> 2.0'
     
 end
 ```
@@ -40,37 +45,24 @@ end
 
 ## Usage
 
-* Direct use of zh_popupController popup your  custom view.
-``` objc
-    [self.popupController showInView:self.view.window completion:NULL];
-```
+* Designated initializer，Must set your content view and its size. Bind the view to a popup controller，one-to-one
 
-* Customize.
-```objc
-_popupController = [[zhPopupController alloc] initWithView:customView size:alert.bounds.size];
-_popupController.presentationStyle = zhPopupSlideStyleTransform;
-_popupController.presentationTransformScale = 1.25;
-_popupController.dismissonTransformScale = 0.85;
-// ...
-[_popupController showInView:self.view.window completion:NULL];
-```
-
-- Support dismiss automatically.
-
-```objc
-/// The view will disappear after `dismissAfterDelay` seconds，default is 0 will not disappear
-@property (nonatomic, assign) NSTimeInterval dismissAfterDelay;
-```
+  ```objc
+  _popupController = [[zhPopupController alloc] initWithView:customView size:alert.bounds.size];
+  _popupController.presentationStyle = zhPopupSlideStyleTransform;
+  _popupController.presentationTransformScale = 1.25;
+  _popupController.dismissonTransformScale = 0.85;
+  // ...
+  [_popupController showInView:self.view.window completion:NULL];
+  ```
 
 -----
 
-- Update
+- Support following keyboard popup and hide
 
   Observe to keyboard changes will change contentView layout
 
   New **`keyboardOffsetSpacing`** properties.   You can through it adjust the spacing relative to the keyboard when the keyboard appears. default is 0, The pan gesture will be invalid when the keyboard appears.
-
-  
 
   If you want to make the animation consistent: 
 
@@ -79,15 +71,15 @@ _popupController.dismissonTransformScale = 0.85;
   You need to call the method "resignFirstResponder()" in "willDismissBlock".
 
   ```objc
-  /// default is NO. if YES, Will adjust view position when keyboard changes
+/// default is NO. if YES, Will adjust view position when keyboard changes
   @property (nonatomic, assign) BOOL keyboardChangeFollowed;
   
   /// default is NO. if the view becomes first responder，you need set YES to keep the animation consistent
   @property (nonatomic, assign) BOOL becomeFirstResponded;
   ```
-
+  
   ```objc
-  _popupController.becomeFirstResponded = YES;
+_popupController.becomeFirstResponded = YES;
   _popupController.keyboardChangeFollowed = YES;
   _popupController.willPresentBlock = ^(zhPopupController * _Nonnull popupController) {
   	[textField becomeFirstResponder];
@@ -101,26 +93,56 @@ _popupController.dismissonTransformScale = 0.85;
   [_popupController show];
   ```
 
-<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_up.gif?raw=true" width="204px" height="365px">
+<img src="http://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_up.gif?raw=true" width="204px" height="365px">
 
 
 
------
+* Support adjust the spacing between with the keyboard.by `keyboardOffsetSpacing`
 
-- Update
-
-   - Support present/dismiss slide style
-
-   - When system is larger than iOS 8 will use of UIVisualEffectView to do mask blur effect.
-
-<img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/_zhPopupController_ios11.gif?raw=true?raw=true" width="216px" height="427px">
+  ```objc
+  /// Adjust the spacing between with the keyboard
+  @property (nonatomic, assign) CGFloat keyboardOffsetSpacing;
+  ```
 
 -----
 
-- Update  **(November 20, 2017 v1.0.2)**
-    - New method `- (void)fadeDismiss` for fade out of your content view.
+- Other
 
-    - In 1.0.2 `zhPopupSlideStyleShrinkInOut` will be deprecated, You should use `zhPopupSlideStyleShrinkInOut1` or `zhPopupSlideStyleShrinkInOut2`
+   - Support present/dismiss slide style. by`presentationStyle` `dismissonStyle`
+- Support Set popup view display position. by `layoutType`
+   - Support Set popup view mask style. by `maskType`
+   - Support set popup view priority. default is zhPopupWindowLevelNormal `windowLevel`
+   -  Support adjust the layout position by `offsetSpacing`
+   - Support gesture dragging,default is NO. if YES, Popup view will allow to drag `panGestureEnabled`
+   - Support dismiss automatically. the view will disappear after `dismissAfterDelay` seconds，default is 0 will not disappear
+   
+   ```objc
+   /// Set popup view mask style. default is zhPopupMaskTypeBlackOpacity (maskAlpha: 0.5)
+   @property (nonatomic, assign) zhPopupMaskType maskType;
+   
+   /// Set popup view display position. default is zhPopupLayoutTypeCenter
+   @property (nonatomic, assign) zhPopupLayoutType layoutType;
+   
+   /// Set popup view present slide style. default is zhPopupSlideStyleFade
+   @property (nonatomic, assign) zhPopupSlideStyle presentationStyle;
+   
+   /// Set popup view dismiss slide style. default is `presentationStyle`
+   @property (nonatomic, assign) zhPopupSlideStyle dismissonStyle;
+   
+   /// Set popup view priority. default is zhPopupWindowLevelNormal
+   @property (nonatomic, assign) zhPopupWindowLevel windowLevel;
+   
+   /// The view will disappear after `dismissAfterDelay` seconds，default is 0 will not disappear
+   @property (nonatomic, assign) NSTimeInterval dismissAfterDelay;
+   
+   /// default is NO. if YES, Popup view will allow to drag
+   @property (nonatomic, assign) BOOL panGestureEnabled;
+   
+   /// Adjust the layout position by `offsetSpacing`
+   @property (nonatomic, assign) CGFloat offsetSpacing;
+   ```
+   
+   See demo for more usage.
 
 
 ## Author

@@ -49,7 +49,7 @@
     if (_wallHeaderHeight > 0) {
         return _wallHeaderHeight;
     }
-    return 30;
+    return 40;
 }
 
 - (CGFloat)wallFooterHeight {

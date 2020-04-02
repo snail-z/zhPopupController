@@ -17,6 +17,7 @@
 		3E02263E241C6EC400630904 /* social-whatsapp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E022635241C6EC400630904 /* social-whatsapp.png */; };
 		3E02263F241C6EC400630904 /* social-yelp.png in Resources */ = {isa = PBXBuildFile; fileRef = 3E022636241C6EC400630904 /* social-yelp.png */; };
 		3E022642241E479600630904 /* UIView+PKExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E022640241E479600630904 /* UIView+PKExtend.m */; };
+		3EDD02BA24356F4F0003B78F /* UILabel+PKExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = 3EDD02B824356F4E0003B78F /* UILabel+PKExtend.m */; };
 		51970250419971193DE3E57E /* Pods_zhPopupController_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 296818C661ECD8383050F14E /* Pods_zhPopupController_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -145,6 +146,8 @@
 		3E022636241C6EC400630904 /* social-yelp.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "social-yelp.png"; sourceTree = "<group>"; };
 		3E022640241E479600630904 /* UIView+PKExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+PKExtend.m"; sourceTree = "<group>"; };
 		3E022641241E479600630904 /* UIView+PKExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+PKExtend.h"; sourceTree = "<group>"; };
+		3EDD02B824356F4E0003B78F /* UILabel+PKExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+PKExtend.m"; sourceTree = "<group>"; };
+		3EDD02B924356F4E0003B78F /* UILabel+PKExtend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+PKExtend.h"; sourceTree = "<group>"; };
 		4800BB513ED7D2624C601ACC /* Pods-zhPopupController_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-zhPopupController_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-zhPopupController_Example/Pods-zhPopupController_Example.release.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* zhPopupController_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = zhPopupController_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -473,6 +476,8 @@
 		F2AB15701F45BF5A003329E3 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				3EDD02B924356F4E0003B78F /* UILabel+PKExtend.h */,
+				3EDD02B824356F4E0003B78F /* UILabel+PKExtend.m */,
 				F2AB15711F45BF5A003329E3 /* CALayer+Layout.h */,
 				F2AB15721F45BF5A003329E3 /* CALayer+Layout.m */,
 				F2BD43E31F6BC3BD005AED6E /* NSArray+zh_SafeAccess.h */,
@@ -840,6 +845,7 @@
 				F2AB158B1F45BF5A003329E3 /* UIColor+Extend.m in Sources */,
 				F2AB158C1F45BF5A003329E3 /* UIImage+Color.m in Sources */,
 				F2AB156A1F45BEFA003329E3 /* zhFullView.m in Sources */,
+				3EDD02BA24356F4F0003B78F /* UILabel+PKExtend.m in Sources */,
 				F2AB15871F45BF5A003329E3 /* CALayer+Layout.m in Sources */,
 				F207350F1F659AE500C1A6A5 /* zhOverflyView.m in Sources */,
 				F207350B1F65983200C1A6A5 /* zhWallView.m in Sources */,

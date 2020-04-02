@@ -15,11 +15,12 @@
     @import Foundation;
 
 static inline bool isIPhoneX () {
-    UIUserInterfaceIdiom idiom = [UIDevice currentDevice].userInterfaceIdiom;
-    if (idiom == UIUserInterfaceIdiomPhone) {
-        return [NSStringFromCGSize([UIScreen mainScreen].bounds.size) isEqualToString:@"{375, 812}"];
+    if (@available(iOS 11.0, *)) {
+        UIEdgeInsets _safe = UIApplication.sharedApplication.keyWindow.safeAreaInsets;
+        return (_safe.bottom > 0) ? YES : NO;
+    } else {
+        return NO;
     }
-    return NO;
 }
 
 /**
