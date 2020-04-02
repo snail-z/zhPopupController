@@ -59,10 +59,6 @@ end
 
 - Support following keyboard popup and hide
 
-  Observe to keyboard changes will change contentView layout
-
-  New **`keyboardOffsetSpacing`** properties.   You can through it adjust the spacing relative to the keyboard when the keyboard appears. default is 0, The pan gesture will be invalid when the keyboard appears.
-
   If you want to make the animation consistent: 
 
   You need to call the method "becomeFirstResponder()" in "willPresentBlock", don't call it before that.
@@ -94,7 +90,7 @@ end
 
 <img src="https://github.com/snail-z/zhPopupController/blob/master/Preview/full2.gif?raw=true" width="188px">
 
-- Support adjust the spacing between with the keyboard.by `keyboardOffsetSpacing`
+- Support adjust the spacing between with the keyboard.by `keyboardOffsetSpacing`. You can through it adjust the spacing relative to the keyboard when the keyboard appears. default is 0, The pan gesture will be invalid when the keyboard appears.
 
   ```objc
   /// Adjust the spacing between with the keyboard
