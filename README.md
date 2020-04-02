@@ -10,7 +10,7 @@ Popup your custom view is easy, support custom mask style, transition effects an
 ### Version 2.0
 
 zhPopupController version 2.0 has been optimized and refactored. Some methods and properties in version 1.0 are no longer compatible. Please upgrade with caution.
-The swiftba version is more lightweight and concise. If you want to know more, please see [here](https://github.com/snail-z/OverlayController).
+The swift version is more lightweight and concise. if you want to know more, please see [here](https://github.com/snail-z/OverlayController).
 
 **Swift - [OverlayController](https://github.com/snail-z/OverlayController)**
 
