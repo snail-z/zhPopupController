@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://cocoapods.org/pods/zhPopupController)
 [![Platform](https://img.shields.io/badge/platform-%20iOS8.0+%20-lightgrey.svg)](http://cocoapods.org/pods/zhPopupController)
 
-Popup your custom view is easy, support custom mask style, transition effects and gesture to drag.
+zhPopupController can help you pop up custom views easily. It supports custom pop-up animations, layout positions, mask effects, keyboard monitoring, gesture interaction, etc. it API simple and easy to use.
 
 ### Version 2.0
 
